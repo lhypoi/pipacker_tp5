@@ -55,7 +55,7 @@ $(function (){
 			$user_pwd.on('blur',function() {
 				$user_pwd_text = $user_pwd.val();
 				if($user_pwd != "") {
-					 if(/^(\w){6,20}$/.test($user_pwd_text)) {
+					 if(/^(\w){8,20}$/.test($user_pwd_text)) {
 						$(".lotips").eq(1).removeClass("glyphicon-remove-circle").addClass("glyphicon-ok-circle");
 
 					} else {
@@ -88,6 +88,7 @@ $(function (){
 									$(".modal-backdrop").hide();
 									// alert('登录成功');
 									console.log(localStorage);
+									window.location.reload();
 								} else if (1 == redata.status) {
 									alert("密码有误");
 								}
@@ -204,11 +205,42 @@ $(function (){
 			});
 		},
 		logout:function(){
-
+			$(".pp_logout_btn").on('click',function() {
+				var user_id = localStorage.getItem("user_id");
+				$.get(register_url,{'user_id':user_id},function(Data) {
+					if (!$.isEmptyObject(Data)) {
+						var redata = $.parseJSON(Data);
+						console.log(redata);
+						if(3==redata.status){
+							localStorage.removeItem("user_id");
+		 					localStorage.removeItem("user_phone");
+		 					localStorage.removeItem("user_name");
+		 					window.location.reload();
+		 				} else {
+		 					console.log('退出失败');
+		 				}
+					}
+				})
+			})
+		},
+		show_person_list:function() {
+			$(".personal_list").hover(function() {
+				$(".per_list_show").stop().fadeIn(200);
+				$(".per_list_show").on('mouseover',function() {
+					$(".per_list_show").stop().show();
+				});
+			},function() {
+				$(".per_list_show").stop().fadeOut(200);
+				$(".per_list_show").on('mouseout',function() {
+					$(".per_list_show").stop().fadeOut(200);
+				});
+			})
 		},
 		init:function(){
 			this.register();
 			this.login();
+			this.logout();
+			this.show_person_list();
 		}
 
 	}
