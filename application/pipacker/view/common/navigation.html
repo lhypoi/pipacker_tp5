@@ -2,11 +2,11 @@
 <header class="pp_header">
 		<div class="row">
 			<div class="col-md-1 logo"><a href="{:url('mainpage/index')}"><img src="__PUBLIC_PIPACKER__/pipacker/images/pipacker_logo.jpg" alt="" style="width: auto;"></a></div>
-			<div class="col-md-8 mune">
+			<div class="col-md-7 mune">
 				<ul>
 					<li><a href="{:url('photography/index')}">作品</a></li>
-					<li><a href="{:url('prints/index')}">图片</a></li>
-					<li><a href="{:url('prints/pgskill/index')}">技巧</a></li>
+					<li><a href="{:url('prints/index')}">商店</a></li>
+					<li><a href="{:url('prints/pgskill')}">技巧</a></li>
 					<li class="pp_down_menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多<span class="caret"></a>
 						<ul class="dropdown-menu nav_more">
@@ -19,15 +19,29 @@
 				</ul>
 			</div>
 			<div class="col-md-2 search"><input type="text" class="search_input" placeholder="搜索"></div>
-			<div class="col-md-1 support">
+			<div class="col-md-2 support">
 				{if ""!=$user_info}
-					<a href="{:url('/user')}"><span class="glyphicon glyphicon-globe"></span></a>
-					<span class="glyphicon glyphicon-envelope"></span>
-					<span class="glyphicon glyphicon-user"></span>
+					<div class="after_login">
+						<span class="glyphicon glyphicon-globe"></span>
+						<span class="glyphicon glyphicon-envelope"></span>
+						<span class="glyphicon glyphicon-user personal_list"></span>
+						<div class="per_list_show">
+							<ul>
+								<li><a href="{:url('homepage/index')}">我的主页</a></li>
+								<li><a href="{:url('Favorites/index')}">我的收藏</a></li>
+								<li><a href="{:url('release/index')}">上传</a></li>
+								<hr style="border-top: 1px solid #222; height: 1px; font-size: 1px; margin: 2px 0px 3px 0px;">
+								<li><a href="javascript:;">设置</a></li>
+								<li><a class="pp_logout_btn" href="javascript:;">退出</a></li>
+							</ul>
+						</div>
+					</div>
 				{else}
-					<a href="#pp_login" data-toggle="modal" style="font-size: 13px;">登录</a>
+					<div class="before_login">
+						<a href="#pp_login" data-toggle="modal" style="font-size: 13px;">登录</a>
 						|
-					<a href="#pp_reg" data-toggle="modal" style="font-size: 13px;">注册</a>
+						<a href="#pp_reg" data-toggle="modal" style="font-size: 13px;">注册</a>
+					</div>
 				{/if}
 			</div>
 		</div>
