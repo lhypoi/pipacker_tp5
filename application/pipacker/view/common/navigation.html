@@ -1,0 +1,103 @@
+
+<header class="pp_header">
+		<div class="row">
+			<div class="col-md-1 logo"><a href="{:url('mainpage/index')}"><img src="__PUBLIC_PIPACKER__/pipacker/images/pipacker_logo.jpg" alt="" style="width: auto;"></a></div>
+			<div class="col-md-8 mune">
+				<ul>
+					<li><a href="{:url('photography/index')}">作品</a></li>
+					<li><a href="{:url('prints/index')}">图片</a></li>
+					<li><a href="{:url('prints/pgskill/index')}">技巧</a></li>
+					<li class="pp_down_menu">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多<span class="caret"></a>
+						<ul class="dropdown-menu nav_more">
+				            <li><a href="{:url('prints/pgskill/index')}">影像圈</a></li>
+				            <li><a href="{:url('impression/index')}">印象杂志</a></li>
+				            <li><a href="{:url('dialogue/index')}">对话</a></li>
+				            <li><a href="{:url('prints/index')}">极限摄影</a></li>
+				          </ul>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-2 search"><input type="text" class="search_input" placeholder="搜索"></div>
+			<div class="col-md-1 support">
+				{if ""!=$user_info}
+					<a href="{:url('/user')}"><span class="glyphicon glyphicon-globe"></span></a>
+					<span class="glyphicon glyphicon-envelope"></span>
+					<span class="glyphicon glyphicon-user"></span>
+				{else}
+					<a href="#pp_login" data-toggle="modal" style="font-size: 13px;">登录</a>
+						|
+					<a href="#pp_reg" data-toggle="modal" style="font-size: 13px;">注册</a>
+				{/if}
+			</div>
+		</div>
+	</header>
+
+	<!-- 登录模态框 -->
+	<div class="modal fade" id="pp_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="background: #161616;color:#fff;">
+				<div class="modal-header" style="border-bottom-color:#aaa;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#fff">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel" style="color:#aaa;">欢迎来到pipacker</h4>
+				</div>
+				<div class="modal-body">
+				<br/>
+					<div class="input-group tel_input">
+						  <span class="input-group-addon pp_black_span"><span class="glyphicon glyphicon-phone"></span></span>
+						  <input type="text" class="form-control pp_input_m" placeholder="输入手机号" aria-describedby="basic-addon1" id="user_phone">
+						  <span class="input-group-addon pp_black_span point"><span class="glyphicon lotips"></span></span>
+					</div><br/>
+					<div class="input-group pwd_input">
+						  <span class="input-group-addon pp_black_span"><span class="glyphicon glyphicon-asterisk"></span></span>
+						  <input type="password" class="form-control pp_input_m" placeholder="输入密码" aria-describedby="basic-addon1" id="user_pwd">
+						  <span class="input-group-addon pp_black_span point"><span class="glyphicon lotips"></span></span>
+					</div><br/>
+				</div>
+				<div class="modal-footer" style="border-top-color:#aaa;">
+					<button type="button" class="btn btn-success pp_login_btn">登录</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 注册模态框 -->
+	<div class="modal fade" id="pp_reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="background: #161616;color:#fff;">
+				<div class="modal-header" style="border-bottom-color:#aaa;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#fff">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel" style="color:#aaa;">欢迎来到pipacker</h4>
+				</div>
+				<div class="modal-body">
+				<br/>
+					<div class="input-group">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon glyphicon-phone"></span></span>
+						  <input type="text" class="form-control pp_input_m user_info" placeholder="输入手机号" aria-describedby="basic-addon1">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon retips"></span></span>
+					</div><br/>
+					<div class="input-group">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+						  <input type="text" class="form-control pp_input_m user_info" placeholder="输入昵称" aria-describedby="basic-addon1">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon retips"></span></span>
+					</div><br/>
+					<div class="input-group">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon glyphicon-asterisk"></span></span>
+						  <input type="password" class="form-control pp_input_m user_info" placeholder="输入密码" aria-describedby="basic-addon1">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon retips"></span></span>
+					</div><br/>
+					<div class="input-group">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon glyphicon-asterisk"></span></span>
+						  <input type="password" class="form-control pp_input_m user_info" placeholder="确认密码" aria-describedby="basic-addon1">
+						  <span class="input-group-addon pp_black_span" id="basic-addon1"><span class="glyphicon retips"></span></span>
+					</div><br/>
+				</div>
+				<div class="modal-footer" style="border-top-color:#aaa;">
+					<button type="button" class="btn btn-success pp_reg_btn">我要注册</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var register_url = "{:url('/user')}";
+	</script>

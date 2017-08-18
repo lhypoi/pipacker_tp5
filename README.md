@@ -127,3 +127,22 @@ All rights reserved。
 ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
 
 更多细节参阅 [LICENSE.txt](LICENSE.txt)
+
+
+## 命名规范
+
+作品 photography
+
+图片广场 imgsquare
+
+摄影技巧 pgskill
+
+影像圈 prints
+
+印象杂志 impression
+
+对话 dialogue
+
+极限摄影 limitpic
+
+个人主页 homepage

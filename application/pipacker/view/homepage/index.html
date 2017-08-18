@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
+	<style type="text/css">
+		:focus {
+			outline: none;
+		}
+		.head_bg {
+			/*display: block;*/
+		    width: 100%;
+		    height: 250px;
+		    background: #151515;
+		    background-repeat: no-repeat;
+		    background-size: 100%;
+		    background-position: center;
+		    margin: auto;
+		    margin-top: 115px;
+		    overflow: hidden;
+	        background-image: url(__PUBLIC_PIPACKER__/pipacker/images/11.jpg);
+		}
+		.container.head_info {
+			position: relative;
+			top: -135px;
+			overflow: hidden;
+		}
+		.head_info .head_photo {
+			width: 170px;
+			height: 170px;
+			display: inline-block;
+			margin: 20px;
+			margin-left: 40px;
+		}
+		.head_info .head_photo img {
+			width: 100%;
+			height: 100%;
+			vertical-align: middle;
+		}
+		.head_info .user_name {
+			color: #fff;
+		    font-size: 30px;
+		    vertical-align: bottom;
+		    padding-bottom: 25px;
+		    display: inline-block;
+		}
+		.head_info div[class^='col-md-4'] {
+			position: absolute;
+			bottom: 28px;
+			right: 0;
+			text-align: right;
+		}
+		.head_info span.scorebadge {
+			display: inline-block;
+			font-size: 14px;
+		    background: #333;
+		    border-radius: 5px;
+		    padding: 5px 10px 5px 10px;
+		    color: #ddd;
+		    margin: 0px 10px 0px 0px;
+		    cursor: pointer;
+		}
+		.head_info span.scorebadge:hover {
+			background: #fff;
+    		color: #000;
+		}
+		.head_info .follow , .save_intro{
+			display: inline-block;
+            float: right;
+            border: none;
+            padding: 3px 0px 0px 0px;
+            color: #ddd;
+            box-shadow: inset 0 1px 1px 0 rgba(255,255,255,0.2), 0 1px 2px 0 rgba(0,0,0,0.4);
+            text-align: center;
+            font-size: 12px;
+            padding: 12px 20px 10px;
+            position: relative;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.7);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            cursor: pointer;
+            background: #262626;
+            background: -moz-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#262626),color-stop(100%,#1c1c1c));
+            background: -webkit-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -o-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -ms-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: linear-gradient(to bottom,#262626 0%,#1c1c1c 100%);
+            padding: 8px 13px;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            vertical-align: middle;
+            /*margin-right: 40px;*/
+		}
+		.head_info .follow:hover, .save_intro:hover {
+			color: #fff;
+		}
+		.container .show_img_list{
+			margin-top: 130px;
+		}
+		.container .show_img_list [class^="col-lg"] img{
+			max-width: 330px;
+    		max-height: 240px;
+    		display: block;
+    		margin:0 auto;
+		}
+		.container .show_img_list [class^="col-lg"]{
+			text-align: center;
+		}
+		.container .show_img_list [class^="col-lg"] p{
+			padding: 10px 0px 80px 0px;
+		}
+		.container .show_img_list [class^="col-lg"] a{
+			color: #555;
+			text-decoration: none;
+		}
+		.container .nav {
+		    /*margin: auto;*/
+		    /*width: 50%;*/
+		    display: inline-block;
+	        /*margin-left: -40px;*/
+   	 		background: #101010;
+		}
+		.container .nav-tabs {
+			border: none;
+		}
+		.container .nav-tabs>li {
+			background: rgb(37,37,37);
+		    background: -moz-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(37,37,37,1)),color-stop(100%,rgba(34,34,34,1)));
+		    background: -webkit-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: -o-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: -ms-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: linear-gradient(to bottom,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+
+		}
+		.container .nav-tabs>li>a, .container .nav-tabs>li>a:focus,.container .nav-tabs>li>a:hover {
+		    padding: 8px;
+		    width: 140px;
+		    font-size: 14px;
+		    position: relative;
+		    background: -moz-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(34,34,34,1)),color-stop(100%,rgba(17,17,17,1)));
+		    background: -webkit-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -o-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -ms-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: linear-gradient(to bottom,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    border: none;
+		    border-top: 2px solid #222222;
+		    border-bottom: 2px solid #222222;
+		    text-align: center;
+		    color: #aaa;
+		    cursor: pointer;
+		}
+		.container .nav-tabs>li>a:hover {
+		    color: #fff;
+		}
+		.container .nav-tabs>li.active>a, .container .nav-tabs>li.active>a:focus, .container .nav-tabs>li.active>a:hover {
+		        text-align: center;
+			    padding: 8px;
+			    cursor: pointer;
+			    width: 140px;
+			    font-size: 14px;
+			    position: relative;
+			    background: rgb(37,37,37);
+			    background: -moz-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(37,37,37,1)),color-stop(100%,rgba(34,34,34,1)));
+			    background: -webkit-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: -o-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: -ms-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: linear-gradient(to bottom,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    border-top: 2px solid #222222;
+			    border-bottom: 2px solid #222222;
+			    color: #fff;
+		}
+		.container .nav-tabs>li.active>a:after {
+			content: "";
+			top: 100%;
+		    border: solid transparent;
+		    height: 0;
+		    width: 0;
+		    position: absolute;
+		    pointer-events: none;
+	        border-color: rgba(34,34,34,0);
+		    border-top-color: #222222;
+		    border-width: 13px;
+		    left: 50%;
+		    margin-left: -13px;
+		}
+		.createInt {
+			display: block;
+			border: none;
+            padding: 3px 0px 0px 0px;
+            color: #ddd;
+            box-shadow: inset 0 1px 1px 0 rgba(255,255,255,0.2), 0 1px 2px 0 rgba(0,0,0,0.4);
+            text-align: center;
+            font-size: 12px;
+            padding: 12px 20px 10px;
+            position: relative;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.7);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            cursor: pointer;
+            background: #262626;
+            background: -moz-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#262626),color-stop(100%,#1c1c1c));
+            background: -webkit-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -o-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -ms-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: linear-gradient(to bottom,#262626 0%,#1c1c1c 100%);
+            padding: 8px 13px;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            margin: 30px auto;
+            margin-bottom: 0;
+		}
+		.save_intro {
+			margin-bottom: 10px;
+		}
+		.createInt:hover {
+			color: #fff;
+		}
+		.introduction_text {
+			width: 100%;
+			height: 500px;
+			padding: 10px;
+         	border: 1px solid #252525;
+          	background: #151515;
+          	color: #ddd;
+         	font-size: 15px;
+         	resize:none;
+		}
+		.introduction_text:focus {
+          color: #fff;
+          border: 1px solid #252525;
+          outline: none;
+        }
+		.comment {
+			padding-bottom: 50px;
+			border-bottom: 1px solid #3a3a3a;
+		}
+		.comment .guestbook {
+			text-align: center;
+			margin: 40px 0 30px 0;
+			display: block;
+		}
+		.comment_text {
+          resize:none;
+          width: 100%;
+          height: 80px;
+          padding: 10px;
+          border: 1px solid #252525;
+          background: #151515;
+          color: #ddd;
+          font-size: 15px;
+        }
+        .comment_text:focus {
+          color: #fff;
+          border: 1px solid #252525;
+          outline: none;
+        }
+        .comment_text_btn {
+          display: inline-block;
+          margin-top: 10px;
+          color: #ddd;
+          background: #262626;
+          padding: 5px 20px;
+          font-size: 14px;
+          border-radius: 4px;
+          border: none;
+          opacity: 0.7;
+        }
+        .comment_text_btn:focus {
+          outline: none;
+        }
+        .comment_container {
+          padding-top: 25px;
+        }
+        .comment_container .comment_connent {
+          margin-bottom: 15px;
+        }
+        .comment_container .media-left>img {
+          width: 40px;
+          box-shadow: #000 0px 0px 10px;
+          border-radius: 5px;
+          height: 40px;
+        }
+	</style>
+	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	{include file="common/navigation"}
+	<div class="container">
+		<div class="head_bg"></div>
+	</div>
+	<div class="container head_info">
+		<div class="row">
+			<div class="col-md-5">
+				<div class="head_photo">
+					<img src="__PUBLIC_PIPACKER__/pipacker/images/18.jpg">
+				</div>
+				<span class="user_name">摄影师不加鸡腿</span>
+			</div>
+			<div class="col-md-3"></div>
+			<div class="col-md-4">
+				<span class="scorebadge">2009年加入</span>
+				<span class="follow">关注</span>
+			</div>
+		</div>
+	</div>
+	<div class="container" style="text-align: center; margin-top: -115px;">
+		<ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a style="border-left: 2px solid #222222;" href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">发布(233)</a></li>
+		    <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">图集</a></li>
+		    <li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">粉丝</a></li>
+		    <li role="presentation"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">留言</a></li>
+	  	</ul>
+		{include file="common/show_img_list"}
+	</div>
+	
+</body>
+</html>

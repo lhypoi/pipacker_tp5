@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/swiper.min.css"> -->
+  <link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
+	<style>
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+        body {
+            background: #101010;
+            padding: 0px;
+            margin: 0px;
+            font-family: ProximaNova-Regular;
+            color: #fff;
+            font-weight: normal;
+            font-style: normal;
+            overflow: hidden;
+        }
+        h1,h2,h3,h4,h5,h6 {
+          font-weight: normal;
+          /*font-family: '宋体';*/
+        }
+        a, a:hover, a:focus {
+            text-decoration: none;
+        }
+        ul {
+          list-style: none;
+        }
+        .swiper-container {
+            overflow: hidden;
+            height: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #000;
+        }
+        .swiper-slide img {
+          width: auto;
+          height: auto;
+          padding-top: 80px;
+          padding-bottom: 50px;
+          max-width: 100%;
+          max-height: 100%;
+          -ms-transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%);
+          -moz-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          position: absolute;
+          left: 50%;
+          top: 50%;
+        }
+        .browse_photo {
+            width: 70%;
+            max-height: 600px;
+            float: left;
+        }
+        /*comment or detail*/
+        .comORdet {
+            color: #fff;
+            width: 30%;
+            display: none;
+            height: 100%;
+            padding: 80px 10px 50px 10px;
+            float: left;
+        }
+        .comORdet .comment_text {
+          resize:none;
+          width: 100%;
+          height: 80px;
+          padding: 10px;
+          border: 1px solid #252525;
+          background: #151515;
+          color: #ddd;
+          font-size: 15px;
+        }
+        .comORdet .comment_text:focus {
+          color: #fff;
+          border: 1px solid #252525;
+          outline: none;
+        }
+        .comORdet .comment_text_btn {
+          display: inline-block;
+          margin-top: 10px;
+          color: #ddd;
+          background: #262626;
+          padding: 5px 20px;
+          font-size: 14px;
+          border-radius: 4px;
+          border: none;
+          opacity: 0.7;
+        }
+        .comORdet .comment_text_btn:focus {
+          outline: none;
+        }
+        .comORdet .comment_container {
+          margin-top: 25px;
+        }
+        .comORdet .comment_container .comment_connent {
+          margin-bottom: 15px;
+        }
+        .comORdet .comment_container .media-left>img {
+          width: 40px;
+          box-shadow: #000 0px 0px 10px;
+          border-radius: 5px;
+          height: 40px;
+        }
+        /********************/
+        .detail_com{
+            color: #fff;
+            width: 30%;
+            display: block;
+            height: 100%;
+            float: left;
+            padding: 80px 10px 50px 10px;
+        }
+        .detail_com .thumbnails {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        .detail_com .thumbnails img {
+          width: 100%;
+          height: auto;
+        }
+        .detail_com .info {
+          width: 100%;
+        }
+        .detail_com .info .info_list li{
+          float: left;
+          width: 50%;
+          padding-right: 10px;
+          margin-bottom: 10px;
+        }
+        .detail_com .info .info_list li .color888 {
+          color: #888;
+        }
+        .detail_com .info .info_list li .colorccc {
+          color: #ccc;
+        }
+        /*floor*/
+        .floor {
+            font-size: 0;
+        }
+        .floor .navbar-default {
+            background: rgb(33,33,33);
+            background: -moz-linear-gradient(top,rgba(33,33,33,1) 0%,rgba(15,15,15,1) 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(33,33,33,1)),color-stop(100%,rgba(15,15,15,1)));
+            background: -webkit-linear-gradient(top,rgba(33,33,33,1) 0%,rgba(15,15,15,1) 100%);
+            background: -o-linear-gradient(top,rgba(33,33,33,1) 0%,rgba(15,15,15,1) 100%);
+            background: -ms-linear-gradient(top,rgba(33,33,33,1) 0%,rgba(15,15,15,1) 100%);
+            background: linear-gradient(to bottom,rgba(33,33,33,1) 0%,rgba(15,15,15,1) 100%);
+            border: none;
+            color: #ddd;
+        }
+        .floor .navbar-default .navbar-text {
+            font-size: 14px;
+            color: #ddd;
+        }
+        .floor .dropdown {
+            display: inline-block;
+            font-size: 14px;
+        }
+        .floor .dropdown .dropdown-toggle {
+            color: #ddd;
+            padding: 15px;
+            display: inline-block;
+            border-left: 1px solid rgba(0,0,0,0.1);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            height: 50px;
+        }
+        .floor .dropdown .dropdown-toggle:hover, .floor .like_btn:hover, .floor .comment_btn:hover, .floor .detail_btn:hover {
+            color: #fff;
+            background: rgb(49,49,49);
+            background: -moz-linear-gradient(top,rgba(49,49,49,1) 0%,rgba(19,19,19,1) 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(49,49,49,1)),color-stop(100%,rgba(19,19,19,1)));
+            background: -webkit-linear-gradient(top,rgba(49,49,49,1) 0%,rgba(19,19,19,1) 100%);
+            background: -o-linear-gradient(top,rgba(49,49,49,1) 0%,rgba(19,19,19,1) 100%);
+            background: -ms-linear-gradient(top,rgba(49,49,49,1) 0%,rgba(19,19,19,1) 100%);
+            background: linear-gradient(to bottom,rgba(49,49,49,1) 0%,rgba(19,19,19,1) 100%);
+        }
+        .floor .dropdown.open .dropdown-toggle:focus, .floor .like_btn:focus, .floor .comment_btn:focus, .floor .detail_btn:focus {
+            color: #fff;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            background: -moz-linear-gradient(top,rgba(1,1,1,1) 0%,rgba(21,21,21,1) 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(1,1,1,1)),color-stop(100%,rgba(21,21,21,1)));
+            background: -webkit-linear-gradient(top,rgba(1,1,1,1) 0%,rgba(21,21,21,1) 100%);
+            background: -o-linear-gradient(top,rgba(1,1,1,1) 0%,rgba(21,21,21,1) 100%);
+            background: -ms-linear-gradient(top,rgba(1,1,1,1) 0%,rgba(21,21,21,1) 100%);
+            background: linear-gradient(to bottom,rgba(1,1,1,1) 0%,rgba(21,21,21,1) 100%);
+        }
+        .floor .dropdown .dropdown-menu {
+            border: 3px solid #252525;
+            border-radius: 4px;
+            background: #080808;
+            box-shadow: #000 0px 0px 15px;
+            margin-bottom: 10px;
+            padding: 0;
+        }
+        .floor .dropdown .dropdown-menu:after,.floor .dropdown .dropdown-menu:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+        .floor .dropdown .dropdown-menu:after {
+            border-color: rgba(8,8,8,0);
+            border-top-color: #080808;
+            border-width: 15px;
+            left: 14.5px;
+        }
+        .floor .dropdown .dropdown-menu:before {
+            border-color: rgba(37,37,37,0);
+            border-top-color: #252525;
+            border-width: 19px;
+            left: 10px;
+        }
+        .floor .dropdown .dropdown-menu .author_content {
+            height: 400px;
+            width: 500px;
+            overflow: auto;
+            position: relative;
+        }
+        .floor .dropdown .dropdown-menu .author_content .author_header, .floor .dropdown .dropdown-menu .author_content .mylike_header {
+          background: rgb(37,37,37);
+          background: -moz-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(8,8,8,1) 100%);
+          background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(37,37,37,1)),color-stop(100%,rgba(8,8,8,1)));
+          background: -webkit-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(8,8,8,1) 100%);
+          background: -o-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(8,8,8,1) 100%);
+          background: -ms-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(8,8,8,1) 100%);
+          background: linear-gradient(to bottom,rgba(37,37,37,1) 0%,rgba(8,8,8,1) 100%);
+          height: 70px;
+        }
+        .floor .dropdown .dropdown-menu .author_content .author_header .author_header_inner, .floor .mylike_header .mylike_header_inner {
+          padding: 15px;
+          font-size: 23px;
+          color: #ddd;
+        }
+        .floor .author_header_inner .user_headphoto {
+            float: left;
+            width: 110px;
+            height: 110px;
+            box-shadow: #000 0px 0px 10px;
+            margin: -5px 15px 0px -5px;
+        }
+        .floor .author_header_inner .follow, .floor .mylike_header .mylike_header_create_list, .floor .mylike_photo .mylike_photo_list .mylike_photo_list_btn {
+            display: inline-block;
+            float: right;
+            padding: 3px 0px 0px 0px;
+            color: #ddd;
+            box-shadow: inset 0 1px 1px 0 rgba(255,255,255,0.2), 0 1px 2px 0 rgba(0,0,0,0.4);
+            text-align: center;
+            font-size: 12px;
+            padding: 12px 20px 10px;
+            position: relative;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.7);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            cursor: pointer;
+            background: #262626;
+            background: -moz-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#262626),color-stop(100%,#1c1c1c));
+            background: -webkit-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -o-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: -ms-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+            background: linear-gradient(to bottom,#262626 0%,#1c1c1c 100%);
+            padding: 8px 13px;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            vertical-align: middle;
+        }
+        .floor .dropdown .dropdown-menu .author_content .author_photo {
+            clear: both;
+            font-size: 14px;
+            color: #aaa;
+            padding: 10px;
+        }
+        .floor .author_photo .author_photo_list li {
+          float: left;
+          width: 110px;
+          height: 110px;
+          margin-right: 5px;
+          margin-bottom: 10px;
+        }
+        .floor .author_photo .author_photo_list li img {
+          width: 100%;
+          height: 100%;
+        }
+        .floor .mylike_photo {
+          text-align: left;
+          padding: 10px;
+          background: rgb(28,28,28);
+          background: -moz-linear-gradient(top,rgba(28,28,28,1) 0%,rgba(13,13,13,1) 100%);
+          background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(28,28,28,1)),color-stop(100%,rgba(13,13,13,1)));
+          background: -webkit-linear-gradient(top,rgba(28,28,28,1) 0%,rgba(13,13,13,1) 100%);
+          background: -o-linear-gradient(top,rgba(28,28,28,1) 0%,rgba(13,13,13,1) 100%);
+          background: -ms-linear-gradient(top,rgba(28,28,28,1) 0%,rgba(13,13,13,1) 100%);
+          background: linear-gradient(to bottom,rgba(28,28,28,1) 0%,rgba(13,13,13,1) 100%);
+          border-bottom: 1px solid #222;
+        }
+        .floor .mylike_photo .mylike_photo_list li {
+          width: 100%;
+        }
+        .floor .mylike_photo .mylike_photo_list li .mylike_photo_list_img {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+        }
+        .floor .mylike_photo .mylike_photo_list li .mylike_photo_list_name {
+          font-size: 18px;
+          color: #eee;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .floor .like_btn, .floor .comment_btn, .floor .detail_btn {
+            font-size: 14px;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            color: #ddd;
+            border-left: 1px solid rgba(0,0,0,0.1);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .floor .like_btn i, .floor .comment_btn i, .floor .detail_btn i{       
+            padding: 15px;
+        }
+        .floor .like_btn:focus i {
+            color: #000;
+        }
+        .browse_big_img{
+          clear: both;
+          width:100%;
+          height:400px;
+          margin-top: 120px;
+          display: inline-block;
+          vertical-align: middle;
+          position: relative;
+        }
+        .browse_big_img img {
+          display: block;
+          max-width: 100%;
+          max-height: 100%;
+          margin:auto;
+        }   
+          .hf_btn{
+          position: absolute;        
+          top:-50%;
+          margin-top:40%;
+          font-size: 30px;
+          font-size: 100;
+          z-index: 2;
+          cursor: pointer;
+          color:#fff;
+          }
+          .next_btn{
+            right: 0;
+          }
+    </style>
+</head>
+<body>
+	{include file="common/navigation"}
+    <div class="browse_photo">
+            <div class="browse_big_img">
+                   <img src="__PUBLIC_PIPACKER__/pipacker/images/11.jpg" class="show_content_small_img">
+                   <span class="pre_btn hf_btn glyphicon glyphicon-chevron-left"></span>
+                   <span class="next_btn hf_btn glyphicon glyphicon-chevron-right"></span>
+            </div>
+    </div>
+    <div class="comORdet">
+      <h3 style="font-family: '宋体';">评论</h3>
+      <div>
+        <textarea class="comment_text" placeholder="在这里写出你的评论"></textarea>
+        <button class="comment_text_btn">写</button>
+      </div>
+      <div class="comment_container">
+        <div class="comment_connent">
+          <div class="media">
+            <div class="media-left">
+                <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
+              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
+            </div>
+          </div>
+        </div>
+        <div class="comment_connent">
+          <div class="media">
+            <div class="media-left">
+                <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
+              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
+            </div>
+          </div>
+        </div>
+        <div class="comment_connent">
+          <div class="media">
+            <div class="media-left">
+                <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
+              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
+            </div>
+          </div>
+        </div>
+        <div class="comment_connent">
+          <div class="media">
+            <div class="media-left">
+                <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
+              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="detail_com">
+      <h3 style="font-family: '宋体';">照片信息</h3>
+      <div class="thumbnails">
+        
+      </div>
+      <div class="info">
+          <!-- <p><span class="color888;">查看</span><br><span class="colorccc;">10086+</span></p>
+          <p><span class="color888;">类型</span><br><span class="colorccc;">肖像</span></p> -->
+          <ul class="info_list">
+            <li>
+              <p><span class="color888">查看</span><br><span class="colorccc">10086+</span></p>
+            </li>
+            <li>
+              <p><span class="color888">类型</span><br><span class="colorccc">肖像</span></p>
+            </li>
+            <li>
+              <p><span class="color888">相机</span><br><span class="colorccc">Canon EOS 5D Mark IV</span></p>
+            </li>
+            <li>
+              <p><span class="color888">光圈</span><br><span class="colorccc">F/0</span></p>
+            </li>
+            <li>
+              <p><span class="color888">快门</span><br><span class="colorccc">1/800</span></p>
+            </li>
+            <li>
+              <p><span class="color888">感光度</span><br><span class="colorccc">ISO-400</span></p>
+            </li>
+          </ul>
+      </div>
+    </div>
+    <div class="floor">
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+          <div class="container">
+            <p class="navbar-text">作品名字</p>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">©作者</a>
+                <div class="dropdown-menu">
+                   <div class="author_content">
+                      <div class="author_header">
+                        <div class="author_header_inner">
+                          <a href="homepage" class="user_name" style="color: #fff; font-size: 21px;">RUA<img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" class="user_headphoto"></a>
+                          <span class="follow">关注</span>
+                        </div>
+                      </div>
+                      <div class="author_photo">
+                        <ul class="author_photo_list">
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                        </ul>
+                      </div>
+                   </div>
+                </div>
+            </div>
+            <p class="like_btn"><i class="glyphicon glyphicon-heart"></i></p>
+            <div class="dropdown like_list">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-list"></i></a>
+                <div class="dropdown-menu">
+                   <div class="author_content">
+                       <div class="mylike_header">
+                         <div class="mylike_header_inner">
+                            <span class="mylike_header_title" style="color: #fff; font-size: 21px;">组</span>
+                            <span class="mylike_header_create_list">创建组</span>
+                         </div>
+                       </div>
+                       <div class="mylike_photo">
+                         <ul class="mylike_photo_list">
+                           <li>
+                             <img class="mylike_photo_list_img" src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg">
+                             <a href="" class="mylike_photo_list_name">我的最爱</a>
+                             <span class="mylike_photo_list_btn" style="margin-top: 2px;">添加图片</span>
+                           </li>
+                         </ul>
+                       </div>
+                   </div>
+                </div>
+            </div>
+            <div class="pull-right right_btn">
+                <p class="comment_btn"><i class="pull-right glyphicon glyphicon-comment comment_btn_i"></i></p>
+                <p class="detail_btn"><i class="pull-right glyphicon glyphicon-exclamation-sign detail_btn_i"></i></p>
+            </div>
+          </div>
+        </nav>
+    </div>
+</body>
+</html>
+
+<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
+<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/swiper.min.js"></script> -->
+<script type="text/javascript">
+
+  $(function(){        
+        var works_id = localStorage.getItem("apic_id");
+        var $para = $(".colorccc");        
+        var $browse_img = $('.browse_big_img');
+        var $thumbnails = $('.thumbnails');
+        $.ajax({
+          url: "{:url('/qworks/Apic')}",
+          type: 'get',
+          data: {"works_id": works_id},
+        })
+        .done(function(data) {
+           if(!$.isEmptyObject(data)){
+              var redata = $.parseJSON(data);
+              $para.eq(0).text(redata.rearray.works_browse);
+              $browse_img.find("img").attr("src","/public/static/"+redata.rearray.works_src);
+              $thumbnails.text(redata.rearray.works_profile);
+              $para.eq(1).text(redata.rearray.works_type);
+              $para.eq(2).text(redata.rearray.works_para[0]);
+              $para.eq(3).text(redata.rearray.works_para[1]);
+              $para.eq(4).text(redata.rearray.works_para[2]);
+              $para.eq(5).text(redata.rearray.works_para[3]);
+           }
+        });
+        var pic_id = 0;
+        var pre_lock = true;
+        var next_lock = true;
+        $browse_img.on('click',function(e){
+          var this_elm = $(e.target);
+          if(this_elm.hasClass('pre_btn')){
+            if(pre_lock){
+              browse_img(1);
+            }else{
+              alert("已经是第一张了");
+            }
+            // $browse_img.find('img').attr('src','__PUBLIC_PIPACKER__/pipacker/images/bg.jpg');
+          }else if(this_elm.hasClass('next_btn')){
+            if(next_lock){
+              browse_img(0);
+            }else{
+              alert("已经是最后一张了");
+            } 
+          }
+        });
+       function browse_img(ew){
+        $.ajax({
+              url: '/public/pipacker/Prints/browse',
+              type: 'post',
+              data: {'id':pic_id,'ew':ew},
+            })
+            .done(function(data) {
+              if(!$.isEmptyObject(data)){
+                var redata = $.parseJSON(data);
+                if(1==redata.has){
+                  var pic_url = redata.content_pic;
+                  $browse_img.find('img').attr('src',"/public/static/"+pic_url);
+                  // console.log(pic_url);
+                  var str ="";
+                  for(var i=0;i<redata.content_type.length;i++){
+                    str += "<span> #"+redata.content_type[i]+"</span>";
+                  }
+                  $(".tags").html($(str));
+                  $(".pic_title").text(redata.content_title);
+                  pic_id = redata.content_id;
+                }else{
+                  if(1==ew){
+                    pre_lock = false;
+                    next_lock = true;
+                    alert("已经是第一张了");
+                  }else{
+                    pre_lock = true;
+                    next_lock = false;
+                    alert("已经是最后一张了");
+                  }
+                }
+              }else{
+                alert("页面走丢了");
+              }
+            });
+       }
+      });
+</script>

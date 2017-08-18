@@ -17,7 +17,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -237,5 +237,10 @@ return [
         'type'      => 'bootstrap',
         'var_page'  => 'page',
         'list_rows' => 15,
+    ],
+    // 路径配置
+    'view_replace_str'      =>[
+        '__PUBLIC_PIPACKER__' =>'/public/static',
+        '__PUBLIC__' => '/public/pipacker'
     ],
 ];

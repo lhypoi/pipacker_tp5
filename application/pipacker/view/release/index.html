@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
+	<style></style>
+</head>
+<style>
+	span{
+		color: #FFF;
+	}
+	.margin_auto{
+		margin: 10px auto;
+	}
+	.margin_bottom{
+		margin-bottom: 30px;
+	}
+	.container{
+		text-align: center;
+	}
+	.container h1{
+		text-align: center;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 30px;
+		color: #fff;
+	}
+	.container h2{
+		/*text-align: center;*/
+		margin: 30px auto;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 30px;
+		color: #fff;
+		width: 50%;
+	}
+	.container button{
+		display: block;
+		width: 100px;
+	}
+	.container input[type="file"]{
+		color: #fff;
+		display: inline-block;
+		margin-left: 10px;
+	}
+	.container textarea{
+		resize:none;
+        width: 60%;
+        height: 80px;
+        padding: 10px;
+	}
+	.works_profile span{
+		display: block;
+		margin-bottom: 20px;
+	}
+</style>
+<body>
+	<div class="container">
+		<h1>发布</h1>
+		<div class="row">
+			<div class="col-lg-12">
+				<span>请选择发布的文件：</span>
+				<input type="file" id="pic_file" name="pic_file" class="margin_auto margin_bottom">
+			</div>
+		</div>
+		<div>
+			<h2>图片参数</h2>
+			<div class="row margin_bottom">
+				<div class="col-lg-6">
+					<span>请选择发布的类型：</span>
+					<select class="img_type">  
+					  <option value ="人像">人像</option>  
+					  <option value ="风景">风景</option>  
+					  <option value="生态">生态</option>  
+					  <option value="纪实">纪实</option>
+					  <option value="生活">生活</option>
+					  <option value="LOMO">LOMO</option>
+					  <option value="观念">观念</option>
+					</select>
+				</div>
+				<div class="col-lg-6">
+					<span>请选择拍摄的相机型号：</span>
+					<select class="camera_type">  
+					  <option value ="尼康 D810">尼康 D810</option>  
+					  <option value ="佳能 EOS M6">佳能 EOS M6</option>  
+					  <option value="佳能 5D Mark IV">佳能 5D Mark IV</option>  
+					  <option value="佳能 6D Mark II">佳能 6D Mark II</option>  
+					  <option value="佳能 800D">佳能 800D</option>
+					  <option value="佳能 700D">佳能 700D</option>
+					  <option value="佳能 100D">佳能 100D</option>
+					</select>
+				</div>
+			</div>
+			<div class="row margin_bottom">
+				<div class="col-lg-6">
+					<span>请选择拍摄的光圈：</span>
+					<select class="aperture_type">
+	                    <option value="f/2">f/2</option>
+	                    <option value="f/2.8">f/2.8</option>
+	                    <option value="f/4">f/4</option>
+	                    <option value="f/5.6">f/5.6</option>
+	                    <option value="f/8">f/8</option>
+	                    <option value="f/11">f/11</option>
+	                    <option value="f/16">f/16</option>
+	                    <option value="f/22">f/22</option>
+	                </select>
+				</div>
+				<div class="col-lg-6">
+					<span>请输入拍摄的快门：</span>
+					<input type="text" class="shutter_type">
+				</div>
+			</div>
+			<div class="row margin_bottom">
+				<div class="col-lg-6">
+					<span>请选择拍摄的感光度：</span>
+					<select class="iso_type">
+	                    <option value="ISO 100">ISO 100</option>
+	                    <option value="ISO 200">ISO 200</option>
+	                    <option value="ISO 400">ISO 400</option>
+	                    <option value="ISO 800">ISO 800</option>
+	                    <option value="ISO 1600">ISO 1600</option>
+	                    <option value="ISO 3200">ISO 3200</option>
+	                    <option value="ISO 6400">ISO 6400</option>
+	                    <option value="ISO 12800">ISO 12800</option>
+	                    <option value="ISO 25600">ISO 25600</option>
+	                </select>
+				</div>
+			</div>
+		</div>
+		<div>
+			<h2>图片简介</h2>
+			<div class="margin_bottom works_title">
+				<span>请输入图片标题：</span>
+				<input type="text">
+			</div>
+			<div class="margin_bottom works_profile">
+				<span>请输入图片简介：</span>
+				<textarea placeholder="请输入图片简介，方便更多人了解"></textarea>
+			</div>
+			<div class="row margin_bottom">
+				<div class="col-lg-6 atlas_id">
+					<span>请输入图集：</span>
+					<input type="text">
+				</div>
+				<div class="col-lg-6 works_tags">
+					<span>请输入图片标签：</span>
+					<input type="text">
+				</div>
+			</div>
+		</div>
+		<button class="margin_auto send_works">发布</button>
+	</div>
+
+
+	<script type="text/javascript">
+		var works_url = "{:url('/works')}";
+	</script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/js/release.js?2"></script>
+</body>
+</html>

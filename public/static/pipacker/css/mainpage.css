@@ -1,0 +1,138 @@
+/*复位样式*/
+html,body {
+    background: #101010;
+    padding: 0px;
+    margin: 0px;
+    /*color: #fff;*/
+    font-weight: normal;
+    font-style: normal;
+    font-size: 13px;
+}
+a{
+	color:#aaa;
+	text-decoration: none;
+}
+a:hover{
+	color:#fff;
+	text-decoration:none; 
+}
+a:focus{
+	color:#fff;
+	text-decoration:none; 
+	outline: none;
+}
+:focus{
+	text-decoration:none; 
+	outline: none;
+}
+li{
+	list-style: none;
+}
+ul{
+	padding: 0px;
+}
+
+/*工具箱*/
+.float_left{
+	float: left;
+}
+.float_rigth{
+	float: right;
+}
+.text_center{
+	text-align: center;
+}
+.clear{
+	clear:both;
+}
+.imgwidth{
+	width: 100%;
+}
+
+
+/*导航条样式*/
+.pp_header{
+	background: black;
+	padding:20px 0px;
+	color: #fff;
+	font-size: 20px;
+	position: fixed;
+	top:0px;
+	width:100%;
+	color:#aaa;
+	z-index: 2;
+}
+.logo img{
+	height: 55px;
+    display: block;
+    margin: -10px auto
+}
+.search_input{	
+    font-size: 13px;
+    background: rgb(0,0,0);
+    background: -moz-linear-gradient(top,rgba(0,0,0,1) 0%,rgba(22,22,22,1) 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(0,0,0,1)),color-stop(100%,rgba(22,22,22,1)));
+    background: -webkit-linear-gradient(top,rgba(0,0,0,1) 0%,rgba(22,22,22,1) 100%);
+    background: -o-linear-gradient(top,rgba(0,0,0,1) 0%,rgba(22,22,22,1) 100%);
+    background: -ms-linear-gradient(top,rgba(0,0,0,1) 0%,rgba(22,22,22,1) 100%);
+    background: linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(22,22,22,1) 100%);
+    color: #fff;
+    font-weight: normal;
+    padding: 8px 15px;
+    border: none;
+    width: 80%;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+}
+.support span{
+	margin:0 2px;
+	cursor: pointer;
+}
+.mune ul li{
+	display: inline-block;
+	font-size: 13px;
+	padding:4px 20px;
+	cursor:pointer;
+	color: #aaa;
+}
+.mune ul li:hover{
+	color:#fff;
+}
+.mune .pp_down_menu>ul>li:hover{
+	color: #000;
+}
+ul.nav_more{
+	background: #161616;
+}
+ul.nav_more li a{
+	color:#aaa;
+}
+ul.nav_more li a:hover{
+	color:#fff;
+	background: transparent;	
+} 
+input.pp_input_m{
+	font-size: 13px;
+    background: #222 !important;
+    color: #fff;
+    font-weight: normal;
+    padding: 8px 15px;
+    border: none !important;
+    width: 80%;
+    border-radius: 2px;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+}
+input.pp_inut_m:focus{
+    outline:none !important;
+}
+span.pp_black_span{
+	background: #222;
+	border:1px solid #222;
+	color:#aaa;
+}
+span.glyphicon-remove-circle{
+	color:red;
+}
+span.glyphicon-ok-circle{
+	color:green;
+}
+

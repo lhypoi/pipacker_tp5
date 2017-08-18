@@ -1,0 +1,55 @@
+{include file="public/header"}
+<h1>图片管理</h1>
+
+<table class="table">
+	<tr>
+		<th>ID</th>
+		<th>标题</th>
+		<th style="text-align: center;">图片</th>
+		<th>发布时间</th>
+		<th>待定</th>
+		<th>待定</th>
+		<th>操作</th>
+	</tr>
+
+	{foreach $weibo_list as $item}
+	<tr>
+		<td>{$item.works_id}</td>
+		<td >  <span onclick="textEdit(this,'weibo',{$item.works_id})">{$item.works_title}</span></td>
+		<td style="text-align: center;"><img src="/public/static/{$item.works_src}" style="height:50px;"></td>
+		<td>{$item.update_time|date="Y-m-d H:m:s",###}</td>
+		<td></td>
+		<td></td>
+		<td><a href="" class="btn btn-info">修改</a><a href="" class="btn btn-danger">删除</a></td>
+	</tr>
+	{/foreach}
+</table>
+<div>
+	{$weibo_list->render()}
+</div>
+<script type="text/javascript">
+	 
+		function  textEdit(this_ele,control,id){
+			// 给当前节点创建一个输入框
+			// 当前节点是否有输入框 
+			var this_val = $(this_ele).html();
+
+			if($(this_ele).parent().find("input").length<=0){
+				// 第一步：创建节点
+				var new_input_ele = document.createElement("input");
+				// 第二步：为新的节点添加ID属性
+				new_input_ele.id = control+"_"+id;
+				// 第三步：为新的节点添加值
+				new_input_ele.value = this_val
+				
+
+				$(this_ele).parent().append(new_input_ele);
+
+				$(this_ele).hide();
+
+			}
+		}
+ 
+
+</script>
+{include file="public/footer"}
