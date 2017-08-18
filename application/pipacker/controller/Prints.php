@@ -28,6 +28,12 @@
 	    	return $this->fetch();
 	    }
 	    public function pgskill(){
+	    	session_start();
+            if(!empty($_SESSION["user_info"])){
+                $this->assign("user_info",$_SESSION["user_info"]);
+            }else{
+                $this->assign("user_info","");
+            }
 	    	$pp_list =  db("works")->paginate(4);
 	    	$this->assign("pp_list",$pp_list);
 	    	return $this->fetch('pgskill');

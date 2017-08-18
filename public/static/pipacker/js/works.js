@@ -15,6 +15,7 @@ browse_img_hf.prototype = {
           var this_elm = $(e.target);
           if(this_elm.hasClass('pre_btn')){
           	// console.log(that.pre_lock);
+            that.next_lock = true;
             if(that.pre_lock){
             	that.ew = 1;
               that.browse_img_n();
@@ -23,6 +24,7 @@ browse_img_hf.prototype = {
             }
             // $browse_img.find('img').attr('src','__PUBLIC_PIPACKER__/pipacker/images/bg.jpg');
           }else if(this_elm.hasClass('next_btn')){
+            that.pre_lock = true;
             if(that.next_lock){
             	that.ew=0;
               that.browse_img_n();
