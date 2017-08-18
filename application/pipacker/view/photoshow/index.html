@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+  <meta charset="UTF-8">
+  <title>Document</title>
     <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
-	<!-- <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/swiper.min.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/swiper.min.css"> -->
   <link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
-	<style>
+  <style>
         html, body {
             position: relative;
             height: 100%;
@@ -368,10 +368,10 @@
     </style>
 </head>
 <body>
-	{include file="common/navigation"}
+  {include file="common/navigation"}
     <div class="browse_photo">
             <div class="browse_big_img">
-                   <img src="__PUBLIC_PIPACKER__/pipacker/images/11.jpg" class="show_content_small_img">
+                   <img src="" class="show_content_small_img">
                    <span class="pre_btn hf_btn glyphicon glyphicon-chevron-left"></span>
                    <span class="next_btn hf_btn glyphicon glyphicon-chevron-right"></span>
             </div>
@@ -524,8 +524,37 @@
 
 <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
-<!-- <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/swiper.min.js"></script> -->
+<script src="__PUBLIC_PIPACKER__/pipacker/js/works.js"></script>
 <script type="text/javascript">
+  $(function (){
+        $('.right_btn').on('click',function(e){
+            var this_elm = $(e.target);
+            var $show_div = $('.comORdet');
+            var $detail_com = $('.detail_com');
+            // console.log($show_div);
+            if(this_elm.hasClass("comment_btn_i")){
+                if(!$detail_com.is(":hidden")){
+                        $detail_com.fadeOut(500);
+                    }
+                    if($show_div.is(":hidden")){
+                        // console.log($show_div);
+                        $show_div.fadeIn(500);
+                    }else{
+                        // $show_div.hide(500);
+                    }                
+                }else if(this_elm.hasClass("detail_btn_i")){
+                    if(!$show_div.is(":hidden")){
+                        $show_div.fadeOut(500);
+                    }
+                    if($detail_com.is (":hidden")){
+                        $detail_com.fadeIn(500);
+                    }else{
+                        // $detail_com.hide(500);
+                    } 
+                }
+            });
+    });
+
 
   $(function(){        
         var works_id = localStorage.getItem("apic_id");
@@ -541,7 +570,7 @@
            if(!$.isEmptyObject(data)){
               var redata = $.parseJSON(data);
               $para.eq(0).text(redata.rearray.works_browse);
-              $browse_img.find("img").attr("src","/public/static/"+redata.rearray.works_src);
+              $browse_img.find("img").attr("src",redata.rearray.works_src);
               $thumbnails.text(redata.rearray.works_profile);
               $para.eq(1).text(redata.rearray.works_type);
               $para.eq(2).text(redata.rearray.works_para[0]);
@@ -550,61 +579,14 @@
               $para.eq(5).text(redata.rearray.works_para[3]);
            }
         });
-        var pic_id = 0;
-        var pre_lock = true;
-        var next_lock = true;
-        $browse_img.on('click',function(e){
-          var this_elm = $(e.target);
-          if(this_elm.hasClass('pre_btn')){
-            if(pre_lock){
-              browse_img(1);
-            }else{
-              alert("已经是第一张了");
-            }
-            // $browse_img.find('img').attr('src','__PUBLIC_PIPACKER__/pipacker/images/bg.jpg');
-          }else if(this_elm.hasClass('next_btn')){
-            if(next_lock){
-              browse_img(0);
-            }else{
-              alert("已经是最后一张了");
-            } 
-          }
-        });
-       function browse_img(ew){
-        $.ajax({
-              url: '/public/pipacker/Prints/browse',
-              type: 'post',
-              data: {'id':pic_id,'ew':ew},
-            })
-            .done(function(data) {
-              if(!$.isEmptyObject(data)){
-                var redata = $.parseJSON(data);
-                if(1==redata.has){
-                  var pic_url = redata.content_pic;
-                  $browse_img.find('img').attr('src',"/public/static/"+pic_url);
-                  // console.log(pic_url);
-                  var str ="";
-                  for(var i=0;i<redata.content_type.length;i++){
-                    str += "<span> #"+redata.content_type[i]+"</span>";
-                  }
-                  $(".tags").html($(str));
-                  $(".pic_title").text(redata.content_title);
-                  pic_id = redata.content_id;
-                }else{
-                  if(1==ew){
-                    pre_lock = false;
-                    next_lock = true;
-                    alert("已经是第一张了");
-                  }else{
-                    pre_lock = true;
-                    next_lock = false;
-                    alert("已经是最后一张了");
-                  }
-                }
-              }else{
-                alert("页面走丢了");
-              }
-            });
-       }
+        var data = {
+          "url":"{:url('/qworks/Apic')}",
+          "browse_img":$browse_img,//包裹图片的盒子
+          "para":$para,//相片参数
+          "thumbnails":$thumbnails,//图片简介
+          "works_id":works_id//当前图片id
+        };
+        var browse_img_btn = new browse_img_hf(data);//新建
+        browse_img_btn.init();//初始化
       });
 </script>

@@ -70,11 +70,11 @@
 		    color: #ccc;
 		}
 		.show_img_list{
-			margin-top: 40px;
+			margin-top: 20px;
 		}
 		.show_img_list [class^="col-lg"] img{
 			max-width: 330px;
-			height:auto;
+			max-height: 200px;
     		display: block;
     		margin:0 auto;
 		}
@@ -82,11 +82,11 @@
 			text-align: center;
 			margin-top: 50px;
 			margin-bottom: 50px;		
-			max-height: 200px;
+			max-height: 220px;
 		}
-		/*.show_img_list [class^="col-lg"] p{
-			padding: 10px 0px 80px 0px;
-		}*/
+		.show_img_list [class^="col-lg"] p{
+			padding-top: 10px;
+		}
 		.show_img_list [class^="col-lg"] a{
 			color: #555;
 			text-decoration: none;
@@ -139,23 +139,11 @@
 				{foreach $works_list as $val}
 					<div class="col-lg-4">
 						<a href="javascript:;">
-							<img src="__PUBLIC_PIPACKER__/{$val.works_src}" class="m_img" data-id="{$val.works_id}">
+							<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
 							<p>© {$val.user_name}</p>
 						</a>
 					</div>
 				{/foreach}
-					<!-- <div class="col-lg-4">
-						<a href="">
-							<img src="__PUBLIC_PIPACKER__/pipacker/images/2.jpg" alt="">
-							<p>© 唐著</p>
-						</a>
-					</div>
-					<div class="col-lg-4">
-						<a href="">
-							<img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">
-							<p>© 唐著</p>
-						</a>
-					</div> -->
 				</div>
 				
 			</div>
