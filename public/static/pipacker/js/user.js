@@ -80,16 +80,10 @@ $(function (){
 								var redata = $.parseJSON(Data);
 								console.log(redata);
 								if (0 == redata.status) {
-									// localStorage.setItem("user_phone",redata.rearray[0].user_phone);
-									// // localStorage.setItem("user_pwd",redata[0].user_pwd);
-									// localStorage.setItem("user_name",redata.rearray[0].user_name);
-									// localStorage.setItem("user_id",redata.rearray[0].user_id);
-
 									localStorage.setItem("user_phone",redata.rearray.user_phone);
 									// localStorage.setItem("user_pwd",redata[0].user_pwd);
 									localStorage.setItem("user_name",redata.rearray.user_name);
 									localStorage.setItem("user_id",redata.rearray.user_id);
-									
 									$("#pp_login").modal('hide');
 									$(".modal-backdrop").hide();
 									// alert('登录成功');
