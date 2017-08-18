@@ -22,7 +22,7 @@ class Works extends baseControll
             if(isset($param["page"])){
                 $PP_list = Db::table("pp_works")
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                                ->limit(2*$param["page"])
+                                ->limit(10*$param["page"])
                                 ->select();
             }else{     
                 $pp_list = Db::table("pp_works")
@@ -34,7 +34,7 @@ class Works extends baseControll
         }else{            
             $pp_list = Db::table("pp_works")
                             ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                            ->limit(2)
+                            ->limit(5)
                             ->select();
         }
         // echo Db:: ;
@@ -165,29 +165,51 @@ class Works extends baseControll
         }
     }
     public function getApic()
-    {
+     {
         //
         $param = Request::instance()->param();
         if(!empty($param)){
             unset($param["action"]);
-            $pp_list = Db::table("pp_works")
-                            ->where($param)
-                            ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                            ->find();
-            if(!empty($pp_list)){
-                $tags = explode(',',$pp_list['works_tags']);
-                $para = explode(',',$pp_list['works_para']);
-                $pp_list['works_tags'] =$tags;
-                $pp_list['works_para'] =$para;
-                $this->reJson("0",$pp_list);
-            }else{
-                $this->reJson("1",$param,'没有数据');
+            if(isset($param["browse"])){
+                $ew = $param["browse"];
+                $id = $param["works_id"];
+                unset($param["browse"]);
+                //上一张和下一张
+                if(1==$ew){
+                    $pic = Db::table("pp_works")->order('works_id desc')->where("works_id<$id")->limit(1)->find();
+                    // print_r($pic);
+                }else if(0==$ew){
+                    $pic = Db::table("pp_works")->order('works_id asc')->where("works_id>$id")->limit(1)->find();
+                }
+                if(!empty($pic)){   
+                    $tags = explode(',',$pic['works_tags']);
+                    $pic['works_tags'] = $tags;
+                    $para = explode(',',$pic['works_para']);
+                    $pic['works_para'] = $para;
+                    $this->reJson("0",$pic);
+                }else{
+                    $this->reJson("1");
+                }
+            }else{  
+                $pp_list = Db::table("pp_works")
+                                ->where($param)
+                                ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                                ->find();
+                if(!empty($pp_list)){
+                    $tags = explode(',',$pp_list['works_tags']);
+                    $para = explode(',',$pp_list['works_para']);
+                    $pp_list['works_tags'] =$tags;
+                    $pp_list['works_para'] =$para;
+                    $this->reJson("0",$pp_list);
+                }else{
+                    $this->reJson("1",$pp_list,'没有数据');
+                }  
             }
         }else{
             $this->reJson("2",$param,"没有值");
         }
     }
-    public function hot_content()
+    public function getHot()
     {
         //
         $param = Request::instance()->param();
