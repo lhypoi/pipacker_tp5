@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Photography</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
+	<style type="text/css">
+		html,body {
+		    background: #101010;
+		    padding: 0px;
+		    margin: 0px;
+		    color: #fff;
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		a {
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: none;
+		}
+		:focus {
+		    outline: -webkit-focus-ring-color auto 5px;
+		}
+		ul {
+			list-style: none;
+		}
+		.photo_main_nav {
+		    background: #050505;
+		    width: 150px;
+		    border-radius: 5px;
+		    padding: 15px;
+		    /* margin: 20px 0px 0px 0px; */
+		    position: fixed;
+		    top: 150px;
+		    max-height: 75%;
+		    overflow: auto;
+		}
+		.photo_main_nav_item {
+			padding: 4px 8px 4px 8px;
+		    color: #aaa;
+		    font-size: 13px;
+		    cursor: pointer;
+		}
+		.photo_main_nav_item_selected {
+		    padding: 4px 8px 4px 8px;
+		    font-size: 13px;
+		    border-radius: 5px;
+		    background: -moz-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(34,34,34,1)),color-stop(100%,rgba(17,17,17,1)));
+		    background: -webkit-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -o-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -ms-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: linear-gradient(to bottom,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    color: #fff;
+		}
+		.photo_main_nav_item a {
+			text-decoration: none;
+		 	color: #aaa;
+		}
+		.photo_main_nav_item_selected a {
+		    color: #fff;
+		}
+		.photo_main_content {
+		    width: 980px;
+		    height: auto;
+		    margin: 60px 0px 0px 0px;
+		    text-align: center;
+		}
+		.hotlist {
+			text-align: center;
+			width: 100%;
+			padding-bottom: 8px;
+			position: fixed;
+			top: 80px; 
+			display: inline-block; 
+			background: #101010;
+		}
+		.hotlist .nav {
+		    /*margin: auto;*/
+		    width: 50%;
+		    display: inline-block;
+	        margin-left: -40px;
+   	 		margin-top: 20px;
+		}
+		.hotlist .nav-tabs {
+			border: none;
+		}
+		.hotlist .nav-tabs>li {
+			background: rgb(37,37,37);
+		    background: -moz-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(37,37,37,1)),color-stop(100%,rgba(34,34,34,1)));
+		    background: -webkit-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: -o-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: -ms-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		    background: linear-gradient(to bottom,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+		}
+		.hotlist .nav-tabs>li>a, .hotlist .nav-tabs>li>a:focus,.hotlist .nav-tabs>li>a:hover {
+		    padding: 8px;
+		    width: 140px;
+		    font-size: 14px;
+		    position: relative;
+		    background: -moz-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(34,34,34,1)),color-stop(100%,rgba(17,17,17,1)));
+		    background: -webkit-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -o-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: -ms-linear-gradient(top,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    background: linear-gradient(to bottom,rgba(34,34,34,1) 0%,rgba(17,17,17,1) 100%);
+		    border: none;
+		    border-top: 2px solid #222222;
+		    border-bottom: 2px solid #222222;
+		    text-align: center;
+		    color: #aaa;
+		    cursor: pointer;
+		}
+		.hotlist .nav-tabs>li>a:hover {
+		    color: #fff;
+		}
+		.hotlist .nav-tabs>li.active>a, .hotlist .nav-tabs>li.active>a:focus,.hotlist .nav-tabs>li.active>a:hover {
+		        text-align: center;
+			    padding: 8px;
+			    cursor: pointer;
+			    width: 140px;
+			    font-size: 14px;
+			    position: relative;
+			    background: rgb(37,37,37);
+			    background: -moz-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(37,37,37,1)),color-stop(100%,rgba(34,34,34,1)));
+			    background: -webkit-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: -o-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: -ms-linear-gradient(top,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    background: linear-gradient(to bottom,rgba(37,37,37,1) 0%,rgba(34,34,34,1) 100%);
+			    border-top: 2px solid #222222;
+			    border-bottom: 2px solid #222222;
+			    color: #fff;
+		}
+		.hotlist .nav-tabs>li.active>a:after {
+			content: "";
+			top: 100%;
+		    border: solid transparent;
+		    height: 0;
+		    width: 0;
+		    position: absolute;
+		    pointer-events: none;
+	        border-color: rgba(34,34,34,0);
+		    border-top-color: #222222;
+		    border-width: 13px;
+		    left: 50%;
+		    margin-left: -13px;
+		}
+		.photo_main_content_photo {
+			margin-top: 150px;
+		}
+		/********/
+		.pg_list {
+			width: 100%;
+			text-align: center;
+		}
+		.pg_list li{
+			display: inline-block;
+			text-align: center;
+			width: 300px;
+			height: 300px;
+			padding: 30px 30px 0 20px;
+		}
+		.pg_list li img {
+			max-height: 230px; 
+			max-width: 270px;
+			display: inline-block;
+		}
+		.pg_list li .author {
+			display: inline-block;
+		    font-size: 13px;
+		    margin: 13px 0px 50px 0px;
+		    color: #999;
+		}
+	</style>
+	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	{include file="common/navigation"}
+	<div class="pg">
+		<div class="photo_main container">
+			<div class="">
+				<div class="photo_main_nav">
+					<div class="photo_main_nav_item_selected"><a href="">人像</a></div>
+					<div class="photo_main_nav_item"><a href="">风景</a></div>
+					<div class="photo_main_nav_item"><a href="">生态</a></div>
+					<div class="photo_main_nav_item"><a href="">纪实</a></div>
+					<div class="photo_main_nav_item"><a href="">生活</a></div>
+					<div class="photo_main_nav_item"><a href="">LOMO</a></div>
+					<div class="photo_main_nav_item"><a href="">观念</a></div>
+				</div>
+			</div>
+			<div class="pull-right">
+				<div class="hotlist">
+					<ul class="nav nav-tabs" role="tablist">
+					    <li role="presentation" class="active"><a style="border-left: 2px solid #222222;" href="#Popular" aria-controls="Popular" role="tab" data-toggle="tab">热门</a></li>
+					    <li role="presentation"><a href="#potential" aria-controls="potential" role="tab" data-toggle="tab">潜力</a></li>
+					    <li role="presentation"><a href="#Latest" aria-controls="Latest" role="tab" data-toggle="tab">最新</a></li>
+				  	</ul>
+				</div>
+				<div class="photo_main_content">
+				  <!-- Tab panes -->
+				  <div class="tab-content photo_main_content_photo">
+				    <div role="tabpanel" class="tab-pane active" id="Popular">
+				    	<div>
+				    		<ul class="pg_list">
+				    			<li>
+				    				<a href="{:url('photoshow/index')}"><img src="__PUBLIC_PIPACKER__/pipacker/images/1.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/2.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/4.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/5.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/6.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/7.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/8.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    		</ul>
+				    	</div>
+			    	</div>
+				    <div role="tabpanel" class="tab-pane" id="potential">
+				    	<div>
+				    		<ul class="pg_list">
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/8.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/7.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/6.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/5.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/4.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/2.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/1.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    		</ul>
+				    	</div>
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="Latest">
+				    	<div>
+				    		<ul class="pg_list">
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/1.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/4.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/7.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/2.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/5.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/8.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/6.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    			<li>
+				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg" alt=""></a><br>
+				    				<a href="" class="author">©作者</a>
+			    				</li>
+				    		</ul>
+				    	</div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

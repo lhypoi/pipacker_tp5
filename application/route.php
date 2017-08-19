@@ -8,21 +8,27 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
-    // 定义资源路由
-    '__rest__'=>[
-        // 指向api模块的控制器
-        'works'=>'api/Works',
-        'atlas'=>'api/Atlas',
-        'comment'=>'api/Comments',
-        'user'=>'api/User'
-    ]
-];
+// return [
+//     '__pattern__' => [
+//         'name' => '\w+',
+//     ],
+//     '[hello]'     => [
+//         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
+//         ':name' => ['index/hello', ['method' => 'post']],
+//     ],
+//     // 定义资源路由
+//     '__rest__'=>[
+//         // 指向api模块的控制器
+//         'works'=>'api/Works',
+//         'atlas'=>'api/Atlas',
+//         'comment'=>'api/Comments',
+//         'user'=>'api/User',
+//     ]
+// ];
+//
+use think\Route;
+Route::resource("works","api/Works");
+Route::resource("atlas","api/Atlas");
+Route::resource("comment","api/comment");
+Route::resource("user","api/User");
+Route::controller("qworks","api/Works");

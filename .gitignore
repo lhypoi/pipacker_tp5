@@ -1,0 +1,13 @@
+﻿/public/static/library
+/public/static/images
+/public/static/pipacker/images
+/public/static/pipacker/libarary
+/thinkphp
+/public/static/mui
+/public/static/fonts
+/public/static/dropify
+/public/static/admin
+echarts.min.js
+jquery.form.js
+jquery.form.js
+!.gitignore
