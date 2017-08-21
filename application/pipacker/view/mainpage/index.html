@@ -163,7 +163,7 @@
 			  <div class="tab-content show_img_list">
 			    <div role="tabpanel" class="tab-pane active" id="home">
 			    	<div class="show_img_content">
-						<ul>
+						<ul class="show_img_ul">
 							{foreach $works_list as $val}
 							<li class="show_content_img">
 								<a href="javascript:;">
@@ -177,12 +177,14 @@
 			    </div>
 			    <div role="tabpanel" class="tab-pane" id="profile">
 			    	<div class="show_img_content">
-					
+						<ul class="show_img_ul">
+						</ul>
 					</div>
 			    </div>
 			    <div role="tabpanel" class="tab-pane" id="messages">
 			    	<div class="show_img_content">
-					
+						<ul class="show_img_ul">
+						</ul>
 					</div>
 			    </div>
 			  </div>
@@ -218,11 +220,11 @@
 						redata = $.parseJSON(data);
 						var str = '';
 						for(var i=0;i<redata.rearray.length;i++){
-							str+='<div class="col-lg-4"><a href="javascript:;">'+
+							str+='<li class="show_content_img"><a href="javascript:;">'+
 								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-								 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';		
 						}
-						$show_img_list.find(".show_img_content").eq(1).html($(str));
+						$show_img_list.find(".show_img_ul").eq(1).html($(str));
 						url = "{:url('/works')}";
 						more_lock = true;
 						
@@ -237,11 +239,11 @@
 						redata = $.parseJSON(data);
 						var str = '';
 						for(var i=0;i<redata.rearray.length;i++){
-							str+='<div class="col-lg-4"><a href="javascript:;">'+
+							str+='<li class="show_content_img"><a href="javascript:;">'+
 								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-								 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
 						}
-						$show_img_list.find(".show_img_content").eq(0).html($(str));
+						$show_img_list.find(".show_img_ul").eq(0).html($(str));
 						url = "{:url('/qworks/Hot')}";
 						more_lock = true;
 						$(".more").text("发现更多");
@@ -262,11 +264,11 @@
 							var str = '';
 							if(0==redata.status){
 								for(var i=0;i<redata.rearray.length;i++){
-								str+='<div class="col-lg-4"><a href="javascript:;">'+
-									 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-									 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
+								str+='<li class="show_content_img"><a href="javascript:;">'+
+								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';
 								}
-								$show_img_list.find(".show_img_content").append($(str));
+								$show_img_list.find(".show_img_ul").append($(str));
 							}else{
 								more_lock = false;
 								$(".more").text("没有啦");
