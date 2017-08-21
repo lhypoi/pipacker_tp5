@@ -135,7 +135,7 @@
 				<span><a href="">获奖作品</a></span>
 			</div>
 			<div class="show_img_list">
-				<div class="row">
+				<div class="row show_img_content">
 				{foreach $works_list as $val}
 					<div class="col-lg-4">
 						<a href="javascript:;">
@@ -149,7 +149,7 @@
 			</div>
 		</div>
 		<div class="more_img">
-			<span>发现更多</span>
+			<span class="more">发现更多</span>
 		</div>
 	</div>
 
@@ -158,6 +158,7 @@
 	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js?1"></script>
 
 	<script>
+		var page = 1; 
 		var $show_img_list = $(".show_img_list");
 		$show_img_list.on("click",function(el){
 			var this_elm = $(el.target);
@@ -166,6 +167,26 @@
 				localStorage.setItem("apic_id",apic_id);
 				location.href = "{:url('photoshow/index')}";
 			}
+		});
+		$(".more").on('click',function(){
+			page++;
+			$.ajax({
+				url:"{:url('/works')}",
+				type:"get",
+				data:{"page":page},
+				success:function(data){
+					if(!$.isEmptyObject(data)){
+						redata = $.parseJSON(data);
+						var str = '';
+						for(var i=0;i<redata.rearray.length;i++){
+							str+='<div class="col-lg-4"><a href="javascript:;">'+
+								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
+						}
+						$show_img_list.find(".show_img_content").html($(str));
+					}
+				}
+			});
 		});
 	</script>
 </body>
