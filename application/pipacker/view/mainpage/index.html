@@ -110,6 +110,27 @@
 		    letter-spacing: 1px;
 		    cursor: pointer;
 		}
+		.show_img_content ul li{
+			width:calc(33.33% - 24px);
+			margin: 20px 10px;
+			display: inline-block;
+			text-align: center;
+		}
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.show_content_img{
+			vertical-align: middle;
+		}
+		.show_content_img img{
+			max-height: 300px;
+		    max-width: 300px;
+		    cursor: pointer;
+		    border-radius: 3px;
+		    box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
+		}
 	</style>
 </head>
 <body>
@@ -141,24 +162,26 @@
 
 			  <div class="tab-content show_img_list">
 			    <div role="tabpanel" class="tab-pane active" id="home">
-			    	<div class="row show_img_content">
-					{foreach $works_list as $val}
-						<div class="col-lg-4">
-							<a href="javascript:;">
-								<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
-								<p>© {$val.user_name}</p>
-							</a>
-						</div>
-					{/foreach}
+			    	<div class="show_img_content">
+						<ul>
+							{foreach $works_list as $val}
+							<li class="show_content_img">
+								<a href="javascript:;">
+									<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
+									<p>© {$val.user_name}</p>
+								</a>
+							</li>
+							{/foreach}
+						</ul>
 					</div>
 			    </div>
 			    <div role="tabpanel" class="tab-pane" id="profile">
-			    	<div class="row show_img_content">
+			    	<div class="show_img_content">
 					
 					</div>
 			    </div>
 			    <div role="tabpanel" class="tab-pane" id="messages">
-			    	<div class="row show_img_content">
+			    	<div class="show_img_content">
 					
 					</div>
 			    </div>

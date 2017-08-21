@@ -10,7 +10,7 @@
 		public function index()
 	    {
 	    	
-	    	$pp_list =  db("works")->paginate(1);
+	    	$pp_list =  db("works")->paginate(10);
 	    	$pp_json = $pp_list->all();
 	    	// print_r($pp_list);
 	    	foreach ($pp_json as $key => $value) {
