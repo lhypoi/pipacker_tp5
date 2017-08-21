@@ -20,10 +20,11 @@ class Works extends baseControll
         $param = Request::instance()->param();
         if(!empty($param)){
             if(isset($param["page"])){
-                $PP_list = Db::table("pp_works")
+                $pp_list = Db::table("pp_works")
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                                ->limit(10*$param["page"])
+                                ->limit(5*$param["page"])
                                 ->select();
+
             }else{     
                 $pp_list = Db::table("pp_works")
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
@@ -149,18 +150,18 @@ class Works extends baseControll
         $param = Request::instance()->param();
         if(empty($param)){
             $pp_list = Db::table("pp_works")
-                            ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                            ->order("pp_works.update_time desc")
-                            ->limit(15)
-                            ->select();
+                        ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                        ->order("pp_works.update_time desc")
+                        ->limit(15)
+                        ->select();
             $this->reJson("0",$pp_list);
         }else{
             $page_val = $param["page"];
             $pp_list = Db::table("pp_works")
-                            ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                            ->order("pp_works.update_time desc")
-                            ->limit(15*$page_val)
-                            ->select();
+                        ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                        ->order("pp_works.update_time desc")
+                        ->limit(15*$page_val)
+                        ->select();
             $this->reJson("0",$pp_list); 
         }
     }
@@ -168,6 +169,7 @@ class Works extends baseControll
      {
         //
         $param = Request::instance()->param();
+        // var_dump(Request::instance());
         if(!empty($param)){
             unset($param["action"]);
             if(isset($param["browse"])){
