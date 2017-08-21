@@ -1,0 +1,26 @@
+{include file="public/header"}
+<h1 class="page-title">商品分类管理</h1>
+<a class="btn btn-info" href="{:url('add')}">添加分类</a>
+<table class="table">
+	<tr>
+		<th>ID</th>
+		<th>名称</th>
+		<th>内容</th>
+		<th>待定</th>
+		<th>操作</th>
+	</tr>
+
+	{foreach $cate_list as $item}
+	<tr>
+		<td>{$item.cate_id}</td>
+		<td >  <span onclick="textEdit(this,'cate',{$item.cate_id},'cate_name')">{$item.cate_name}</span></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	{/foreach}
+</table>
+<div>
+	{$cate_list->render()}
+</div>
+{include file="public/footer"}

@@ -134,6 +134,31 @@
                                     </a>
 
                                 </li>
+                                
+                                <li class="nav-item <?php echo  is_active('goods, goodscate','active');?>
+                                    ">
+                                    <a href="" class="nav-link nav-toggle">
+                                        <i class="fa fa-user-secret"></i>
+                                        <span class="title">商城管理</span>
+										<span class="arrow"></span>
+                                    </a>
+									<ul class="sub-menu">
+										<li class="nav-item <?php echo  is_active('goods','active');?>">
+		                                    <a href="{:url('goods/index')}" class="nav-link nav-toggle">
+		                                        <span class="title">商品管理</span>
+		
+		                                    </a>
+
+                                		</li>
+                                		<li class="nav-item <?php echo  is_active('goodscate','active');?>">
+		                                    <a href="{:url('goodscate/index')}" class="nav-link nav-toggle">
+		                                        <span class="title">分类管理</span>
+		
+		                                    </a>
+
+                                		</li>
+									</ul>
+                                </li>
 
                                 <li class="nav-item <?php echo  is_active('system','active');?>
                                     ">
