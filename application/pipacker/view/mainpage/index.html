@@ -49,19 +49,21 @@
 		    padding: 40px 0px 30px 0px;
 		    text-align: center;
 		}
-		.show_img_title span{
-			padding: 7px 0px 10px 0px;
-		    border-bottom: 1px solid #444;
-		    text-transform: uppercase;
-		    margin: 0px 20px 0px 20px;
-		    color: #666;
-		    font-size: 19px;
-		    font-family: 'ProximaNovaT-Thin';
-		    letter-spacing: 1px;
-		    cursor: pointer;
+		.show_img_title ul{
+			border:none;
+			display: inline-block;
 		}
-		.show_img_title a{
-			color: #666;
+		.show_img_title .nav-tabs>li.active>a,.nav-tabs>li a:hover{
+			color: #fff;
+			border:none;
+			background-color: transparent;
+		}
+		.show_img_title .nav-tabs>li{
+			border-bottom: 1px solid #fff;
+			margin-left: 10px;
+		}
+		.show_img_title .nav-tabs>li a{
+			font-size: 20px;
 		}
 		.active{
 			color: #ccc;
@@ -116,7 +118,7 @@
 		<div class="head_img">
 			<div class="header_img">
 				<a href="">
-					<img src="__PUBLIC_PIPACKER__/pipacker/images/headImg.jpg" class="imgwidth">
+					<img src="__PUBLIC_PIPACKER__/pipacker/images/cover5.jpg" class="imgwidth">
 				</a>
 				<p class="header_author">© Yucel Basoglu</p>
 			</div>
@@ -130,23 +132,51 @@
 		</div>
 		<div class="show_img">
 			<div class="show_img_title">
-				<span class="active"><a href="">最受欢迎的</a></span>
-				<span><a href="">最新发布的</a></span>
-				<span><a href="">获奖作品</a></span>
+			  <ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">最受欢迎的</a></li>
+			    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">最新发布的</a></li>
+			    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">获奖作品</a></li>
+			  </ul>
 			</div>
-			<div class="show_img_list">
-				<div class="row show_img_content">
-				{foreach $works_list as $val}
-					<div class="col-lg-4">
-						<a href="javascript:;">
-							<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
-							<p>© {$val.user_name}</p>
-						</a>
+
+			  <div class="tab-content">
+			    <div role="tabpanel" class="tab-pane active show_img_list" id="home">
+			    	<div class="row show_img_content">
+					{foreach $works_list as $val}
+						<div class="col-lg-4">
+							<a href="javascript:;">
+								<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
+								<p>© {$val.user_name}</p>
+							</a>
+						</div>
+					{/foreach}
 					</div>
-				{/foreach}
-				</div>
-				
-			</div>
+			    </div>
+			    <div role="tabpanel" class="tab-pane show_img_list" id="profile">
+			    	<div class="row show_img_content">
+					{foreach $works_list as $val}
+						<div class="col-lg-4">
+							<a href="javascript:;">
+								<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
+								<p>© {$val.user_name}</p>
+							</a>
+						</div>
+					{/foreach}
+					</div>
+			    </div>
+			    <div role="tabpanel" class="tab-pane show_img_list" id="messages">
+			    	<div class="row show_img_content">
+					{foreach $works_list as $val}
+						<div class="col-lg-4">
+							<a href="javascript:;">
+								<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
+								<p>© {$val.user_name}</p>
+							</a>
+						</div>
+					{/foreach}
+					</div>
+			    </div>
+			  </div>
 		</div>
 		<div class="more_img">
 			<span class="more">发现更多</span>
