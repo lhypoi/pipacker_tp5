@@ -22,24 +22,31 @@ class Works extends baseControll
             if(isset($param["page"])){
                 $pp_list = Db::table("pp_works")
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                                ->limit(5*$param["page"])
+                                ->limit(15)
+                                ->page($param["page"])
                                 ->select();
+
+                // print_r(5*$param["page"]);
 
             }else{     
                 $pp_list = Db::table("pp_works")
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
                                 ->where($param)
-                                ->limit(10)
+                                ->limit(15)
                                 ->select(); 
             }
         }else{            
             $pp_list = Db::table("pp_works")
                             ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                            ->limit(5)
+                            ->limit(15)
                             ->select();
         }
         // echo Db:: ;
-        $this->reJson("0",$pp_list);
+       if(!empty($pp_list)){                
+            $this->reJson("0",$pp_list); 
+        }else{
+           $this->reJson("1");  
+        }
     }
 
     /**
@@ -154,7 +161,11 @@ class Works extends baseControll
                         ->order("pp_works.update_time desc")
                         ->limit(15)
                         ->select();
-            $this->reJson("0",$pp_list);
+           if(!empty($pp_list)){                
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            }
         }else{
             $page_val = $param["page"];
             $pp_list = Db::table("pp_works")
@@ -162,7 +173,11 @@ class Works extends baseControll
                         ->order("pp_works.update_time desc")
                         ->limit(15*$page_val)
                         ->select();
-            $this->reJson("0",$pp_list); 
+            if(!empty($pp_list)){                
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            } 
         }
     }
     public function getApic()
@@ -215,21 +230,30 @@ class Works extends baseControll
     {
         //
         $param = Request::instance()->param();
-        if(empty($param)){
+        if(empty($param['page'])){
             $pp_list = Db::table("pp_works")
                             ->join("pp_user","pp_user.user_id = pp_works.user_id")
                             ->order("pp_works.works_browse desc")
-                            ->limit(4)
+                            ->limit(15)
                             ->select();
-            $this->reJson("0",$pp_list);
+            if(!empty($pp_list)){                
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            }
         }else{
             $page_val = $param["page"];
             $pp_list = Db::table("pp_works")
                             ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                            ->order("pp_works.pp_works.works_browse desc")
-                            ->limit(4*$page_val)
+                            ->order("pp_works.works_browse desc")
+                            ->limit(15)
+                            ->page($page_val)
                             ->select();
-            $this->reJson("0",$pp_list); 
+            if(!empty($pp_list)){                
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            }
         }
     }
 }
