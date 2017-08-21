@@ -130,9 +130,9 @@
 		</div>
 		<div class="show_img">
 			<div class="show_img_title">
-				<span class="active"><a href="">最受欢迎的</a></span>
-				<span><a href="">最新发布的</a></span>
-				<span><a href="">获奖作品</a></span>
+				<span class="active"><a href="javascript:;" class="nav_main_btn">最受欢迎的</a></span>
+				<span><a href="javascript:;" class="nav_main_btn">最新发布的</a></span>
+				<span><a href="javascript:;" class="nav_main_btn">获奖作品</a></span>
 			</div>
 			<div class="show_img_list">
 				<div class="row show_img_content">
@@ -158,7 +158,9 @@
 	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js?1"></script>
 
 	<script>
-		var page = 1; 
+		var page = 1;
+		var more_lock = true;
+		var url = "{:url('/qworks/Hot')}";
 		var $show_img_list = $(".show_img_list");
 		$show_img_list.on("click",function(el){
 			var this_elm = $(el.target);
@@ -168,14 +170,12 @@
 				location.href = "{:url('photoshow/index')}";
 			}
 		});
-		$(".more").on('click',function(){
-			page++;
-			$.ajax({
-				url:"{:url('/works')}",
-				type:"get",
-				data:{"page":page},
-				success:function(data){
-					if(!$.isEmptyObject(data)){
+		var $nav_main_btn = $(".nav_main_btn");
+		// console.log($nav_main_btn);
+		$nav_main_btn.eq(1).on("click",function(){
+			page=1;
+			$.get("{:url('/works')}").done(function(data){
+				if(!$.isEmptyObject(data)){
 						redata = $.parseJSON(data);
 						var str = '';
 						for(var i=0;i<redata.rearray.length;i++){
@@ -184,9 +184,60 @@
 								 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
 						}
 						$show_img_list.find(".show_img_content").html($(str));
+						url = "{:url('/works')}";
+						more_lock = true;
+						
+						$(".more").text("发现更多");
 					}
-				}
 			});
+		});
+		$nav_main_btn.eq(0).on("click",function(){
+			page=1;
+			$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
+				if(!$.isEmptyObject(data)){
+						redata = $.parseJSON(data);
+						var str = '';
+						for(var i=0;i<redata.rearray.length;i++){
+							str+='<div class="col-lg-4"><a href="javascript:;">'+
+								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
+						}
+						$show_img_list.find(".show_img_content").html($(str));
+						url = "{:url('/qworks/Hot')}";
+						more_lock = true;
+						$(".more").text("发现更多");
+					}
+			});
+		});
+		$(".more").on('click',function(){
+			page++;
+			// console.log(page);
+			if(more_lock){
+				$.ajax({
+					url:url,
+					type:"get",
+					data:{"page":page},
+					success:function(data){
+						if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							if(0==redata.status){
+								for(var i=0;i<redata.rearray.length;i++){
+								str+='<div class="col-lg-4"><a href="javascript:;">'+
+									 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+									 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
+								}
+								$show_img_list.find(".show_img_content").append($(str));
+							}else{
+								more_lock = false;
+								$(".more").text("没有啦");
+							}
+						}
+					}
+				});
+			}else{
+				$(".more").text("没有啦");
+			}
 		});
 	</script>
 </body>

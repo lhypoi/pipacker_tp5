@@ -108,7 +108,7 @@
 	    	right: 0;
 	    }
 		.browse_big_img img {
-			width:100%;
+			/*width:100%;*/
 			height:100%;
 		}
 		.menu_right{
@@ -136,6 +136,9 @@
 	    .swiper-slide {
 	        background-size: cover;
 	        background-position: center;
+	        height: 100%;
+	        background: #000;
+	        text-align: center;
 	    }
 	    .gallery-top {
 	        height: 100%;
@@ -169,7 +172,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 						<div class="browse_big_img">
-				           <div class="swiper-slide"><img src="__PUBLIC_PIPACKER__/pipacker/images/bg.jpg" class="show_content_small_img"></div>
+				           <div class="swiper-slide"><img src="{$item['works_src']}" class="show_content_small_img"></div>
 				           <span class="pre_btn hf_btn glyphicon glyphicon-chevron-left"></span>
 				           <span class="next_btn hf_btn glyphicon glyphicon-chevron-right"></span>
 						</div>
@@ -177,9 +180,9 @@
 							<h4 class="pic_title">一个很有感觉的时间</h4>
 							<p>&copy;作者</p>
 							<div class="tags">
-								<!-- {foreach $tags as $item}
+								{foreach $tags as $item}
 									<span>#{$item}</span>
-								{/foreach} -->
+								{/foreach}
 							</div>
 						</div>
 					</div>

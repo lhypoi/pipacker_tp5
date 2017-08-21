@@ -16,6 +16,7 @@ browse_img_hf.prototype = {
           if(this_elm.hasClass('pre_btn')){
             that.next_lock = true;
           	// console.log(that.pre_lock);
+            that.next_lock = true;
             if(that.pre_lock){
             	that.ew = 1;
               that.browse_img_n();
