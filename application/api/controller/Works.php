@@ -22,22 +22,35 @@ class Works extends baseControll
             if(isset($param["page"])){
                 $pp_list = Db::table("pp_works")
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                                ->order("pp_works.works_id desc")
                                 ->limit(15)
                                 ->page($param["page"])
                                 ->select();
 
                 // print_r(5*$param["page"]);
 
-            }else{     
-                $pp_list = Db::table("pp_works")
+            }else{
+                if(isset($param["user_id"])){
+                    $user_id = $param["user_id"];
+                    $pp_list = Db::table("pp_works")
+                                ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                                ->where("pp_works.user_id=$user_id")
+                                ->order("pp_works.works_id desc")
+                                ->limit(15)
+                                ->select();
+                }else{                      
+                    $pp_list = Db::table("pp_works")
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
                                 ->where($param)
+                                ->order("pp_works.works_id desc")
                                 ->limit(15)
-                                ->select(); 
+                                ->select();
+                } 
             }
         }else{            
             $pp_list = Db::table("pp_works")
                             ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                            ->order("pp_works.works_id desc")
                             ->limit(15)
                             ->select();
         }
@@ -48,6 +61,7 @@ class Works extends baseControll
            $this->reJson("1");  
         }
     }
+
 
     /**
      * 显示创建资源表单页.

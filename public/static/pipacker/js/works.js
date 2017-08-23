@@ -47,7 +47,12 @@ browse_img_hf.prototype = {
             var redata = $.parseJSON(rdata);
             if(0==redata.status){
                 that.data.browse_img.find("img").attr("src",redata.rearray.works_src);
-                that.data.thumbnails.text(redata.rearray.works_profile);
+                that.data.thumbnails.text(redata.rearray.works_title);
+                // that.data.works_tags.text(redata.rearray.works_tags);
+                // datapp.each( function(index, el) {
+                //   that.data.user_name.text(datapp[index].user_name);
+                // })
+                // console.log(datapp);
                 if(typeof(that.data.para)!='undefined'){
                   // console.log(that.data.para);
                   that.data.para.eq(1).text(redata.rearray.works_type);
@@ -57,10 +62,10 @@ browse_img_hf.prototype = {
                   that.data.para.eq(5).text(redata.rearray.works_para[3]);
                 }
                 if(typeof(that.data.tags)!='undefined'){
-                  console.log(that.data)
-                  that.data.tags.forEach( function(element, index) {
+                  // console.log(that.data.tags)
+                  that.data.tags.each( function(index, el) {
                     // statements
-                    that.data.tags.eq(index).text(redata.rearray.works_tags[index]);
+                    that.data.tags.eq("index").text("#"+redata.rearray.works_tags[index]);
                   });
                 }                
                 that.data.works_id = redata.rearray.works_id;
