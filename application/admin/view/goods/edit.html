@@ -1,0 +1,167 @@
+{include file="public/header"}
+<link href="__PUBLIC__/static/admin/shop/form.css" rel="stylesheet" type="text/css">
+<h1>修改商品信息</h1>
+<a class="btn btn-default" href="{:url('index')}">返回</a>
+
+<form id="goods_form" class="form" method="post">
+	<input type="hidden" value="{$info.goods_id}" />
+    <div class="form-group clearfix">
+        <label>商品名称</label>
+        <input type="text" id="goods_name" value="{$info.goods_name}" class="form-control">
+    </div>
+    <div class="form-group clearfix">
+        <label>商品库存</label>
+        <input type="text" id="goods_num" value="{$info.goods_number}" class="form-control">
+    </div>
+    <div class="form-group clearfix">
+        <label>商品价格</label>
+        <input type="text" id="goods_price" value="{$info.goods_price}" class="form-control">
+    </div>
+    <div class="form-group clearfix">
+        <label>商品分类</label>
+        <select name="cate_id" id="goods_cate" class="form-control">
+        	{foreach $cate_list as $item}
+        	<option value="{$item.cate_id}">{$item.cate_name}</option>
+        	{/foreach}
+        </select>
+    </div>
+    <div class="form-group clearfix">
+        <label>商品图片</label>
+        {if $arr}
+        <ul class="photo_list clearfix">
+        	{foreach $arr as $item}
+        	<li>
+        		<img src="{$item}" class="pic" />
+        		<div class="mask"><i class="icon-close" style="color: #fff; font-size: 26px;"></i></div>
+        	</li>
+        	{/foreach}
+        </ul>
+        {/if}
+        <label class="btn btn-info">
+        	上传图片
+        	<input type="file" id="pic_file" class="form-control" style="visibility: hidden;" />
+        </label>
+        <div class="preview">
+        	<img src="" id="pic" />
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="修改">
+    </div>
+</form>
+<div id="warning"></div>
+<script type="text/javascript">
+$('#warning').css('left', ($(window).width() - $('#warning').width())/2 + 'px').css('top', ($(window).height() - $('#warning').height())/3 + 'px')
+//图片自适应
+for(let i = 0; i < $('.pic').length; i ++) {
+	adjust($('.pic').eq(i));
+}
+
+//存放要删除的图片的数组
+var del_photo = [];
+$('.photo_list li').on('click', function() {
+	for(let i = 0; i < del_photo.length; i ++) {
+		if(del_photo[i] == $(this).index()) {
+			del_photo.splice(i, 1);
+			$(this).children('.mask').css('background-color', '#666');
+			return;
+		}
+	}
+	del_photo.push($(this).index());
+	$(this).children('.mask').css('display', 'block').css('background-color', '#333');
+})
+$('.photo_list li').on('mouseover', function() {
+	for(let i = 0; i < del_photo.length; i ++) {
+		if(del_photo[i] == $(this).index()) {
+			return;
+		}
+	}
+	$(this).children('.mask').fadeIn()
+}).on('mouseleave', function() {
+	for(let i = 0; i < del_photo.length; i ++) {
+		if(del_photo[i] == $(this).index()) {
+			return;
+		}
+	}
+	$(this).children('.mask').fadeOut()
+})
+
+function adjust(photo_obj) {
+    var photo = photo_obj;
+    var img = new Image();
+    img.src = photo.attr("src");
+    var width = img.width;
+    var height = img.height;
+    if((width - 100) > (height - 100)) {
+        photo.css('height', '100px');
+        var rate = 100 / height;
+        if(width * rate < 100) {
+        	photo.css('width', '100px')
+        	rate = 100 / (width * rate)
+        	photo.css('height', 100 * rate + 'px')
+        	photo.css('margin-top', (-(100 * rate - 100) / 2) + 'px')
+        }else{
+        	photo.css('width', (width * rate) + 'px');
+            var margin = (width * rate - 100) / 2;
+            photo.css('margin-left', '-'+margin+'px');
+        }
+    } else {
+        photo.css('width', '100px');
+        var rate = 100 / width;
+        if(height * rate < 100) {
+        	photo.css('height', '100px')
+        	rate = 100 / (height * rate)
+        	photo.css('width', 100 * rate + 'px')
+        	photo.css('margin-left', (-(100 * rate - 100) / 2) + 'px')
+        }else{
+	        photo.css('height', (height * rate) + 'px');
+	        var margin = (height * rate - 100) / 2;
+	        photo.css('margin-top', '-'+margin+'px');
+        }
+    }
+}
+function getObjUrl(file) {
+	var url = null ;
+	if (window.createObjectURL != undefined) { //IE
+		url = window.createObjectURL(file) ;
+	} else if (window.URL != undefined) { //firefox
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL != undefined) { //webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
+$('#pic_file').on('change', function() {
+	let objUrl = getObjUrl(this.files[0])
+	if(objUrl) {
+		$('#pic').attr('src', objUrl);
+		adjust($('#pic'));
+	}
+})
+$('#goods_form').on('submit', function(e) {
+	e.preventDefault();
+	let id = $('input[type=hidden]').val();
+	let fd = new FormData();
+	fd.append('id',id);
+	fd.append('name', $('#goods_name').val());
+	fd.append('num', $('#goods_num').val());
+	fd.append('price', $('#goods_price').val());
+	fd.append('cate', $('#goods_cate').val())
+	fd.append('del_photo', del_photo);
+	fd.append('pic_file', $('#pic_file').get(0).files[0]);
+	$.ajax({
+        url: "/public/admin/goods/save",
+        type: "POST",
+        contentType: false,
+        processData: false,
+        data: fd, 
+        success: rtnData => {
+        	if(rtnData.status == 1) {
+	        	$('#warning').html('修改成功').fadeIn().delay(1000).fadeOut();
+	        	setTimeout(location.reload(), 3000);
+        	}
+        }
+    });
+})
+</script>
+{include file="public/footer"}

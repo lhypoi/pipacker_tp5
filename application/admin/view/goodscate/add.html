@@ -1,0 +1,15 @@
+{include file="public/header"}
+<link href="__PUBLIC__/static/admin/shop/form.css" rel="stylesheet" type="text/css">
+<h1>添加分类</h1>
+<a class="btn btn-default" href="{:url('index')}">返回</a>
+
+<form action="{:url('save')}" class="form" method="post">
+    <div class="form-group clearfix">
+        <label>分类名称</label>
+        <input type="text" name="cate_name" class="form-control">
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="添加">
+    </div>
+</form>
+{include file="public/footer"}
