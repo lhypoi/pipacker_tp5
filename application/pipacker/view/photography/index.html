@@ -187,149 +187,49 @@
 		<div class="photo_main container">
 			<div class="">
 				<div class="photo_main_nav">
-					<div class="photo_list_nav photo_main_nav_item_selected"><a href="javascript:;">人像</a></div>
-					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">风景</a></div>
-					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">生态</a></div>
-					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">纪实</a></div>
-					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">生活</a></div>
-					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">LOMO</a></div>
-					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">观念</a></div>
+					<div class="photo_main_nav_item_selected"><a href="">人像</a></div>
+					<div class="photo_main_nav_item"><a href="">风景</a></div>
+					<div class="photo_main_nav_item"><a href="">生态</a></div>
+					<div class="photo_main_nav_item"><a href="">纪实</a></div>
+					<div class="photo_main_nav_item"><a href="">生活</a></div>
+					<div class="photo_main_nav_item"><a href="">LOMO</a></div>
+					<div class="photo_main_nav_item"><a href="">观念</a></div>
 				</div>
 			</div>
 			<div class="pull-right">
 				<div class="hotlist">
 					<ul class="nav nav-tabs" role="tablist">
-					    <li role="presentation" class="active"><a style="border-left: 2px solid #222222;" href="#Popular" aria-controls="Popular" role="tab" data-toggle="tab">热门</a></li>
-					    <li role="presentation"><a href="#potential" aria-controls="potential" role="tab" data-toggle="tab">潜力</a></li>
-					    <li role="presentation"><a href="#Latest" aria-controls="Latest" role="tab" data-toggle="tab">最新</a></li>
+					    <li role="presentation" class="active"><a class="nav_main_btn" style="border-left: 2px solid #222222;" href="#Popular" aria-controls="Popular" role="tab" data-toggle="tab">热门</a></li>
+					    <li role="presentation"><a class="nav_main_btn" href="#potential" aria-controls="potential" role="tab" data-toggle="tab">潜力</a></li>
+					    <li role="presentation"><a class="nav_main_btn" href="#Latest" aria-controls="Latest" role="tab" data-toggle="tab">最新</a></li>
 				  	</ul>
 				</div>
 				<div class="photo_main_content">
 				  <!-- Tab panes -->
-				  <div class="tab-content photo_main_content_photo">
+				  <div class="tab-content photo_main_content_photo show_img_list">
 				    <div role="tabpanel" class="tab-pane active" id="Popular">
 				    	<div>
 				    		<ul class="pg_list">
+				    			{foreach $works_list as $val}
 				    			<li>
-				    				<a href="{:url('photoshow/index')}"><img src="__PUBLIC_PIPACKER__/pipacker/images/1.jpg" alt=""></a><br>
+				    				<a href="javascript:;"><img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}"></a><br>
 				    				<a href="" class="author">©作者</a>
 			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/2.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/4.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/5.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/6.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/7.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/8.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
+			    				{/foreach}
 				    		</ul>
 				    	</div>
 			    	</div>
 				    <div role="tabpanel" class="tab-pane" id="potential">
 				    	<div>
 				    		<ul class="pg_list">
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/8.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/7.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/6.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/5.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/4.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/2.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/1.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
+				    			
 				    		</ul>
 				    	</div>
 				    </div>
 				    <div role="tabpanel" class="tab-pane" id="Latest">
 				    	<div>
 				    		<ul class="pg_list">
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/1.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/4.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/7.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/2.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/5.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/8.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/6.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
-				    			<li>
-				    				<a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg" alt=""></a><br>
-				    				<a href="" class="author">©作者</a>
-			    				</li>
+				    			
 				    		</ul>
 				    	</div>
 				    </div>
@@ -338,31 +238,76 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		// var p_list_nav = document.getElementsByClassName("photo_list_nav");
-		// for (var i = 0; i < p_list_nav.length; i++) {
-		// 	p_list_nav[i].index = i;
-		// 	console.log(p_list_nav[i])
-		// 	p_list_nav[i].onclick = function() {
-		// 		for (var i = 0; i < p_list_nav.length; i++) {
-		// 			p_list_nav[i].className = "photo_list_nav photo_main_nav_item";
-		// 		}
-		// 		p_list_nav[this.index].className = "photo_list_nav photo_main_nav_item_selected";
-		// 	}
-		// }
-		
-		$(function() {
-			$(".photo_list_nav").each(function(index,el) {
-					// console.log($(el).eq(index));
-				$(el).on("click", function() {
-					// console.log($(el).eq(index));
-					$(".photo_list_nav").removeClass("photo_main_nav_item_selected").addClass("photo_main_nav_item");
-					$(el).removeClass("photo_main_nav_item").addClass("photo_main_nav_item_selected");
-				})
-				
-			})
-		})
+	<script>
+		var page = 1;
+		var more_lock = true;
+		var url = "{:url('/qworks/Hot')}";
+		var $show_img_list = $(".show_img_list");
+		$show_img_list.on("click",function(el){
+			var this_elm = $(el.target);
+			if(this_elm.hasClass("m_img")){
+				var apic_id = this_elm.attr("data-id");
+				localStorage.setItem("apic_id",apic_id);
+				location.href = "{:url('photoshow/index')}";
+			}
+		});
+		var $nav_main_btn = $(".nav_main_btn");
+		// console.log($nav_main_btn);
+		$nav_main_btn.eq(2).on("click",function(){
+			page=1;
+			$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
+				if(!$.isEmptyObject(data)){
+						redata = $.parseJSON(data);
+						var str = '';
+						for(var i=0;i<redata.rearray.length;i++){
+							str+='<li class="show_content_img"><a href="javascript:;">'+
+								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+						}
+						$show_img_list.find(".pg_list").eq(2).html($(str));
+						url = "{:url('/qworks/Hot')}";
+						more_lock = true;
+						$(".more").text("发现更多");
+					}
+			});
+		});
+		$nav_main_btn.eq(1).on("click",function(){
+			page=1;
+			$.get("{:url('/works')}").done(function(data){
+				if(!$.isEmptyObject(data)){
+						redata = $.parseJSON(data);
+						var str = '';
+						for(var i=0;i<redata.rearray.length;i++){
+							str+='<li class="show_content_img"><a href="javascript:;">'+
+								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';		
+						}
+						$show_img_list.find(".pg_list").eq(1).html($(str));
+						url = "{:url('/works')}";
+						more_lock = true;
+						
+						$(".more").text("发现更多");
+					}
+			});
+		});
+		$nav_main_btn.eq(0).on("click",function(){
+			page=1;
+			$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
+				if(!$.isEmptyObject(data)){
+						redata = $.parseJSON(data);
+						var str = '';
+						for(var i=0;i<redata.rearray.length;i++){
+							str+='<li class="show_content_img"><a href="javascript:;">'+
+								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+						}
+						$show_img_list.find(".pg_list").eq(0).html($(str));
+						url = "{:url('/qworks/Hot')}";
+						more_lock = true;
+						$(".more").text("发现更多");
+					}
+			});
+		});
 	</script>
 </body>
 </html>

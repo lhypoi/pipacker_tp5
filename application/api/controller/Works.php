@@ -82,14 +82,23 @@ class Works extends baseControll
      */
     public function save(Request $request)
     {
-        //
         $param = Request::instance()->param();
-        // print_r($_FILES['works_src']);
         if(!empty($param)){
+            $tmp_pic_name = $_FILES['pic_src']['tmp_name'];
+            $tmp_pic_type = $_FILES['pic_src']['type'];
             // $param['works_para'] = json_encode($param['works_para']);
-            $param['works_src'] = saveFile('pic_src');
-            $param['update_time'] = time();
-            Db::table("pp_works")->insert($param);
+            foreach($tmp_pic_name as $key => $tmp_pic_names) {
+                // foreach ($tmp_pic_type as $key => $tmp_pic_type) {
+                    // print_r($tmp_pic_name);print_r($tmp_pic_type);exit();
+                // echo $tmp_pic_type[$key];
+                    $param['works_src'] = saveFile($tmp_pic_names,$tmp_pic_type[$key]);
+                // }
+                    $param['update_time'] = time();
+                    Db::table("pp_works")->insert($param);
+            }
+            // print_r($param['works_src']);exit();
+            
+            
             $works_id = Db::table("pp_works")->getLastInsID();
             $this->reJson("2",$works_id,"成功插入");
         }else{
@@ -238,6 +247,26 @@ class Works extends baseControll
             }
         }else{
             $this->reJson("2",$param,"没有值");
+        }
+    }
+    public function getSearch(){
+        $param = Request::instance()->param();
+        if(!empty($param)){
+            if(isset($param["page"])){
+                $page = $param["page"];
+            }else{       
+                $page = 1;
+            }
+             $pp_list = Db::table("pp_works")
+                           ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                           ->where('works_title|works_profile|works_para|works_type|user_name','like','%'.$param["key_word"].'%')
+                           ->limit(15)
+                           ->page($page)
+                           ->select();
+
+            $this->reJson("0",$pp_list);
+        }else{
+             $this->reJson("1");
         }
     }
     public function getHot()

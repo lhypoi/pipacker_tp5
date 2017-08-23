@@ -36,6 +36,11 @@
 			 curl_close($con);
 			 // var_dump($val['rearray']);	
 			 // echo 'http://'.$_SERVER['HTTP_HOST'].url('/qworks/Apic',array('works_id'=>10));
+			 foreach($val["rearray"] as $key=>$pic){
+			 	$tags = explode(',',$pic['works_tags']);
+		    	$val["rearray"][$key]["works_tags"] = $tags;
+		    	// print_r($tags);
+			 }
 			 
 			 $this->assign("works_list",$val["rearray"]);
 	    	 return $this->fetch();
