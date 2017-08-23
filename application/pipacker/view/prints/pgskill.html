@@ -5,10 +5,11 @@
 	<meta charset="UTF-8">
 	<title>pgskill</title>
 	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
 
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css?1">
+	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js"></script>
 	<style>
 		ul{
 			list-style: none;
@@ -23,10 +24,6 @@
 		.pgskill_nav{
 			width:60%;
 			margin:10% auto 0 auto;
-		}
-		.pgskill_nav .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
-			border:none;
-			background-color: transparent;
 		}
 		.pgskill_nav>ul>li{
 			width:calc(50% - 210px);
@@ -91,47 +88,44 @@
 <body>
 
 	{include file="common/navigation"}
-	<div>
-
-	  <!-- Nav tabs -->
-	  <div class="pgskill_nav">
-		  <ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">最新</a></li>
-		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">最热</a></li>
-		  </ul>
-	  </div>
-
-	  <!-- Tab panes -->
-	  <div class="tab-content pgskill_content">
-	    <div role="tabpanel" class="tab-pane active" id="home">
-	    	<ul>
-				{foreach $pp_list as $item}
-					<li>
-						<div class="pgskil_content_img">
-							<img src="{$item['works_src']}" alt="">
-							<h3>Waiting for the Miracle</h3>
-							<p>Matjaz Cater</p>
-						</div>
-					</li>
-				{/foreach}
-			</ul>
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="profile">
-	    	<ul>
-				{foreach $pp_list as $item}
-					<li>
-						<div class="pgskil_content_img">
-							<img src="{$item['works_src']}" alt="">
-							<h3>Waiting for the Miracle</h3>
-							<p>Matjaz Cater</p>
-						</div>
-					</li>
-				{/foreach}
-			</ul>
-	    </div>
-	  </div>
-
+	<nav class="pgskill_nav">
+		<ul>
+			<li class="pgskill_nav_active"><a href="#" >最新</a></li>
+			<li><a href="#" aria-controls="home" role="tab" data-toggle="tab">最热</a></li>
+			<!-- <li>动态视觉</li>
+			<li>基础理论</li> -->
+			<!-- <li>
+				<div class="dropdown">
+					<a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="flase" aria-expanded="true">更多<span class="caret"></a>
+					<ul class="dropdown-menu skill_mune_down" aria-labelledby="dropdownMenu1">
+			            <li>实战技巧</li>
+			            <li>后期教程</li>
+			            <li>分享探讨</li>
+			            <li>摄影师访谈</li>
+			            <li>作品心得</li>
+			            <li>用好器材</li>
+			            <li>器材div</li>
+			            <li>视觉漫游</li>
+			            <li>专栏</li>
+			            <li>大专题</li>
+			            <li>印象</li>
+			          </ul>
+		          </div>
+			</li> -->
+		</ul>
+	</nav>
+	<div class="pgskill_content">
+		<ul>
+			{foreach $pp_list as $item}
+				<li>
+					<div class="pgskil_content_img">
+						<img src="{$item['works_src']}" alt="">
+						<h3>Waiting for the Miracle</h3>
+						<p>Matjaz Cater</p>
+					</div>
+				</li>
+			{/foreach}
+		</ul>
 	</div>
-	
 </body>
 </html>
