@@ -1,0 +1,110 @@
+{include file="public/header"}
+<link href="__PUBLIC__/static/admin/shop/form.css" rel="stylesheet" type="text/css">
+<h1>添加商品</h1>
+<a class="btn btn-default" href="{:url('index')}">返回</a>
+
+<form action="{:url('do_add')}" enctype="multipart/form-data" class="form" method="post">
+    <div class="form-group clearfix">
+        <label>商品名称</label>
+        <input type="text" id="goods_name" name="goods_name" value="" class="form-control">
+    </div>
+    <div class="form-group clearfix">
+        <label>商品库存</label>
+        <input type="text" id="goods_num" name="goods_number" value="" class="form-control">
+    </div>
+    <div class="form-group clearfix">
+        <label>商品价格</label>
+        <input type="text" id="goods_price" name="goods_price" value="" class="form-control">
+    </div>
+    <div class="form-group clearfix">
+        <label>商品分类</label>
+        <select name="cate_id" class="form-control">
+        	{foreach $cate_list as $item}
+        	<option value="{$item.cate_id}">{$item.cate_name}</option>
+        	{/foreach}
+        </select>
+    </div>
+    <div class="form-group clearfix">
+        <label>商品图片</label>
+        <label class="btn btn-info">
+        	上传图片
+        	<input type="file" id="pic_file" name="goods_img" class="form-control" style="visibility: hidden;" />
+        </label>
+        <div class="preview">
+        	<img src="" id="pic" />
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="添加">
+    </div>
+</form>
+<div id="warning"></div>
+<script type="text/javascript">
+$('#warning').css('left', ($(window).width() - $('#warning').width())/2 + 'px').css('top', ($(window).height() - $('#warning').height())/3 + 'px')
+//图片自适应
+for(let i = 0; i < $('.pic').length; i ++) {
+	adjust($('.pic').eq(i));
+}
+
+function adjust(photo_obj) {
+    var photo = photo_obj;
+    var img = new Image();
+    img.src = photo.attr("src");
+    var width = img.width;
+    var height = img.height;
+    if((width - 100) > (height - 100)) {
+        photo.css('height', '100px');
+        var rate = 100 / height;
+        if(width * rate < 100) {
+        	photo.css('width', '100px')
+        	rate = 100 / (width * rate)
+        	photo.css('height', 100 * rate + 'px')
+        	photo.css('margin-top', (-(100 * rate - 100) / 2) + 'px')
+        }else{
+        	photo.css('width', (width * rate) + 'px');
+            var margin = (width * rate - 100) / 2;
+            photo.css('margin-left', '-'+margin+'px');
+        }
+    } else {
+        photo.css('width', '100px');
+        var rate = 100 / width;
+        if(height * rate < 100) {
+        	photo.css('height', '100px')
+        	rate = 100 / (height * rate)
+        	photo.css('width', 100 * rate + 'px')
+        	photo.css('margin-left', (-(100 * rate - 100) / 2) + 'px')
+        }else{
+	        photo.css('height', (height * rate) + 'px');
+	        var margin = (height * rate - 100) / 2;
+	        photo.css('margin-top', '-'+margin+'px');
+        }
+    }
+}
+function getObjUrl(file) {
+	var url = null ;
+	if (window.createObjectURL != undefined) { //IE
+		url = window.createObjectURL(file) ;
+	} else if (window.URL != undefined) { //firefox
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL != undefined) { //webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
+$('#pic_file').on('change', function() {
+	let objUrl = getObjUrl(this.files[0])
+	if(objUrl) {
+		$('#pic').attr('src', objUrl);
+		adjust($('#pic'));
+	}
+})
+
+$('.form').on('submit', function() {
+	if($('#goods_name').val() == '' || $('#goods_num').val() == '' || $('#goods_price').val() == '') {
+		$('#warning').html('请填写名称、库存和价格').fadeIn().delay(1000).fadeOut();
+		return false;
+	}
+	return true;
+})
+</script>
+{include file="public/footer"}
