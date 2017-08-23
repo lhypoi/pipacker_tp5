@@ -34,7 +34,7 @@
 			 $val =  json_decode(curl_exec($con),true);
 
 			 curl_close($con);
-			 // var_dump($val['rearray']);	
+//			  var_dump($val['rearray']);
 			 // echo 'http://'.$_SERVER['HTTP_HOST'].url('/qworks/Apic',array('works_id'=>10));
 			 
 			 $this->assign("works_list",$val["rearray"]);

@@ -30,13 +30,14 @@ class Works extends baseControll
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
                                 ->where($param)
                                 ->limit(10)
-                                ->select(); 
+                                ->select();
             }
-        }else{            
+        }else{
             $pp_list = Db::table("pp_works")
                             ->join("pp_user","pp_user.user_id = pp_works.user_id")
                             ->limit(5)
                             ->select();
+
         }
         // echo Db:: ;
         $this->reJson("0",$pp_list);
@@ -231,5 +232,20 @@ class Works extends baseControll
                             ->select();
             $this->reJson("0",$pp_list); 
         }
+    }
+//    根据参数获取对应的作品：分类、页数、最热or最新
+    public function getWorks ()
+    {
+        $param = Request::instance()->param();
+        $order = $param['selected'] == '0' ? "pp_works.works_browse desc" : "pp_works.update_time desc";
+        $page_val = $param["page"];
+        $where = $param['classify'] == '分类' ? '' : 'works_type =\''.$param['classify'].'\'';
+        $pp_list = Db::table("pp_works")
+            ->join("pp_user","pp_user.user_id = pp_works.user_id")
+            ->where($where)
+            ->order($order)
+            ->page($page_val)
+            ->paginate(10);
+        $this->reJson("0",$pp_list);
     }
 }
