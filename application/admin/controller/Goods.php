@@ -63,6 +63,7 @@ class Goods extends Controller{
                 }
                 db('goods')->where("goods_id=$id")->update([
                     'goods_name' => input('name'),
+                    'goods_info' => input('info'),
                     'goods_number' => input('num'),
                     'goods_price' => input('price'),
                     'cate_id' => input('cate'),
@@ -73,6 +74,7 @@ class Goods extends Controller{
         }else{
             db('goods')->where("goods_id=$id")->update([
                 'goods_name' => input('name'),
+                'goods_info' => input('info'),
                 'goods_number' => input('num'),
                 'goods_price' => input('price'),
                 'cate_id' => input('cate'),
@@ -86,6 +88,7 @@ class Goods extends Controller{
     public function do_add() {
         $arr = array();
         $arr['goods_name'] = input('goods_name');
+        $arr['goods_info'] = input('goods_info');
         $arr['cate_id'] = input('cate_id');
         $arr['goods_number'] = input('goods_number');
         $arr['goods_price'] = input('goods_price');

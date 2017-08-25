@@ -10,6 +10,10 @@
         <input type="text" id="goods_name" value="{$info.goods_name}" class="form-control">
     </div>
     <div class="form-group clearfix">
+        <label>商品介绍</label>
+        <input type="text" id="goods_info" value="{$info.goods_info}" class="form-control">
+    </div>
+    <div class="form-group clearfix">
         <label>商品库存</label>
         <input type="text" id="goods_num" value="{$info.goods_number}" class="form-control">
     </div>
@@ -144,6 +148,7 @@ $('#goods_form').on('submit', function(e) {
 	let fd = new FormData();
 	fd.append('id',id);
 	fd.append('name', $('#goods_name').val());
+	fd.append('info', $('#goods_info').val())
 	fd.append('num', $('#goods_num').val());
 	fd.append('price', $('#goods_price').val());
 	fd.append('cate', $('#goods_cate').val())
