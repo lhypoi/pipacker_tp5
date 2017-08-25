@@ -5,7 +5,12 @@
   <title>Document</title>
     <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/swiper.min.css"> -->
-  <link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
+  <link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css?1">
+
+
+  <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
+  <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
+  <script src='__PUBLIC_PIPACKER__/pipacker/js/jquery.zoombie.js'></script>
   <style>
         html, body {
             position: relative;
@@ -99,8 +104,24 @@
           outline: none;
         }
         .comORdet .comment_container {
-          margin-top: 25px;
+            margin-top: 25px;
+            max-height: 300px;
+            overflow-x: auto;
         }
+       .comORdet .comment_container::-webkit-scrollbar-track {
+              -webkit-box-shadow: inset 0 0 6px rgba(98,98,98,0);
+              background-color: rgba(100,100,100,0);
+          }
+
+       .comORdet .comment_container::-webkit-scrollbar {
+              width: 5px;
+              background-color: rgba(0,0,0,0);
+          }
+
+       .comORdet .comment_container::-webkit-scrollbar-thumb {
+              background-color: rgba(0,0,0,0.2);
+              border-radius: 6px;
+          }
         .comORdet .comment_container .comment_connent {
           margin-bottom: 15px;
         }
@@ -109,8 +130,7 @@
           box-shadow: #000 0px 0px 10px;
           border-radius: 5px;
           height: 40px;
-        }
-        /********************/
+        }   
         .detail_com{
             color: #fff;
             width: 30%;
@@ -121,6 +141,7 @@
         }
         .detail_com .thumbnails {
             width: 100%;
+            height:40%;
             margin-bottom: 25px;
         }
         .detail_com .thumbnails img {
@@ -342,91 +363,138 @@
           width:100%;
           height:400px;
           margin-top: 120px;
-          display: inline-block;
-          vertical-align: middle;
           position: relative;
+          border-right: 1px solid #aaa;
         }
-        .browse_big_img img {
-          display: block;
-          max-width: 100%;
-          max-height: 100%;
-          margin:auto;
-        }   
-          .hf_btn{
-          position: absolute;        
-          top:-50%;
-          margin-top:40%;
-          font-size: 30px;
-          font-size: 100;
-          z-index: 2;
+        .browse_big_img div.img_middle{
+          /*vertical-align: middle;*/
+          text-align: center;
+          height:400px;
+        }
+        .browse_big_img div.img_middle img {
+          position: relative;
+          cursor:pointer;
+        }
+        .show_content_small_img{
+          max-width:100%;
+          max-height:80%;
+        }
+        .hf_btn{
+        position: absolute;        
+        top:-50%;
+        margin-top:40%;
+        font-size: 30px;
+        font-size: 100;
+        z-index: 2;
+        cursor: pointer;
+        color:#fff;
+        }
+        .next_btn{
+          right: 0;
+        }
+        .browse_nav_div{
+          width:100%;
+          margin-top: 10px;
+          overflow: hidden; 
+          position: absolute;
+          bottom: -16%;
+        }
+        ul.browse_nav_small_img{
+          list-style: none;
+          width:100%;
+          margin-top: 10px;
+          height: 14%;
+
+          overflow: hidden; 
+        }
+        ul.browse_nav_small_img li{
+          display: inline-block;
+          max-width:100px;
+          margin-left: 20px;
+        }
+        ul.browse_nav_small_img li img{
+          width:auto;          
+          max-height: 50px;
           cursor: pointer;
-          color:#fff;
-          }
-          .next_btn{
-            right: 0;
-          }
+        }
+        
+        .imgnum{
+          text-align: center;
+          margin-left:10px;
+          font-size: 25px;
+          height:35px;          
+          top:-35px;
+
+          position: absolute;
+          display: inline-block;
+        }
+        .cancel{
+          display: inline-block;
+          cursor: pointer;
+          /*line-height: 120%;*/
+          right:0;
+          width:35px;
+          background: rgba(98,98,98,.3);
+          border-radius: 50%;
+        }
+        .zoom {
+          display:inline-block;
+        }
+
+        .zoom:after {
+          content:'';
+          display:block; 
+          width:33px; 
+          height:33px; 
+          position:absolute; 
+          top:0;
+          right:0;
+        ;
+        }
+        .zoom img {
+          display: block; 
+        }
+
+        .zoom img::selection { background-color: transparent; }
     </style>
 </head>
 <body>
   {include file="common/navigation"}
     <div class="browse_photo">
             <div class="browse_big_img">
-                   <img src="" class="show_content_small_img">
+                    <div class="imgnum browsenum"><span>1</span>/<span></span></div>
+                   <div class="img_middle">
+                      <img src="" data-id="" class="show_content_small_img">                     
+                      <!-- <pre>$('.browse_big_img').children(".img_middle").find("img").zoombieLens({ Size: 200 });</pre> -->
+                    </div>
                    <span class="pre_btn hf_btn glyphicon glyphicon-chevron-left"></span>
                    <span class="next_btn hf_btn glyphicon glyphicon-chevron-right"></span>
+                   <a class="cancel imgnum" href="{:url('mainpage/index')}">X</a>
+                   <div class="browse_nav_div">
+                     <ul class="browse_nav_small_img">
+                       <!-- <li><img src="/public/static/pipacker/images/pipacker_logo.jpg" alt=""></li> -->
+                     </ul>
+                   </div>
             </div>
     </div>
     <div class="comORdet">
       <h3 style="font-family: '宋体';">评论</h3>
       <div>
         <textarea class="comment_text" placeholder="在这里写出你的评论"></textarea>
-        <button class="comment_text_btn">写</button>
+        <button class="comment_text_btn">发表</button>
       </div>
       <div class="comment_container">
-        <div class="comment_connent">
+        <!-- <div class="comment_connent">
           <div class="media">
             <div class="media-left">
-                <!-- <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""> -->
+                <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">
             </div>
             <div class="media-body">
               <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
-              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
+              <p>....<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></p>
             </div>
           </div>
-        </div>
-        <div class="comment_connent">
-          <div class="media">
-            <div class="media-left">
-                <!-- <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""> -->
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
-              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
-            </div>
-          </div>
-        </div>
-        <div class="comment_connent">
-          <div class="media">
-            <div class="media-left">
-               <!--  <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""> -->
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
-              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
-            </div>
-          </div>
-        </div>
-        <div class="comment_connent">
-          <div class="media">
-            <div class="media-left">
-                <!-- <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""> -->
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
-              <p>....<!-- <span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span> --></p>
-            </div>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="detail_com">
@@ -464,7 +532,7 @@
           <div class="container">
             <p class="navbar-text">作品名字</p>
             <div class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">©作者</a>
+                <a href="#" class="nav_a_author dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">©作者</a>
                 <div class="dropdown-menu">
                    <div class="author_content">
                       <div class="author_header">
@@ -491,26 +559,8 @@
             </div>
             <p class="like_btn"><i class="glyphicon glyphicon-heart"></i></p>
             <div class="dropdown like_list">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-list"></i></a>
-                <div class="dropdown-menu">
-                   <div class="author_content">
-                       <div class="mylike_header">
-                         <div class="mylike_header_inner">
-                            <span class="mylike_header_title" style="color: #fff; font-size: 21px;">组</span>
-                            <span class="mylike_header_create_list">创建组</span>
-                         </div>
-                       </div>
-                       <div class="mylike_photo">
-                         <ul class="mylike_photo_list">
-                           <li>
-                             <img class="mylike_photo_list_img" src="__PUBLIC_PIPACKER__/pipacker/images/9.jpg">
-                             <a href="" class="mylike_photo_list_name">我的最爱</a>
-                             <span class="mylike_photo_list_btn" style="margin-top: 2px;">添加图片</span>
-                           </li>
-                         </ul>
-                       </div>
-                   </div>
-                </div>
+                <a href="#"><i class="glyphicon glyphicon-zoom-in"></i></a>
+                <a href="#"><i class="glyphicon glyphicon-zoom-out"></i></a>
             </div>
             <div class="pull-right right_btn">
                 <p class="comment_btn"><i class="pull-right glyphicon glyphicon-comment comment_btn_i"></i></p>
@@ -521,12 +571,168 @@
     </div>
 </body>
 </html>
-
-<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
-<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
-  <script src="__PUBLIC_PIPACKER__/pipacker/js/user.js"></script>
 <script src="__PUBLIC_PIPACKER__/pipacker/js/works.js"></script>
 <script type="text/javascript">
+
+    $(document).on("keydown", function (event) {
+        if (event.keyCode == 116) {
+            event.keyCode = 0;
+            event.cancelBubble = true;
+            return false;
+        }
+    });
+    //禁止右键弹出菜单 
+    $(document).on("contextmenu", function () {
+        return false;
+    });
+
+ var $browse_nav_small_img = $(".browse_nav_small_img");
+ var $browse_nav_small_img = $("ul.browse_nav_small_img");
+ // $browse_nav_small_img.on("mousedown",function(){
+ //    $(this).on('mousemove',function(e){
+ //        var X = e.clientX;
+ //        console.log($browse_nav_small_img.offset().left-X+"px");
+ //        $browse_nav_small_img.animate({
+ //                  "left": $browse_nav_small_img.offset().left-X+"px",
+ //                  },500);
+ //        $(this).on("mouseup",function(){
+ //                $(this).unbind('mousemove');
+ //            })
+ //    });
+ // });
+ 
+var $browse_img = $('.browse_big_img');        
+var $para = $(".colorccc");        
+var $thumbnails = $('.thumbnails');
+var $navbar_text = $(".navbar-text");
+var $author = $("a.nav_a_author");
+var $collection = $(".like_btn").find("i");
+var $comment_text = $(".comment_text");
+var $comment_text_btn = $(".comment_text_btn");
+var $comment_btn_i = $(".comment_btn_i");
+    var $comment_container = $(".comment_container");
+    var $browsenum = $('.browsenum');
+    var gnum = 0;
+var posnum = 200;
+var $like_btn = $(".like_list");
+$like_btn.on("click",function(e){
+  var this_elm = $(e.target);
+  if(this_elm.hasClass('glyphicon-zoom-in')){
+      if(posnum<400){
+        posnum=posnum+100;
+      }
+  }else if(this_elm.hasClass('glyphicon-zoom-out')){
+      if(posnum>100){
+        posnum=posnum-100;
+      }
+  }
+});
+$browse_img.children(".img_middle").find("img").mouseenter(function () {
+    // $(this).stop().animate({ "max-width": "180%", "max-height": "140%", marginTop: "-5%", marginLeft: "0%","z-index":1036 });
+    $(this).zoombieLens({Size:posnum,imageSrc: $(this).attr("src")});
+}).mouseleave(function () {
+    $(this).stop().animate({ "max-width": "100%", "max-height": "80%", marginTop:0, marginLeft: 0,"z-index":0 })
+});
+//发表评论
+  $comment_text_btn.on("click",function(){
+      var val = $comment_text.val();
+      var comdata = {
+        "user_id":localStorage.getItem("user_id"),
+        "comment":val,
+        "works_id":localStorage.getItem("apic_id")
+      };
+      //评论的回调函数
+      $.post("{:url('/comment')}",comdata,function(data){
+          if (!$.isEmptyObject(data)) {
+              redata = $.parseJSON(data);
+              str = '<div class="comment_connent">' +
+                  '<div class="media">' +
+                  '<div class="media-left">' +
+                  '<img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">' +
+                  '</div>' +
+                  '<div class="media-body">' +
+                  '<h4 class="media-heading">' + localStorage.getItem("user_name") + '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">' + getLocalTime(redata.rearray.update_time) + '</span></h4>' +
+                  '<p>' + comdata.comment + '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: relative;float:right;">删除</span></p>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div> ';
+              $comment_container.prepend(str);
+          }
+      });
+  });
+  //时间转换 
+  function getLocalTime(nS) {     
+   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+  } 
+
+  $collection.on('click',function(){
+    //收藏回调函数
+    $.post("{:url('/collect')}",{"user_id":localStorage.getItem("user_id"),"works_id":localStorage.getItem("apic_id")},function(data){
+        if (!$.isEmptyObject(data)) {
+            var redata = $.parseJSON(data);
+            if (0 == redata.status) {
+                $collection.addClass("text_red");
+            }
+        }
+    });
+  });
+  //查看评论
+    $comment_btn_i.on("click", comment_query);
+    function comment_query() {
+        var str = '';
+        $.get("{:url('/comment')}", { "works_id": localStorage.getItem("apic_id") }, function (data) {
+            if (!$.isEmptyObject(data)) {
+                redata = $.parseJSON(data);
+                if (0 == redata.status) {
+                    for (var i = 0; i < redata.rearray.length; i++) {
+                        str += '<div class="comment_connent">' +
+                            '<div class="media">' +
+                            '<div class="media-left">' +
+                            '<img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">' +
+                            '</div>' +
+                            '<div class="media-body">' +
+                            '<h4 class="media-heading">' + redata.rearray[i].user_name +
+                            '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">' +
+                            getLocalTime(redata.rearray[i].update_time) + '</span></h4>' +
+                            '<p>' + redata.rearray[i].comment;
+                            if (0 == redata.rearray[i].del_val){
+                                str += '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">删除</span></p>';
+                            }
+                            str += '</div>' +
+                            '</div>' +
+                            '</div> ';
+                    }
+                    $comment_container.html(str);
+                }
+            }
+        });
+    }
+  //预览鱼片
+ $browse_nav_small_img.on('click',function(e){
+      var this_elm = $(e.target);
+      if(this_elm.hasClass("nav_small_img")){
+          // $browse_img.find("img").eq(0).attr("src",this_elm.attr('src'));
+          var num = this_elm.attr('data-id');
+          gnum = num;
+          $browsenum.find("span").eq(0).text(+num+1);
+          pic=$.parseJSON(sessionStorage.getItem("allpic"))[num];
+          // $('.browsenum').text(redata.rearray.count);
+          $browse_img.find("img").eq(0).attr("src",pic.works_src);
+          $browse_img.find("img").eq(0).zoombieLens({Size:200,imageSrc: $(this).attr("src")});
+          $browse_img.find("img").eq(0).attr("data-id",num);
+          $thumbnails.text(pic.works_profile);
+          $para.eq(0).text(pic.works_browse);
+          $para.eq(1).text(pic.works_type);
+          $para.eq(2).text(pic.works_para[0]);
+          $para.eq(3).text(pic.works_para[1]);
+          $para.eq(4).text(pic.works_para[2]);
+          $para.eq(5).text(pic.works_para[3]);
+          $navbar_text.text(pic.works_title);
+          localStorage.setItem("apic_id", pic.works_id); 
+          $author.html("&copy;"+pic.user_name);
+      }
+ });
+
   $(function (){
         $('.right_btn').on('click',function(e){
             var this_elm = $(e.target);
@@ -559,9 +765,6 @@
 
   $(function(){        
         var works_id = localStorage.getItem("apic_id");
-        var $para = $(".colorccc");        
-        var $browse_img = $('.browse_big_img');
-        var $thumbnails = $('.thumbnails');
         $.ajax({
           url: "{:url('/qworks/Apic')}",
           type: 'get',
@@ -570,24 +773,41 @@
         .done(function(data) {
            if(!$.isEmptyObject(data)){
               var redata = $.parseJSON(data);
-              $para.eq(0).text(redata.rearray.works_browse);
-              $browse_img.find("img").attr("src",redata.rearray.works_src);
-              $thumbnails.text(redata.rearray.works_profile);
-              $para.eq(1).text(redata.rearray.works_type);
-              $para.eq(2).text(redata.rearray.works_para[0]);
-              $para.eq(3).text(redata.rearray.works_para[1]);
-              $para.eq(4).text(redata.rearray.works_para[2]);
-              $para.eq(5).text(redata.rearray.works_para[3]);
+              $para.eq(0).text(redata.rearray.pic.works_browse);
+              sessionStorage.setItem("allpic",JSON.stringify(redata.rearray.allpic));
+              var str = '';
+              for(var i=0;i<redata.rearray.allpic.length;i++){
+                str+='<li><img class="nav_small_img" src="'+redata.rearray.allpic[i].works_src+'" alt="" data-id="'+i+'"></li>';
+              }
+              $browse_nav_small_img.html(str);
+              $browsenum.find("span").eq(1).text(redata.rearray.allpic.length);
+              $browse_img.find("img").eq(0).attr("src",redata.rearray.pic.works_src);
+              $browse_img.find("img").eq(0).zoombieLens({Size:200,imageSrc: $(this).attr("src")});
+              $browse_img.find("img").eq(0).attr("data-id",0);
+              $thumbnails.text(redata.rearray.pic.works_profile);
+              $para.eq(0).text(redata.rearray.pic.works_browse);
+              $para.eq(1).text(redata.rearray.pic.works_type);
+              $para.eq(2).text(redata.rearray.pic.works_para[0]);
+              $para.eq(3).text(redata.rearray.pic.works_para[1]);
+              $para.eq(4).text(redata.rearray.pic.works_para[2]);
+              $para.eq(5).text(redata.rearray.pic.works_para[3]);
+              $navbar_text.text(redata.rearray.pic.works_title);
+              $author.html("&copy;"+redata.rearray.pic.user_name);
            }
         });
+
         var data = {
           "url":"{:url('/qworks/Apic')}",
           "browse_img":$browse_img,//包裹图片的盒子
           "para":$para,//相片参数
           "thumbnails":$thumbnails,//图片简介
-          "works_id":works_id//当前图片id
+          "works_id":works_id,//当前图片id
+          "browse_nav_small_img":$browse_nav_small_img,
+          "num":gnum,
+          "author": $author,
+          "browsenum": $browsenum
         };
-        var browse_img_btn = new browse_img_hf(data);//新建
+        var browse_img_btn = new browse_img_yf(data);//新建
         browse_img_btn.init();//初始化
       });
 </script>

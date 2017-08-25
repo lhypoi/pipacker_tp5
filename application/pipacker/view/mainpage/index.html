@@ -159,7 +159,7 @@
 			display:none;
 			background:rgba(98,98,98,.4);
 			padding:10px;
-			height: 95%;
+			height: 96.5%;
 			width:100%;
 			cursor: pointer;
 			position: absolute;
@@ -208,10 +208,16 @@
 								<div class="pic_div">
 									<img src="{$val.works_src}" data-id="{$val.works_id}" class="m_img"/>
 									<div class="modal_tip">
-										<h4 class="modal_tip_aaa">{$val.works_title}</h4>
-										{foreach $val.works_tags as $tags}
-											<a href="#" class="modal_tip_aaa">#{$tags}</a>
-										{/foreach}
+										<h5 class="modal_tip_aaa">标题：{$val.works_title}</h5>
+                                        <span class="modal_tip_aaa">
+                                            标签：
+                                            {foreach $val.works_tags as $tags}
+                                            <a href="#" class="modal_tip_aaa">#{$tags} </a>
+                                            {/foreach}
+                                        </span>
+                                        <br>
+                                        <br>
+                                        <span class="modal_tip_aaa">浏览量：{$val.works_browse}</span>
 									</div>
 								</div>
 								
@@ -246,7 +252,8 @@
 		var page = 1;
 		var more_lock = true;
 		var url = "{:url('/qworks/Hot')}";
-		var $show_img_list = $(".show_img_list");
+        var $show_img_list = $(".show_img_list");
+        var search_data = {};
 
 
 		$show_img_list.on("click",function(el){
@@ -299,17 +306,22 @@
 			page=1;
 			// console.log($show_img_list.find(".show_img_content").eq(1).html());
 			if($show_img_list.find(".show_img_content").eq(1).html()!=''){
-				$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
+				$.get("{:url('/qworks/News')}",{page:page}).done(function(data){
 					if(!$.isEmptyObject(data)){
 							redata = $.parseJSON(data);
 							var str = '';
 							for(var i=0;i<redata.rearray.length;i++){
-								str+='<div class="show_img_box">'+
-									 '<div class="show_content_img">'+
-									 '<div class="pic_div">'+
-									 '<img src="'+redata.rearray[i].works_src+'" data-id="'+redata.rearray[i].works_id+'" class="m_img"/>'+
-									 '<div class="modal_tip">'+
-									 '<h4 class="modal_tip_aaa">{$val.works_title}</h4>'+
+                                str += '<div class="show_img_box">' +
+                                    '<div class="show_content_img">' +
+                                    '<div class="pic_div">' +
+                                    '<img src="' + redata.rearray[i].works_src + '" data-id="' + redata.rearray[i].works_id + '" class="m_img"/>' +
+                                    '<div class="modal_tip">' +
+                                    '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
+                                    '<span class="modal_tip_aaa">';
+                                    for(var j=0; j < redata.rearray[i].works_tags.length;j++){
+                                        str += '<a href="#" class="modal_tip_aaa">#' + redata.rearray[i].works_tags[j]+' </a>';
+                                    }
+                                     str+= '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
 									 '</div>'+
 									 '</div>'+									 
 									 '<p>© '+redata.rearray[i].user_name+'</p>'+
@@ -317,7 +329,8 @@
 									 '</div>';	
 							}
 							$show_img_list.find(".show_img_content").eq(1).html($(str));
-							url = "{:url('/qworks/Hot')}";
+                            url = "{:url('/qworks/News')}";
+                            search_data = { "page": page };
 							more_lock = true;
 							$(".more").text("发现更多");
 						}
@@ -338,7 +351,12 @@
 									 '<div class="pic_div">'+
 									 '<img src="'+redata.rearray[i].works_src+'" data-id="'+redata.rearray[i].works_id+'" class="m_img"/>'+
 									 '<div class="modal_tip">'+
-									 '<h4 class="modal_tip_aaa">{$val.works_title}</h4>'+
+                                     '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title+'</h5>' +
+                                     '<span class="modal_tip_aaa">';
+                                     for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
+                                        str += '<a href="#" class="modal_tip_aaa">#' + redata.rearray[i].works_tags[j] + ' </a>';
+                                     }
+                                     str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
 									 '</div>'+
 									 '</div>'+									 
 									 '<p>© '+redata.rearray[i].user_name+'</p>'+
@@ -346,7 +364,8 @@
 									 '</div>';	
 							}
 							$show_img_list.find(".show_img_content").eq(0).html($(str));
-							url = "{:url('/qworks/Hot')}";
+                            url = "{:url('/qworks/Hot')}";
+                            search_data = { "page": page };
 							more_lock = true;
 							$(".more").text("发现更多");
 						}
@@ -357,12 +376,13 @@
 		//点击加载更多
 		$(".more").on('click',function(){
 			page++;
+			search_data = { "page": page };
 			// console.log(page);
 			if(more_lock){
 				$.ajax({
 					url:url,
 					type:"get",
-					data:{"page":page},
+                    data: search_data,
 					success:function(data){
 						if(!$.isEmptyObject(data)){
 							redata = $.parseJSON(data);
@@ -375,7 +395,12 @@
 									 '<div class="pic_div">'+
 									 '<img src="'+redata.rearray[i].works_src+'" data-id="'+redata.rearray[i].works_id+'" class="m_img"/>'+
 									 '<div class="modal_tip">'+
-									 '<h4 class="modal_tip_aaa">{$val.works_title}</h4>'+
+                                     '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
+                                     '<span class="modal_tip_aaa">';
+                                     for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
+                                        str += '<a href="#" class="modal_tip_aaa">#' + redata.rearray[i].works_tags[j] + ' </a>';
+                                     }
+                                     str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
 									 '</div>'+
 									 '</div>'+									 
 									 '<p>© '+redata.rearray[i].user_name+'</p>'+
@@ -406,28 +431,38 @@
 					"key_word":key_words,
 				},
 				"url":"{:url('/qworks/Search')}",
-				"callback":function(redata){
+                "callback": function (redata) { 
 					var str = '';
-					if(redata.length>0){
-						for(var i=0;i<redata.length;i++){
-						str+='<div class="show_img_box">'+
-							 '<div class="show_content_img">'+
-							 '<div class="pic_div">'+
-							 '<img src="'+redata[i].works_src+'" data-id="'+redata[i].works_id+'" class="m_img"/>'+
-							 '<div class="modal_tip">'+
-							 '<h4 class="modal_tip_aaa">'+redata[i].works_title+'</h4>'+
-							 '</div>'+
-							 '</div>'+
-							 '<p>© '+redata[i].user_name+'</p>'+
-							 '</div>'+
-							 '</div>';
-							};
-
-					}
+                    if (redata.length > 0) {
+                        for (var i = 0; i < redata.length; i++) {
+                            str += '<div class="show_img_box">' +
+                                '<div class="show_content_img">' +
+                                '<div class="pic_div">' +
+                                '<img src="' + redata[i].works_src + '" data-id="' + redata[i].works_id + '" class="m_img"/>' +
+                                '<div class="modal_tip">' +
+                                '<h5 class="modal_tip_aaa">标题：' + redata[i].works_title + '</h5>' +
+                                '<span class="modal_tip_aaa">';
+                                for (var j = 0; j < redata[i].works_tags.length; j++) {
+                                    str += '<a href="#" class="modal_tip_aaa">#' + redata[i].works_tags[j] + ' </a>';
+                                }
+                                str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata[i].works_browse + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<p>© ' + redata[i].user_name + '</p>' +
+                                '</div>' +
+                                '</div>';
+                        }
+                        $(".more").text("发现更多");
+                    }else{
+                        $(".more").text("对不起,没有搜索到相关的图片");
+                    }
 					$search_content.hide();
 					$show_img_title.hide();
 					$show_img.html();
-					$show_img_list.find(".show_img_content").eq(0).html(str);
+                    $show_img_list.find(".show_img_content").eq(0).html(str);
+                    page = 1;
+                    url = "{:url('/qworks/Search')}";
+                    search_data = { "page": page, "key_word": key_words};
 				}
 			};
 			var search = new search_works(search_key);

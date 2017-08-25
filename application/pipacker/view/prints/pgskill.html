@@ -35,19 +35,19 @@
 			margin:0 100px;
 			border-bottom:1px solid black; 
 		}
-		.pgskill_nav>ul>li a:hover{
+		/*.pgskill_nav>ul>li a:hover{
 			color: red;
 			border-bottom: 0px;
 		}
 		.pgskill_nav>ul>li:hover{
 			border-color: red;
-		}
-		.pgskill_nav .pgskill_nav_active{
+		}*/
+		/*.pgskill_nav .pgskill_nav_active{
 			border-bottom:1px solid red;
 		}
 		.pgskill_nav .pgskill_nav_active a{
 			color:red;
-		}
+		}*/
 		.pgskill_nav a{
 			color: black;
 		}
@@ -83,49 +83,109 @@
 			margin: 0;
 			font-weight: normal;
 		}
+		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+			background-color: transparent;
+		    border: 1px solid #000;
+		    border-bottom-color: transparent;
+		    /*border:none;*/
+		}
+		.pgskil_content_img h3{
+			margin: 10px auto;
+		}
 	</style>
 </head>
 <body>
 
 	{include file="common/navigation"}
-	<nav class="pgskill_nav">
-		<ul>
-			<li class="pgskill_nav_active"><a href="#" >最新</a></li>
-			<li><a href="#" aria-controls="home" role="tab" data-toggle="tab">最热</a></li>
-			<!-- <li>动态视觉</li>
-			<li>基础理论</li> -->
-			<!-- <li>
-				<div class="dropdown">
-					<a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="flase" aria-expanded="true">更多<span class="caret"></a>
-					<ul class="dropdown-menu skill_mune_down" aria-labelledby="dropdownMenu1">
-			            <li>实战技巧</li>
-			            <li>后期教程</li>
-			            <li>分享探讨</li>
-			            <li>摄影师访谈</li>
-			            <li>作品心得</li>
-			            <li>用好器材</li>
-			            <li>器材div</li>
-			            <li>视觉漫游</li>
-			            <li>专栏</li>
-			            <li>大专题</li>
-			            <li>印象</li>
-			          </ul>
-		          </div>
-			</li> -->
-		</ul>
-	</nav>
-	<div class="pgskill_content">
-		<ul>
-			{foreach $pp_list as $item}
-				<li>
-					<div class="pgskil_content_img">
-						<img src="{$item['works_src']}" alt="">
-						<h3>Waiting for the Miracle</h3>
-						<p>Matjaz Cater</p>
-					</div>
-				</li>
-			{/foreach}
-		</ul>
+	<div>
+		<nav class="pgskill_nav">
+		  <ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active pgskill_nav_active"><a class="nav_main_btn" href="#home" aria-controls="home" role="tab" data-toggle="tab">最新技术展示</a></li>
+		    <li role="presentation"><a class="nav_main_btn" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">热门搜索技术</a></li>
+		  </ul>
+		 </nav>
+
+	  <div class="tab-content show_img_list">
+	    <div role="tabpanel" class="tab-pane active pgskill_content" id="home">
+	    	<ul class="pg_list">
+				{foreach $pp_list as $item}
+					<li>
+						<div class="pgskil_content_img">
+							<a href="javascript:;">
+							<img src="{$item['works_src']}" alt="">
+							<h3>{$item['works_type']}</h3>
+							<p>{$item['user_name']}</p>
+							</a>
+						</div>
+					</li>
+				{/foreach}
+			</ul>
+	    </div>
+	    <div role="tabpanel" class="tab-pane pgskill_content" id="profile">
+	    	<ul class="pg_list">
+				
+			</ul>
+	    </div>
+	  </div>
+
 	</div>
+	<script>
+		var page = 1;
+		var more_lock = true;
+		var url = "{:url('/qworks/Hot')}";
+		var $nav_main_btn = $(".nav_main_btn");
+		var $show_img_list = $(".show_img_list");
+		// console.log($nav_main_btn);
+		$nav_main_btn.eq(1).on("click",function(){
+			page=1;
+			$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
+				if(!$.isEmptyObject(data)){
+						redata = $.parseJSON(data);
+						console.log(redata.rearray[0]);
+						var str = '';
+						for(var i=0;i<redata.rearray.length;i++){
+							str+='<li>'+
+									'<div class="pgskil_content_img">'+
+									'<a href="javascript:;">'+
+										'<img src="'+redata.rearray[i].works_src+'" alt="">'+
+										'<h3>'+redata.rearray[i].works_type+'</h3>'+
+										'<p>'+redata.rearray[i].user_name+'</p>'+
+									'</a>'+
+									'</div>'+
+								'</li>';
+						}
+						$show_img_list.find(".pg_list").eq(1).html($(str));
+						url = "{:url('/qworks/Hot')}";
+						more_lock = true;
+						// $(".more").text("发现更多");
+					}
+			});
+		});
+		$nav_main_btn.eq(0).on("click",function(){
+			page=1;
+			$.get("{:url('/works')}").done(function(data){
+				if(!$.isEmptyObject(data)){
+						redata = $.parseJSON(data);
+						var str = '';
+						for(var i=0;i<redata.rearray.length;i++){
+							str+='<li>'+
+									'<div class="pgskil_content_img">'+
+									'<a href="javascript:;">'+
+										'<img src="'+redata.rearray[i].works_src+'" alt="">'+
+										'<h3>'+redata.rearray[i].works_type+'</h3>'+
+										'<p>'+redata.rearray[i].user_name+'</p>'+
+									'</a>'+
+									'</div>'+
+								'</li>';		
+						}
+						$show_img_list.find(".pg_list").eq(0).html($(str));
+						url = "{:url('/works')}";
+						more_lock = true;
+						
+						// $(".more").text("发现更多");
+					}
+			});
+		});
+	</script>
 </body>
 </html>

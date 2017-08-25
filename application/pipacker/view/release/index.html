@@ -43,6 +43,8 @@
 		color: #fff;
 		display: inline-block;
 		margin-left: 10px;
+		width:70px;
+		/*cursor: pointer;*/
 	}
 	.container textarea{
 		resize:none;
@@ -57,6 +59,13 @@
 	.show_img_list{
 		width: 1190px;
 	}
+	.tag_box{
+		display: inline-block;
+		background: #fff;
+	}
+	.tag_box span{
+		color: #000;
+	}
 </style>
 <body>
 	{include file="common/navigation"}
@@ -64,8 +73,9 @@
 		<h1>发布属于你的精彩</h1>
 		<div class="row">
 			<div class="col-lg-12">
-				<span>请选择发布的文件：</span>
+				<span>请选择发布的图片：</span>
 				<input type="file" id="pic_file" name="pic_file" class="margin_auto margin_bottom" multiple onchange="javascript:setImagePreviews();">
+				<span>(点击ctrl或shift可以选择多张图片上传,请选择图片参数相同的照片)</span>
 				<div id="dd" class="show_img_list"></div>
 			</div>
 		</div>
@@ -113,7 +123,15 @@
 				</div>
 				<div class="col-lg-6">
 					<span>请输入拍摄的快门：</span>
-					<input type="text" class="shutter_type">
+					<select class="aperture_type">
+	                    <option value="f/2">1/500</option>
+	                    <option value="f/2.8">1/250</option>
+	                    <option value="f/4">1/125</option>
+	                    <option value="f/5.6">1/60</option>
+	                    <option value="f/8">1/30</option>
+	                    <option value="f/11">1/15</option>
+	                    <option value="f/16">1/8</option>
+	                </select>
 				</div>
 			</div>
 			<div class="row margin_bottom">
@@ -137,7 +155,7 @@
 			<h2>图片简介</h2>
 			<div class="margin_bottom works_title">
 				<span>请输入图片标题：</span>
-				<input type="text">
+				<input type="text" placeholder="好名字有画龙点睛的作用">
 			</div>
 			<div class="margin_bottom works_profile">
 				<span>请输入图片简介：</span>
@@ -145,12 +163,15 @@
 			</div>
 			<div class="row margin_bottom">
 				<div class="col-lg-6 atlas_id">
-					<span>请输入图集编号：</span>
+					<span>当前的图集编号：</span>
 					<input type="text" value="0">
 				</div>
 				<div class="col-lg-6 works_tags">
 					<span>请输入图片标签：</span>
-					<input type="text">
+					<div class="tag_box">
+						<input type="text" placeholder="请输入标签，以回车结束" class="tag_input_box">
+					</div>
+					<!-- <div style="margin-top: 10px;display: none;" class="tag_box"><span>图片的标签有：</span><span class="tag_box_list"></span></div> -->
 				</div>
 			</div>
 		</div>
@@ -163,7 +184,7 @@
 	</script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
-	<script src="__PUBLIC_PIPACKER__/pipacker/js/release.js?3"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/js/release.js?4"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js?1"></script>
 	<script type="text/javascript">
 	//下面用于多图片上传预览功能
