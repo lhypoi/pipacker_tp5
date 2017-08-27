@@ -52,6 +52,27 @@ class Goods extends baseControll
         $attr_list=db("goods")
             ->where('goods_id='.$goods_id)
             ->select();
-        return jsonp(['goods_attr'=>$attr_list]);
+        return jsonp([
+            'goods_attr'=>$attr_list
+        ]);
+    }
+
+    public function addCart(){
+        session_start();
+        $param=Request::instance()->param();
+        $cartInfo=$param['cartdata'];
+        print_r($_SESSION);
+        $cart_data=[
+            'goods_id'=>$cartInfo['goods_info'][0]['goods_id'],
+            'goods_name'=>$cartInfo['goods_info'][0]['goods_name'],
+            'goods_num'=>$cartInfo['num'],
+            'goods_price'=>$cartInfo['totPrice'],
+            'user_id'=>2
+        ];
+        db("cart")->insert($cart_data);
+        return jsonp([
+                "status" => 1,
+                "msg" => "加入购物成功"
+        ]);
     }
 }
