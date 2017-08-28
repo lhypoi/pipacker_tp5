@@ -1,0 +1,99 @@
+{include file="public/header"}
+<link href="__PUBLIC__/static/admin/shop/form.css" rel="stylesheet" type="text/css">
+<h1 class="page-title">商品分类管理</h1>
+<a class="btn btn-info" href="{:url('add')}">添加分类</a>
+<a class="btn btn-danger" onclick="$('.delSub').click()">批量删除</a>
+<form action="{:url('delAll')}" id="form-del">
+	<input type="submit" style="display:none" class="delSub" />
+	<table class="table">
+		<tr>
+			<th><input type="checkbox" id="del-all">全选</th>
+			<th>ID</th>
+			<th>名称</th>
+			<th>待定</th>
+			<th>操作</th>
+		</tr>
+	
+		{foreach $cate_list as $item}
+		<tr>
+			<td><input type="checkbox" name="cate_id" value="{$item.cate_id}"></td>
+			<td>{$item.cate_id}</td>
+			<td>
+				<input type="text" value="{$item.cate_name}" id="cate_{$item.cate_id}" onclick=getText({$item.cate_id}) />
+			</td>
+			<td></td>
+			<td>
+				<a onclick=edit({$item.cate_id}) class="btn btn-info">修改</a>
+				<a onclick=del({$item.cate_id}) class="btn btn-danger">删除</a>
+			</td>
+		</tr>
+		{/foreach}
+	</table>
+</form>
+<div>
+	{$cate_list->render()}
+</div>
+<div id="warning"></div>
+<script type="text/javascript">
+$('#warning').css('left', ($(window).width() - $('#warning').width())/2 + 'px').css('top', ($(window).height() - $('#warning').height())/3 + 'px')
+var old_text = '';
+function getText(id) {
+	old_text = $('#cate_' + id).val();
+}
+function edit(id) {
+	let cate_id = id;
+	let field = $('#cate_' + id).val();
+	$('#warning').html('')
+	if(old_text == field || old_text == '') {
+		$('#warning').html('没有进行修改').fadeIn().delay(1000).fadeOut()
+	}else if(field == '') {
+		$('#warning').html('分类名不能为空').fadeIn().delay(1000).fadeOut()
+	}else{
+		$.post("/public/admin/goodscate/edit", {id, field}, function(rtnData) {
+			if(rtnData.status == 1) {
+				$('#warning').html('修改成功').fadeIn().delay(1000).fadeOut()
+				$('#cate_' + id).val(field)
+			}
+		});
+	}
+}
+function del(id) {
+	$.post("/public/admin/goodscate/del", {id}, function(rtnData) {
+		if(rtnData.status == 1) {
+			$('#warning').html('删除成功').fadeIn().delay(1000).fadeOut()
+			$('#form-del').children('table').children('tbody').children('tr').eq(id).remove()
+		}else{
+			$('#warning').html('该分类不允许删除').fadeIn().delay(1000).fadeOut()
+		}
+	})
+}
+$('#del-all').click(function() {
+	if($(this).is(':checked')) {
+		$('input[type="checkbox"]').prop('checked', true)
+	}else{
+		$('input[type="checkbox"]').prop('checked', false)
+	}
+})
+$('#form-del').on('submit', function(e) {
+	e.preventDefault();
+	let cate_id = [];
+	let del_row = []
+	for(let i = 1; i < $('input[type="checkbox"]').length; i ++) {
+		if($('input[type="checkbox"]').eq(i).is(':checked')) {
+			cate_id.push($('input[type="checkbox"]').eq(i).val())
+			del_row.push(i)
+		}
+	}
+	$.post("/public/admin/goodscate/delAll", {cate_id}, function(rtnData) {
+		if(rtnData.status == 1) {
+			$('#warning').html('删除成功').fadeIn().delay(1000).fadeOut()
+			for(let i = 0; i < del_row.length; i ++) {
+				$('#form-del').children('table').children('tbody').children('tr').eq(del_row[i]).css('display', 'none')
+			}
+		}else{
+			$('#warning').html('该分类不允许删除').fadeIn().delay(1000).fadeOut()
+		}
+	});
+})
+</script>
+{include file="public/footer"}

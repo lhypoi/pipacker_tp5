@@ -32,7 +32,7 @@
             <!-- BEGIN THEME LAYOUT STYLES -->
             <link href="__PUBLIC__/static/admin/layout.css" rel="stylesheet" type="text/css">
             <link href="__PUBLIC__/static/admin/grey.min.css" rel="stylesheet" type="text/css" id="style_color">
-
+			
             <script src="__PUBLIC__/static/admin/jquery_002.js" type="text/javascript"></script>
 
             <!-- END THEME LAYOUT STYLES -->
@@ -134,6 +134,31 @@
                                     </a>
 
                                 </li>
+                                
+                                <li class="nav-item <?php echo  is_active('goods, goodscate','active');?>
+                                    ">
+                                    <a href="" class="nav-link nav-toggle">
+                                        <i class="fa fa-user-secret"></i>
+                                        <span class="title">商城管理</span>
+										<span class="arrow"></span>
+                                    </a>
+									<ul class="sub-menu">
+										<li class="nav-item <?php echo  is_active('goods','active',true);?>">
+		                                    <a href="{:url('goods/index')}" class="nav-link nav-toggle">
+		                                        <span class="title">商品管理</span>
+		
+		                                    </a>
+
+                                		</li>
+                                		<li class="nav-item <?php echo  is_active('goodscate','active',true);?>">
+		                                    <a href="{:url('goodscate/index')}" class="nav-link nav-toggle">
+		                                        <span class="title">分类管理</span>
+		
+		                                    </a>
+
+                                		</li>
+									</ul>
+                                </li>
 
                                 <li class="nav-item <?php echo  is_active('system','active');?>
                                     ">
@@ -149,7 +174,6 @@
                                     <a href="/public/pipacker/mainpage" target="_balnk" class="nav-link nav-toggle">
                                         <i class="icon-home"></i>
                                         <span class="title">进入首页</span>
-
                                     </a>
 
                                 </li>
