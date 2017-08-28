@@ -227,7 +227,7 @@ class Works extends baseControll
             $page_val = $param["page"];
             $pp_list = Db::table("pp_works")
                             ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                            ->order("pp_works.pp_works.works_browse desc")
+                            ->order("pp_works.works_browse desc")
                             ->limit(4*$page_val)
                             ->select();
             $this->reJson("0",$pp_list); 

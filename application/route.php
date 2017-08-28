@@ -32,3 +32,4 @@ Route::resource("atlas","api/Atlas");
 Route::resource("comment","api/comment");
 Route::resource("user","api/User");
 Route::controller("qworks","api/Works");
+Route::controller("quser","api/User");
