@@ -177,13 +177,13 @@
 	<div class="container">
 		<div class="head_img">
 			<div class="header_img">
-				<a href="">
+				<a href="{:url('dialogue/index')}">
 					<img src="__PUBLIC_PIPACKER__/pipacker/images/cover5.jpg" class="imgwidth">
 				</a>
 				<p class="header_author">© Yucel Basoglu</p>
 			</div>
 			<div class="header_text">
-				<a href="">
+				<a href="{:url('dialogue/index')}">
 					<span class="header_text_left">杂志</span>
 					&nbsp;&nbsp;
 					<span class="header_text_right">Yucel Basoglu:鼓舞人心的BW海景摄影师</span>
@@ -212,7 +212,7 @@
                                         <span class="modal_tip_aaa">
                                             标签：
                                             {foreach $val.works_tags as $tags}
-                                            <a href="#" class="modal_tip_aaa">#{$tags} </a>
+                                            <a href="#" class="modal_tip_aaa">{$tags} </a>
                                             {/foreach}
                                         </span>
                                         <br>
@@ -302,6 +302,43 @@
 		});
 		var $nav_main_btn = $(".nav_main_btn");
 		// console.log($nav_main_btn);
+		$nav_main_btn.eq(2).on("click",function(){
+			page=1;
+			// console.log($show_img_list.find(".show_img_content").eq(1).html());
+			if($show_img_list.find(".show_img_content").eq(2).html()!=''){
+				$.get("{:url('/works')}",{page:page}).done(function(data){
+					if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							console.log(redata.rearray);
+							var str = '';
+							for(var i=0;i<redata.rearray.length;i++){
+                                str += '<div class="show_img_box">' +
+                                    '<div class="show_content_img">' +
+                                    '<div class="pic_div">' +
+                                    '<img src="' + redata.rearray[i].works_src + '" data-id="' + redata.rearray[i].works_id + '" class="m_img"/>' +
+                                    '<div class="modal_tip">' +
+                                    '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
+                                    '<span class="modal_tip_aaa">';
+                                    for(var j=0; j < redata.rearray[i].works_tags.length;j++){
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j]+' </a>';
+                                    }
+                                     str+= '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
+									 '</div>'+
+									 '</div>'+									 
+									 '<p>© '+redata.rearray[i].user_name+'</p>'+
+									 '</div>'+
+									 '</div>';	
+							}
+							$show_img_list.find(".show_img_content").eq(2).html($(str));
+                            url = "{:url('/works')}";
+                            search_data = { "page": page };
+							more_lock = true;
+							$(".more").text("发现更多");
+						}
+				});
+			}
+			
+		});
 		$nav_main_btn.eq(1).on("click",function(){
 			page=1;
 			// console.log($show_img_list.find(".show_img_content").eq(1).html());
@@ -319,7 +356,7 @@
                                     '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
                                     '<span class="modal_tip_aaa">';
                                     for(var j=0; j < redata.rearray[i].works_tags.length;j++){
-                                        str += '<a href="#" class="modal_tip_aaa">#' + redata.rearray[i].works_tags[j]+' </a>';
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j]+' </a>';
                                     }
                                      str+= '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
 									 '</div>'+
@@ -354,7 +391,7 @@
                                      '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title+'</h5>' +
                                      '<span class="modal_tip_aaa">';
                                      for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
-                                        str += '<a href="#" class="modal_tip_aaa">#' + redata.rearray[i].works_tags[j] + ' </a>';
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j] + ' </a>';
                                      }
                                      str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
 									 '</div>'+
@@ -398,7 +435,7 @@
                                      '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
                                      '<span class="modal_tip_aaa">';
                                      for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
-                                        str += '<a href="#" class="modal_tip_aaa">#' + redata.rearray[i].works_tags[j] + ' </a>';
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j] + ' </a>';
                                      }
                                      str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
 									 '</div>'+

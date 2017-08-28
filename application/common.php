@@ -30,3 +30,4 @@ function saveFile($tmp_pic_name,$tmp_pic_type)
 
 	return "/public/upload/images/".$save_file;
 }
+?>

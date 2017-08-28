@@ -86,6 +86,13 @@ class Works extends baseControll
         if(!empty($param)){
             $tmp_pic_name = $_FILES['pic_src']['tmp_name'];
             $tmp_pic_type = $_FILES['pic_src']['type'];
+            // print_r($param['works_tags']);
+            $tags = '';
+            foreach ($param['works_tags'] as $key => $value) {
+                $tags .= $value;
+            }
+            $param['works_tags'] = $tags;
+            // print_r($tags);
             // $param['works_para'] = json_encode($param['works_para']);
             foreach($tmp_pic_name as $key => $tmp_pic_names) {
                 // foreach ($tmp_pic_type as $key => $tmp_pic_type) {
@@ -95,9 +102,11 @@ class Works extends baseControll
                 // }
                     $param['update_time'] = time();
                     Db::table("pp_works")->insert($param);
+                    // print_r($param);
+                    
             }
             // print_r($param['works_src']);exit();
-            
+            // exit();
             
             $works_id = Db::table("pp_works")->getLastInsID();
             $this->reJson("2",$works_id,"成功插入");
@@ -170,6 +179,157 @@ class Works extends baseControll
             }
         }else{
             $this->reJson("2",array(),"服务器并没有接收到数据，数据应该是丢失了...");   
+        }
+    }
+    /**
+     * 
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function getTags()
+    {
+        //
+        $param = Request::instance()->param();
+        $type = $param["type"];
+        // print_r($type);exit();
+        if(empty($param)){
+            $pp_list = Db::table("pp_works")
+                        ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                        ->order("pp_works.works_id desc")
+                        ->where("pp_works.works_type = '$type'")
+                        ->limit(15)
+                        ->select();
+           if(!empty($pp_list)){  
+                foreach ($pp_list as $key => $val) {
+                    # code...
+                    $tags = explode(',',$val['works_tags']);
+                    $pp_list[$key]['works_tags'] = $tags;
+                    $para = explode(',',$val['works_para']);
+                    $pp_list[$key]['works_para'] = $para;
+                }
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            }
+        }else{
+            $page_val = $param["page"];
+            $pp_list = Db::table("pp_works")
+                        ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                        ->order("pp_works.update_time desc")
+                        ->where("pp_works.works_type = '$type'")
+                        ->limit(15)
+                        ->select();
+            if(!empty($pp_list)){ 
+                foreach ($pp_list as $key => $val) {
+                            # code...
+                            $tags = explode(',',$val['works_tags']);
+                            $pp_list[$key]['works_tags'] = $tags;
+                            $para = explode(',',$val['works_para']);
+                            $pp_list[$key]['works_para'] = $para;
+                }
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            } 
+        }
+    }
+    /**
+     * 
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function getTagsNews()
+    {
+        //
+        $param = Request::instance()->param();
+        if(empty($param)){
+            $pp_list = Db::table("pp_works")
+                        ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                        ->order("pp_works.update_time desc")
+                        ->where("pp_works.works_type = '$type'")
+                        ->limit(15)
+                        ->select();
+           if(!empty($pp_list)){  
+                foreach ($pp_list as $key => $val) {
+                    # code...
+                    $tags = explode(',',$val['works_tags']);
+                    $pp_list[$key]['works_tags'] = $tags;
+                    $para = explode(',',$val['works_para']);
+                    $pp_list[$key]['works_para'] = $para;
+                }
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            }
+        }else{
+            $page_val = $param["page"];
+            $pp_list = Db::table("pp_works")
+                        ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                        ->order("pp_works.update_time desc")
+                        ->where("pp_works.works_type = '$type'")
+                        ->limit(15*$page_val)
+                        ->select();
+            if(!empty($pp_list)){ 
+                foreach ($pp_list as $key => $val) {
+                            # code...
+                            $tags = explode(',',$val['works_tags']);
+                            $pp_list[$key]['works_tags'] = $tags;
+                            $para = explode(',',$val['works_para']);
+                            $pp_list[$key]['works_para'] = $para;
+                }
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            } 
+        }
+    }
+    //按浏览量排序
+    public function getTagsHot()
+    {
+        //
+        $param = Request::instance()->param();
+        if(empty($param['page'])){
+            $pp_list = Db::table("pp_works")
+                            ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                            ->order("pp_works.works_browse desc")
+                            ->where("pp_works.works_type = '$type'")
+                            ->limit(15)
+                            ->select();
+            if(!empty($pp_list)){
+             foreach ($pp_list as $key => $val) {
+                        # code...
+                        $tags = explode(',',$val['works_tags']);
+                        $pp_list[$key]['works_tags'] = $tags;
+                        $para = explode(',',$val['works_para']);
+                        $pp_list[$key]['works_para'] = $para;
+                    }
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            }
+        }else{
+            $page_val = $param["page"];
+            $pp_list = Db::table("pp_works")
+                            ->join("pp_user","pp_user.user_id = pp_works.user_id")
+                            ->order("pp_works.works_browse desc")
+                            ->where("pp_works.works_type = '$type'")
+                            ->limit(15)
+                            ->page($page_val)
+                            ->select();
+            if(!empty($pp_list)){
+                foreach ($pp_list as $key => $val) {
+                            # code...
+                            $tags = explode(',',$val['works_tags']);
+                            $pp_list[$key]['works_tags'] = $tags;
+                            $para = explode(',',$val['works_para']);
+                            $pp_list[$key]['works_para'] = $para;
+                }
+                $this->reJson("0",$pp_list); 
+            }else{
+               $this->reJson("1");  
+            }
         }
     }
     /**
@@ -257,6 +417,7 @@ class Works extends baseControll
                     ->limit(10)->select();
                 }           
                 Db::table("pp_works")->where("works_id=$id")->setInc('works_browse');
+                // Db::table("pp_works")->where("works_id=$id")->update(['id' => 1, 'name' => 'thinkphp']);
                 if(!empty($pic)){   
                     $tags = explode(',',$pic['works_tags']);
                     $pic['works_tags'] = $tags;

@@ -176,6 +176,24 @@
 		    margin: 13px 0px 50px 0px;
 		    color: #999;
 		}
+		.more_img{
+			clear: both;
+		    bottom: 20px;
+		    border-top: 1px solid #222;
+		    text-align: center;
+		    padding: 50px 0px 100px 0px;
+		}
+		.more_img span{
+			padding: 7px 0px 10px 0px;
+		    border-bottom: 1px solid #444;
+		    text-transform: uppercase;
+		    margin: 0px 20px 0px 20px;
+		    color: #666;
+		    font-size: 19px;
+		    font-family: 'ProximaNovaT-Thin';
+		    letter-spacing: 1px;
+		    cursor: pointer;
+		}
 	</style>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
@@ -187,13 +205,13 @@
 		<div class="photo_main container">
 			<div class="">
 				<div class="photo_main_nav">
-					<div class="photo_main_nav_item_selected"><a href="">人像</a></div>
-					<div class="photo_main_nav_item"><a href="">风景</a></div>
-					<div class="photo_main_nav_item"><a href="">生态</a></div>
-					<div class="photo_main_nav_item"><a href="">纪实</a></div>
-					<div class="photo_main_nav_item"><a href="">生活</a></div>
-					<div class="photo_main_nav_item"><a href="">LOMO</a></div>
-					<div class="photo_main_nav_item"><a href="">观念</a></div>
+					<div class="photo_list_nav photo_main_nav_item_selected"><a href="javascript:;">人像</a></div>
+					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">风景</a></div>
+					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">生态</a></div>
+					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">纪实</a></div>
+					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">生活</a></div>
+					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">LOMO</a></div>
+					<div class="photo_list_nav photo_main_nav_item"><a href="javascript:;">观念</a></div>
 				</div>
 			</div>
 			<div class="pull-right">
@@ -236,9 +254,165 @@
 				  </div>
 				</div>
 			</div>
+			<div class="more_img">
+				<span class="more">发现更多</span>
+			</div>
 		</div>
 	</div>
 	<script>
+		$(function() {
+			var page = 1;
+			$(".photo_list_nav").each(function(index,el) {
+					// console.log($(el));
+				$(el).on("click", function() {
+					// console.log(index);
+					$(".photo_list_nav").removeClass("photo_main_nav_item_selected").addClass("photo_main_nav_item");
+					$(el).removeClass("photo_main_nav_item").addClass("photo_main_nav_item_selected");
+					// if(index == 0){
+					// 	console.log(0);
+					// }
+					// else if(index == 1){
+					// 	console.log(1);
+					// }
+					switch(index)
+					{
+						case 0: 
+							$.get("{:url('/qworks/Tags')}",{page:page,type:"人像"}).done(function(data){
+								if(!$.isEmptyObject(data)){
+										redata = $.parseJSON(data);
+										// console.log(redata);
+										var str = '';
+										for(var i=0;i<redata.rearray.length;i++){
+											str+='<li class="show_content_img"><a href="javascript:;">'+
+												 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+												 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+										}
+										$show_img_list.find(".pg_list").html($(str));
+										url = "{:url('/qworks/Hot')}";
+										more_lock = true;
+										$(".more").text("发现更多");
+									}
+							});
+							fuyong();
+							break;
+						case 1:
+							$.get("{:url('/qworks/Tags')}",{page:page,type:"风景"}).done(function(data){
+								if(!$.isEmptyObject(data)){
+										redata = $.parseJSON(data);
+										// console.log(redata);
+										var str = '';
+										for(var i=0;i<redata.rearray.length;i++){
+											str+='<li class="show_content_img"><a href="javascript:;">'+
+												 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+												 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+										}
+										$show_img_list.find(".pg_list").html($(str));
+										url = "{:url('/qworks/Hot')}";
+										more_lock = true;
+										$(".more").text("发现更多");
+									}
+							});
+							fuyong();
+							break;
+						case 2:
+							$.get("{:url('/qworks/Tags')}",{page:page,type:"生态"}).done(function(data){
+								if(!$.isEmptyObject(data)){
+										redata = $.parseJSON(data);
+										// console.log(redata);
+										var str = '';
+										for(var i=0;i<redata.rearray.length;i++){
+											str+='<li class="show_content_img"><a href="javascript:;">'+
+												 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+												 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+										}
+										$show_img_list.find(".pg_list").html($(str));
+										url = "{:url('/qworks/Hot')}";
+										more_lock = true;
+										$(".more").text("发现更多");
+									}
+							});
+							fuyong();
+							break;
+						case 3:
+							$.get("{:url('/qworks/Tags')}",{page:page,type:"纪实"}).done(function(data){
+								if(!$.isEmptyObject(data)){
+										redata = $.parseJSON(data);
+										// console.log(redata);
+										var str = '';
+										for(var i=0;i<redata.rearray.length;i++){
+											str+='<li class="show_content_img"><a href="javascript:;">'+
+												 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+												 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+										}
+										$show_img_list.find(".pg_list").html($(str));
+										url = "{:url('/qworks/Hot')}";
+										more_lock = true;
+										$(".more").text("发现更多");
+									}
+							});
+							fuyong();
+							break;
+						case 4:
+							$.get("{:url('/qworks/Tags')}",{page:page,type:"生活"}).done(function(data){
+								if(!$.isEmptyObject(data)){
+										redata = $.parseJSON(data);
+										// console.log(redata);
+										var str = '';
+										for(var i=0;i<redata.rearray.length;i++){
+											str+='<li class="show_content_img"><a href="javascript:;">'+
+												 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+												 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+										}
+										$show_img_list.find(".pg_list").html($(str));
+										url = "{:url('/qworks/Hot')}";
+										more_lock = true;
+										$(".more").text("发现更多");
+									}
+							});
+							fuyong();
+							break;
+						case 5:
+							$.get("{:url('/qworks/Tags')}",{page:page,type:"LOMO"}).done(function(data){
+								if(!$.isEmptyObject(data)){
+										redata = $.parseJSON(data);
+										// console.log(redata);
+										var str = '';
+										for(var i=0;i<redata.rearray.length;i++){
+											str+='<li class="show_content_img"><a href="javascript:;">'+
+												 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+												 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+										}
+										$show_img_list.find(".pg_list").html($(str));
+										url = "{:url('/qworks/Hot')}";
+										more_lock = true;
+										$(".more").text("发现更多");
+									}
+							});
+							fuyong();
+							break;
+						case 6:
+							$.get("{:url('/qworks/Tags')}",{page:page,type:"观念"}).done(function(data){
+								if(!$.isEmptyObject(data)){
+										redata = $.parseJSON(data);
+										// console.log(redata);
+										var str = '';
+										for(var i=0;i<redata.rearray.length;i++){
+											str+='<li class="show_content_img"><a href="javascript:;">'+
+												 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+												 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+										}
+										$show_img_list.find(".pg_list").html($(str));
+										url = "{:url('/qworks/Hot')}";
+										more_lock = true;
+										$(".more").text("发现更多");
+									}
+							});
+							fuyong();
+							break;
+					}
+				})
+			})
+		})
 		var page = 1;
 		var more_lock = true;
 		var url = "{:url('/qworks/Hot')}";
@@ -251,63 +425,100 @@
 				location.href = "{:url('photoshow/index')}";
 			}
 		});
-		var $nav_main_btn = $(".nav_main_btn");
-		// console.log($nav_main_btn);
-		$nav_main_btn.eq(2).on("click",function(){
-			page=1;
-			$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
-				if(!$.isEmptyObject(data)){
-						redata = $.parseJSON(data);
-						var str = '';
-						for(var i=0;i<redata.rearray.length;i++){
-							str+='<li class="show_content_img"><a href="javascript:;">'+
-								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+		function fuyong(){
+			var $nav_main_btn = $(".nav_main_btn");
+			// console.log($nav_main_btn);
+			$nav_main_btn.eq(2).on("click",function(){
+				page=1;
+				$.get("{:url('/qworks/getTagsNews')}",{page:page}).done(function(data){
+					if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							for(var i=0;i<redata.rearray.length;i++){
+								str+='<li class="show_content_img"><a href="javascript:;">'+
+									 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+									 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+							}
+							$show_img_list.find(".pg_list").eq(2).html($(str));
+							url = "{:url('/qworks/Hot')}";
+							more_lock = true;
+							$(".more").text("发现更多");
 						}
-						$show_img_list.find(".pg_list").eq(2).html($(str));
-						url = "{:url('/qworks/Hot')}";
-						more_lock = true;
-						$(".more").text("发现更多");
-					}
+				});
 			});
-		});
-		$nav_main_btn.eq(1).on("click",function(){
-			page=1;
-			$.get("{:url('/works')}").done(function(data){
-				if(!$.isEmptyObject(data)){
-						redata = $.parseJSON(data);
-						var str = '';
-						for(var i=0;i<redata.rearray.length;i++){
-							str+='<li class="show_content_img"><a href="javascript:;">'+
-								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';		
+			$nav_main_btn.eq(1).on("click",function(){
+				page=1;
+				$.get("{:url('/works')}").done(function(data){
+					if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							for(var i=0;i<redata.rearray.length;i++){
+								str+='<li class="show_content_img"><a href="javascript:;">'+
+									 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+									 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';		
+							}
+							$show_img_list.find(".pg_list").eq(1).html($(str));
+							url = "{:url('/works')}";
+							more_lock = true;
+							
+							$(".more").text("发现更多");
 						}
-						$show_img_list.find(".pg_list").eq(1).html($(str));
-						url = "{:url('/works')}";
-						more_lock = true;
-						
-						$(".more").text("发现更多");
-					}
+				});
 			});
-		});
-		$nav_main_btn.eq(0).on("click",function(){
-			page=1;
-			$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
-				if(!$.isEmptyObject(data)){
-						redata = $.parseJSON(data);
-						var str = '';
-						for(var i=0;i<redata.rearray.length;i++){
-							str+='<li class="show_content_img"><a href="javascript:;">'+
-								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+			$nav_main_btn.eq(0).on("click",function(){
+				page=1;
+				$.get("{:url('/qworks/getTagsHot')}",{page:page}).done(function(data){
+					if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							for(var i=0;i<redata.rearray.length;i++){
+								str+='<li class="show_content_img"><a href="javascript:;">'+
+									 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+									 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';	
+							}
+							$show_img_list.find(".pg_list").eq(0).html($(str));
+							url = "{:url('/qworks/Hot')}";
+							more_lock = true;
+							$(".more").text("发现更多");
 						}
-						$show_img_list.find(".pg_list").eq(0).html($(str));
-						url = "{:url('/qworks/Hot')}";
-						more_lock = true;
-						$(".more").text("发现更多");
-					}
+				});
 			});
+		}
+		fuyong();
+		//点击加载更多
+		$(".more").on('click',function(){
+			page++;
+			search_data = { "page": page };
+			// console.log(page);
+			if(more_lock){
+				$.ajax({
+					url:url,
+					type:"get",
+                    data: search_data,
+					success:function(data){
+						if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							if(0==redata.status){
+								for(var i=0;i<redata.rearray.length;i++){
+									//创建模型
+								str+='<li class="show_content_img"><a href="javascript:;">'+
+								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
+								 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';
+								}
+								$show_img_list.find(".pg_list").append($(str));
+							}else{
+								more_lock = false;
+								$(".more").text("没有啦");
+							}
+						}
+					}
+				});
+			}else{
+				$(".more").text("没有啦");
+			}
 		});
+
 	</script>
 </body>
 </html>

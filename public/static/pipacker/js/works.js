@@ -7,36 +7,43 @@ function browse_img_hf(data){
 }
 browse_img_hf.prototype = {
   init:function(){
-    this.click_btns();
+    this.click_btn();
   },
-  click_btns:function(){
+  click_btn:function(){
     var that = this;
+    // console.log(that)
     this.data.browse_img.on('click',function(e){
           var this_elm = $(e.target);
           if(this_elm.hasClass('pre_btn')){
-            that.next_lock = true;
             // console.log(that.pre_lock);
             that.next_lock = true;
-            if(that.pre_lock){
-              that.ew = 0;
-              that.browse_img_m();
+            if (that.data.data_id > 0) {
+              if(that.pre_lock){
+                that.ew = 1;
+                that.data.data_id--;
+                that.browse_img_n();
+              }
             }else{
               alert("已经是第一张了");
             }
             // $browse_img.find('img').attr('src','__PUBLIC_PIPACKER__/pipacker/images/bg.jpg');
           }else if(this_elm.hasClass('next_btn')){
             that.pre_lock = true;
-            if(that.next_lock){
-              that.ew=1;
-              that.browse_img_m();
+            if (that.data.data_id < datapp.length-1) {
+              if(that.next_lock){
+                that.ew=0;
+                that.data.data_id++;
+                that.browse_img_n();
+              }
             }else{
               alert("已经是最后一张了");
             } 
           }
         })
   },
-  browse_img_m:function(){
+  browse_img_n:function(){
     var that = this;
+
     $.ajax({
           url: that.data.url,
           type: 'get',
@@ -49,10 +56,12 @@ browse_img_hf.prototype = {
                 that.data.browse_img.find("img").attr("src",redata.rearray.works_src);
                 that.data.thumbnails.text(redata.rearray.works_title);
                 // that.data.works_tags.text(redata.rearray.works_tags);
-                // datapp.each( function(index, el) {
-                //   that.data.user_name.text(datapp[index].user_name);
-                // })
-                // console.log(datapp);
+                that.data.user_name.text(datapp[that.data.data_id].user_name);
+                // that.data.user_name.html("");
+                // for (var i = 0; i < datapp.length; i++) {
+                //   that.data.user_name.append(datapp[i].user_name);
+                // }
+                // console.log(that.data);
                 if(typeof(that.data.para)!='undefined'){
                   // console.log(that.data.para);
                   that.data.para.eq(1).text(redata.rearray.works_type);
@@ -63,10 +72,11 @@ browse_img_hf.prototype = {
                 }
                 if(typeof(that.data.tags)!='undefined'){
                   // console.log(that.data.tags)
-                  that.data.tags.each( function(index, el) {
-                    // statements
-                    that.data.tags.eq("index").text("#"+redata.rearray.works_tags[index]);
-                  });
+                  console.log(redata.rearray.pic);
+                  that.data.tags.html("");
+                  for(var i=0;i<redata.rearray.pic.works_tags.length;i++) {
+                    that.data.tags.append("#"+redata.rearray.works_tags[i]);
+                  }
                 }                
                 that.data.works_id = redata.rearray.works_id;
             }else{

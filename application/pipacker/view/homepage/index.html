@@ -11,16 +11,21 @@
 		}
 		.head_bg {
 			/*display: block;*/
-		    width: 100%;
+		    width: 1200px;
 		    height: 250px;
 		    background: #151515;
 		    background-repeat: no-repeat;
 		    background-size: 100%;
 		    background-position: center;
 		    margin: auto;
-		    margin-top: 115px;
+		    margin-top: 80px;
 		    overflow: hidden;
-	        background-image: url(__PUBLIC_PIPACKER__/pipacker/images/11.jpg);
+		    background: #151515;
+		    /*background-image: url(C:\fakepath\02.jpg);*/
+	        position: relative;
+	        left: 50%;
+    		margin-left: -600px;
+    		z-index: 1;
 		}
 		.container.head_info {
 			position: relative;
@@ -32,7 +37,9 @@
 			height: 170px;
 			display: inline-block;
 			margin: 20px;
-			margin-left: 40px;
+			margin-left: 10px;
+			position: relative;
+			z-index: 1;
 		}
 		.head_info .head_photo img {
 			width: 100%;
@@ -289,27 +296,123 @@
           border-radius: 5px;
           height: 40px;
         }
+        .button.grey {
+		    background: #262626;
+		    background: -moz-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+		    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#262626),color-stop(100%,#1c1c1c));
+		    background: -webkit-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+		    background: -o-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+		    background: -ms-linear-gradient(top,#262626 0%,#1c1c1c 100%);
+		    background: linear-gradient(to bottom,#262626 0%,#1c1c1c 100%);
+		    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#262626',endColorstr='#1c1c1c',GradientType=0);
+		}
+		.button {
+		    color: #ddd;
+		    box-shadow: inset 0 1px 1px 0 rgba(255,255,255,0.2), 0 1px 2px 0 rgba(0,0,0,0.4);
+		    text-align: center;
+		    font-size: 14px;
+		    padding: 12px 20px 10px;
+		    
+		    text-shadow: 0 1px 1px rgba(0,0,0,0.7);
+		    -webkit-border-radius: 4px;
+		    -moz-border-radius: 4px;
+		    cursor: pointer;
+		    border-radius: 4px;
+		    font-family: ProximaNova-Regular;
+		    -webkit-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    -o-user-select: none;
+		    user-select: none;
+		    border: none;
+		    
+		    z-index: 1;
+		}
+		.button:hover, .button:focus {
+		    color: #fff;
+		    border: none;
+		}
+		.button.square {
+		    padding: 8px 13px;
+		    -webkit-border-radius: 0;
+		    -moz-border-radius: 0;
+		    border-radius: 0;
+		}
+		.edit_bg {
+			position: absolute;
+			bottom: 20px;
+		    right: 10px;
+		    display: none;
+		}
+		.edit_hp{
+			position: absolute;
+			bottom: 3px;
+		    left: 5px;
+		    display: none;
+		}
+		.modal_main {
+		    /*width: 800px;*/
+		    color: #ddd;
+		    /*position: fixed;
+		    top: 15%;
+		    left: 50%;
+		    margin: 0px 0px 0px -400px;*/
+		    z-index: 203;
+		    background-color: #111;
+		    background-image: -webkit-gradient(linear,left top,left bottom,from(#111),to(#050505));
+		    background-image: -webkit-linear-gradient(top,#111,#050505);
+		    background-image: -moz-linear-gradient(top,#111,#050505);
+		    background-image: -o-linear-gradient(top,#111,#050505);
+		    background-image: -ms-linear-gradient(top,#111,#050505);
+		    background-image: linear-gradient(top,#111,#050505);
+		    border-radius: 5px;
+		}
+		.show_img_content ul li{
+			width:calc(33.33% - 24px);
+			margin: 20px 10px;
+			display: inline-block;
+			text-align: center;
+		}
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.show_content_img{
+			vertical-align: middle;
+		}
+		.show_content_img img{
+			max-height: 300px;
+		    max-width: 300px;
+		    cursor: pointer;
+		    border-radius: 3px;
+		    box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
+		}
 	</style>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js"></script>
 </head>
 <body>
 	{include file="common/navigation"}
 	<div class="container">
-		<div class="head_bg"></div>
+		<div class="head_bg">
+			<a class=" button grey square edit_bg" href="#editbg_model" data-toggle="modal">编辑</a>
+		</div>
 	</div>
 	<div class="container head_info">
 		<div class="row">
 			<div class="col-md-5">
 				<div class="head_photo">
-					<img src="__PUBLIC_PIPACKER__/pipacker/images/18.jpg">
+					<img src="__PUBLIC_PIPACKER__/pipacker/images/none-square.jpg">
+					<a class=" button grey square edit_hp" href="#edithp_model" data-toggle="modal">编辑</a>
 				</div>
-				<span class="user_name">摄影师不加鸡腿</span>
+				<span class="user_name"></span>
 			</div>
 			<div class="col-md-3"></div>
 			<div class="col-md-4">
 				<span class="scorebadge">2009年加入</span>
-				<span class="follow">关注</span>
+				<!-- <span class="follow">关注</span> -->
 			</div>
 		</div>
 	</div>
@@ -322,8 +425,63 @@
 	  	</ul>
 		{include file="common/show_img_list"}
 	</div>
-	<script>
+	
+<!-- bg_Modal -->
+	<div class="modal fade" id="editbg_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content modal_main">
+				<div class="modal-body">
+					<h1 style="font-size: 30px;">更换封面照片</h1>
+					<p style="font-size: 16px; margin: 15px 0px 20px 0px; color: #aaa;">上传封面照片。它将以1200x250像素显示。</p>
+					<p style="margin-bottom: 30px;">
+						<span style="font-size: 13px; font-weight: bold; color: #aaa;">从您的计算机中选择一个文件</span>
+						<input type="file" id="bg_img" name="" style="color: #aaa;">
+					</p>
+        			<button type="button" class="button grey square edit_bg_btn" style="margin-right: 10px;">上传</button>
+					<button type="button" class="button grey square" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- hp_Modal -->
+	<div class="modal fade" id="edithp_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content modal_main">
+				<div class="modal-body">
+					<h1 style="font-size: 30px;">更改个人资料图片</h1>
+					<p style="font-size: 16px; margin: 15px 0px 20px 0px; color: #aaa;">上传下面的个人资料图片。它将以170x170像素显示为正方形。</p>
+					<p style="margin-bottom: 30px;">
+						<span style="font-size: 13px; font-weight: bold; color: #aaa;">从您的计算机中选择一个文件</span>
+						<input type="file" id="hp_img" name="" style="color: #aaa;">
+					</p>
+        			<button type="button" class="button grey square" style="margin-right: 10px;">上传</button>
+					<button type="button" class="button grey square" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	$(function() {
+		$(".head_photo").hover(function() {
+			$(".edit_hp").show();
+		},function() {
+			$(".edit_hp").hide();
+		})
+		$(".head_bg").hover(function() {
+			$(".edit_bg").show();
+		},function() {
+			$(".edit_bg").hide();
+		})
+
+		$edit_bg = $(".edit_bg");
+		$edit_hp = $(".edit_hp");
+		var $show_img_content = $(".show_img_content");
 		var user_id = localStorage.getItem("user_id");
+		var user_name = localStorage.getItem("user_name");
+		var $user_name = $(".user_name");
 		$.get("{:url('/works')}",{user_id:user_id}).done(function(data){
 			if(!$.isEmptyObject(data)){
 				redata = $.parseJSON(data);
@@ -332,16 +490,19 @@
 				for(var i=0;i<redata.rearray.length;i++){
 					str+='<li class="show_content_img"><a href="javascript:;">'+
 						 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-						 '<p> '+redata.rearray[i].user_name+'</p></a></li>';		
+						 '<p>© '+redata.rearray[i].user_name+'</p></a></li>';		
 				}
-				$show_img_list.find(".show_img_ul").eq(1).html($(str));
+				$user_name.text(user_name);
+				$show_img_content.find(".show_img_ul").eq(0).html($(str));
 				// url = "{:url('/works')}";
 				// more_lock = true;
 				
 				// $(".more").text("发现更多");
 			}
 		})
-
-	</script>
-</body>
-</html>
+		$(".edit_bg_btn").on("click",function() {
+			// $edit_bg.css('background-image','$("#bg_img")[0].value');
+			// console.log($("#bg_img")[0].value)
+		})
+	})
+</script>

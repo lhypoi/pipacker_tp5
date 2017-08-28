@@ -60,6 +60,7 @@ $(function(){
 					var tag_text = $(".tag_box").find('span');
 					for(var i=0;i<tag_text.length;i++){
 						fd.append("works_tags[]",tag_text[i].innerHTML);
+						console.log(tag_text[i].innerHTML);
 					}
 					fd.append("works_title",$(".works_title").find('input').val());
 					fd.append("works_profile",$(".works_profile").find('textarea').val());

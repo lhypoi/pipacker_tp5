@@ -2,6 +2,7 @@
 <header class="pp_header">
 		<div class="row">
 			<div class="col-md-1 logo"><a href="{:url('mainpage/index')}"><img src="__PUBLIC_PIPACKER__/pipacker/images/pipacker_logo.jpg" alt="" style="width: auto;"></a></div>
+			{if ""!=$user_info}
 			<div class="col-md-7 mune">
 				<ul>
 					<li><a href="{:url('photography/index')}">作品</a></li>
@@ -20,7 +21,7 @@
 			<div class="col-md-2 search">
             <div class="search_btn"><i class="glyphicon glyphicon-search" style="top:8px;"></i><input type="text" class="search_input" id="shot_search" placeholder="搜索"></div></div>
 			<div class="col-md-2 support">
-				{if ""!=$user_info}
+				
 					<div class="after_login">
 						<span class="glyphicon glyphicon-globe"></span>
 						<span class="glyphicon glyphicon-envelope"></span>
@@ -37,6 +38,23 @@
 						</div>
 					</div>
 				{else}
+				<div class="col-md-7 mune">
+				<ul>
+					<li><a href="{:url('photography/index')}">作品</a></li>
+					<li><a href="{:url('prints/pgskill')}">技巧</a></li>
+		            <li><a href="{:url('dialogue/index')}">对话</a></li>
+					<li class="pp_down_menu">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多<span class="caret"></a>
+						<ul class="dropdown-menu nav_more">
+				            <li><a href="{:url('prints/pgskill')}">影像圈</a></li>
+				            <li><a href="{:url('prints/index')}">极限摄影</a></li>
+				          </ul>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-2 search">
+            <div class="search_btn"><i class="glyphicon glyphicon-search" style="top:8px;"></i><input type="text" class="search_input" id="shot_search" placeholder="搜索"></div></div>
+			<div class="col-md-2 support">
 					<div class="before_login">
 						<a href="#pp_login" data-toggle="modal" style="font-size: 13px;">登录</a>
 						|
