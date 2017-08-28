@@ -31,5 +31,7 @@ Route::resource("works","api/Works");
 Route::resource("atlas","api/Atlas");
 Route::resource("comment","api/comment");
 Route::resource("user","api/User");
+Route::resource("collect","api/Collect");
 Route::controller("qworks","api/Works");
 Route::controller("quser","api/User");
+Route::resource("carts","api/Carts");

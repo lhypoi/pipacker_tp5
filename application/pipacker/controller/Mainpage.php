@@ -22,7 +22,7 @@
 			 // $con = curl_init((string)'http://'.$_SERVER['HTTP_HOST'].'/'.url('/works'));
 			$con = curl_init();
 
-			curl_setopt($con,CURLOPT_URL,'http://'.$_SERVER['HTTP_HOST'].url('/works'));
+			curl_setopt($con,CURLOPT_URL,'http://'.$_SERVER['HTTP_HOST'].url('/qworks/Hot'));
 			curl_setopt($con,CURLOPT_RETURNTRANSFER,1);
 			curl_setopt($con,CURLOPT_HEADER,0);
 
@@ -34,33 +34,9 @@
 			 $val =  json_decode(curl_exec($con),true);
 
 			 curl_close($con);
-//			  var_dump($val['rearray']);
-			 // echo 'http://'.$_SERVER['HTTP_HOST'].url('/qworks/Apic',array('works_id'=>10));
 			 
 			 $this->assign("works_list",$val["rearray"]);
 	    	 return $this->fetch();
-	    }
-	    public function apic()
-	    {
-	    	session_start();
-            if(!empty($_SESSION["user_info"])){
-                $this->assign("user_info",$_SESSION["user_info"]);
-            }else{
-                $this->assign("user_info","");
-				$con = curl_init();
-
-				curl_setopt($con,CURLOPT_URL,'http://'.$_SERVER['HTTP_HOST'].url('/qworks/Apic',array('works_id'=>6)));
-				curl_setopt($con,CURLOPT_RETURNTRANSFER,1);
-				curl_setopt($con,CURLOPT_HEADER,0);
-				$val =  json_decode(curl_exec($con),true);
-
-				 curl_close($con);
-				 // var_dump($val['rearray']);	
-				 // echo 'http://'.$_SERVER['HTTP_HOST'].url('/works',array('works_id'=>4,'apic'=>1));
-				 
-				 $this->assign("works_list",$val["rearray"]);
-		    	 return $this->fetch("/photoshow/index");
-		    }
 	    }
 	}
  ?>
