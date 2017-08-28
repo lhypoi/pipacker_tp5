@@ -75,4 +75,99 @@ class Goods extends baseControll
                 "msg" => "加入购物成功"
         ]);
     }
+    
+    //获取购物车信息
+    public function getCartInfo() {
+        $param=Request::instance()->param();
+        $user_id = $param['id'];
+        $goods_list = db("cart")->where("user_id=$user_id")->order("id DESC")->select();
+        foreach ($goods_list as $key => $value) {
+            $goods_id = $value['goods_id'];
+            $imgs = db("goods")->where("goods_id=$goods_id")->field("goods_img")->find();
+            $img = explode(",", $imgs['goods_img']);
+            $goods_list[$key]['goods_img'] = $img[0];
+            $numbers = db("goods")->where("goods_id=$goods_id")->field("goods_number")->find();
+            $goods_list[$key]['goods_number'] = $numbers['goods_number'];
+        }
+        return jsonp(['goods_attr' => $goods_list]);
+    }
+    
+    //修改购物车信息
+    public function updateCart() {
+        $param=Request::instance()->param();
+        $user_id = $param['u_id'];
+        $goods_id = $param['g_id'];
+        $nums = $param['nums'];
+        db("cart")->where("goods_id=$goods_id AND user_id=$user_id")->update(['goods_num'=>$nums]);
+        return jsonp(1);
+    }
+    
+    //删除购物车商品
+    public function delGoods() {
+        $param=Request::instance()->param();
+        $user_id = $param['u_id'];
+        $goods_id = $param['g_id'];
+        db("cart")->where("goods_id=$goods_id AND user_id=$user_id")->delete();
+        return jsonp(1);
+    }
+    
+    //提交订单
+    public function submitOrder() {
+        $param=Request::instance()->param();
+        $data = [
+            'receive_id' => $param['data']['receive_id'],
+            'order_sn' => $param['data']['order_sn'],
+            'total_num' => $param['data']['total_num'],
+            'total_price' => $param['data']['total_price'],
+            'time' => $param['data']['time']
+        ];
+        $result = db("order")->insert($data);
+        //$result = 1;
+        return jsonp(['result' => $result]);
+    }
+    
+    //记录订单中的商品
+    public function submitOrderGoods() {
+        $param=Request::instance()->param();
+        for ($i = 0; $i < count($param['data']); $i ++) {
+            $data = [
+                'order_sn' => $param['sn'],
+                'goods_id' => $param['data'][$i]['goods_id'],
+                'goods_name' => $param['data'][$i]['goods_name'],
+                'goods_img' => $param['data'][$i]['goods_img'],
+                'goods_num' => $param['data'][$i]['goods_num'],
+                'goods_price' => $param['data'][$i]['goods_price']
+            ];
+            db("order_goods")->insert($data);
+            db("cart")->where("id={$param['data'][$i]['id']}")->delete();
+        }
+        return jsonp(1);
+    }
+    
+    //获取最新订单信息
+    public function getConfirm() {
+        $param = Request::instance()->param();
+        $sn = $param['sn'];
+        $attr_list = db("order")->where("order_sn=$sn")->find();
+        $goods_attr = db("order_goods")->where("order_sn={$attr_list['order_sn']}")->select();
+        return jsonp([
+            'goods_attr' => $goods_attr,
+            'attr_list' => $attr_list
+        ]);
+    }
+    
+    //订单列表
+    public function getOrder() {
+        $param = Request::instance()->param();
+        $id = $param['id'];
+        $attr_list = db("order")->where("receive_id=$id")->select();
+        $goods_attr = array();
+        for ($i = 0; $i < count($attr_list); $i ++) {
+            $goods_attr[$i] = db("order_goods")->where("order_sn={$attr_list[$i]['order_sn']}")->select();
+        }
+        return jsonp([
+            'goods_attr' => $goods_attr,
+            'attr_list' => $attr_list
+        ]);
+    }
 }
