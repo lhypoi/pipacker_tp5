@@ -49,19 +49,21 @@
 		    padding: 40px 0px 30px 0px;
 		    text-align: center;
 		}
-		.show_img_title span{
-			padding: 7px 0px 10px 0px;
-		    border-bottom: 1px solid #444;
-		    text-transform: uppercase;
-		    margin: 0px 20px 0px 20px;
-		    color: #666;
-		    font-size: 19px;
-		    font-family: 'ProximaNovaT-Thin';
-		    letter-spacing: 1px;
-		    cursor: pointer;
+		.show_img_title ul{
+			border:none;
+			display: inline-block;
 		}
-		.show_img_title a{
-			color: #666;
+		.show_img_title .nav-tabs>li.active>a,.nav-tabs>li a:hover{
+			color: #fff;
+			border:none;
+			background-color: transparent;
+		}
+		.show_img_title .nav-tabs>li{
+			border-bottom: 1px solid #fff;
+			margin-left: 10px;
+		}
+		.show_img_title .nav-tabs>li a{
+			font-size: 20px;
 		}
 		.active{
 			color: #ccc;
@@ -92,6 +94,7 @@
 			text-decoration: none;
 		}
 		.more_img{
+			clear: both;
 		    bottom: 20px;
 		    border-top: 1px solid #222;
 		    text-align: center;
@@ -108,6 +111,65 @@
 		    letter-spacing: 1px;
 		    cursor: pointer;
 		}
+		/*.show_img_content ul li{
+			width:calc(33.33% - 24px);
+			margin: 20px 10px;
+			display: inline-block;
+			text-align: center;
+		}*/
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.show_img_content{
+			-moz-column-count:4; /* Firefox */
+	        -webkit-column-count:4; /* Safari 和 Chrome */
+	        column-count:4;
+	        -moz-column-gap: 1em;
+	        -webkit-column-gap: 1em;
+	        column-gap: 1em;+
+		}
+		.show_img_box{
+			padding: 15px 0 0 15px;
+			display: inline-block;
+		}
+		.show_content_img{
+			 padding: 10px;
+		     margin: 0 0 10px 0;
+		     -moz-page-break-inside: avoid;
+		     -webkit-column-break-inside: avoid;
+		     break-inside: avoid;
+		}
+
+		.show_content_img img{
+			width: 100%;
+        	margin-bottom:10px;
+        	cursor: pointer;
+		}
+		.show_img_box p{
+			color: #ccc;
+			text-align: center;
+		}
+
+		.pic_div{
+			position: relative;
+		}
+		.modal_tip{
+			display:none;
+			background:rgba(98,98,98,.4);
+			padding:10px;
+			height: 96.5%;
+			width:100%;
+			cursor: pointer;
+			position: absolute;
+			top:0;
+			left:0;
+			color:#fff;
+		}
+		.modal_tip a{
+			color:#fff;	
+		}
 	</style>
 </head>
 <body>
@@ -115,13 +177,13 @@
 	<div class="container">
 		<div class="head_img">
 			<div class="header_img">
-				<a href="">
-					<img src="__PUBLIC_PIPACKER__/pipacker/images/headImg.jpg" class="imgwidth">
+				<a href="{:url('dialogue/index')}">
+					<img src="__PUBLIC_PIPACKER__/pipacker/images/cover5.jpg" class="imgwidth">
 				</a>
 				<p class="header_author">© Yucel Basoglu</p>
 			</div>
 			<div class="header_text">
-				<a href="">
+				<a href="{:url('dialogue/index')}">
 					<span class="header_text_left">杂志</span>
 					&nbsp;&nbsp;
 					<span class="header_text_right">Yucel Basoglu:鼓舞人心的BW海景摄影师</span>
@@ -130,23 +192,51 @@
 		</div>
 		<div class="show_img">
 			<div class="show_img_title">
-				<span class="active"><a href="">最受欢迎的</a></span>
-				<span><a href="">最新发布的</a></span>
-				<span><a href="">获奖作品</a></span>
+			  <ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" class="active"><a class="nav_main_btn" href="#home" aria-controls="home" role="tab" data-toggle="tab">最受欢迎的</a></li>
+			    <li role="presentation"><a class="nav_main_btn" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">最新发布的</a></li>
+			    <li role="presentation"><a class="nav_main_btn" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">获奖作品</a></li>
+			  </ul>
 			</div>
-			<div class="show_img_list">
-				<div class="row show_img_content">
-				{foreach $works_list as $val}
-					<div class="col-lg-4">
-						<a href="javascript:;">
-							<img src="{$val.works_src}" class="m_img" data-id="{$val.works_id}">
-							<p>© {$val.user_name}</p>
-						</a>
+
+			  <div class="tab-content show_img_list">
+			    <div role="tabpanel" class="tab-pane active" id="home">
+			    	<div class="show_img_content">
+						{foreach $works_list as $val}
+			    		<div class="show_img_box">
+							<div class="show_content_img">
+								<div class="pic_div">
+									<img src="{$val.works_src}" data-id="{$val.works_id}" class="m_img"/>
+									<div class="modal_tip">
+										<h5 class="modal_tip_aaa">标题：{$val.works_title}</h5>
+                                        <span class="modal_tip_aaa">
+                                            标签：
+                                            {foreach $val.works_tags as $tags}
+                                            <a href="#" class="modal_tip_aaa">{$tags} </a>
+                                            {/foreach}
+                                        </span>
+                                        <br>
+                                        <br>
+                                        <span class="modal_tip_aaa">浏览量：{$val.works_browse}</span>
+									</div>
+								</div>
+								
+								<p>© {$val.user_name}</p>
+							</div>
+							
+						</div>
+						{/foreach}
 					</div>
-				{/foreach}
-				</div>
-				
-			</div>
+			    </div>
+			    <div role="tabpanel" class="tab-pane" id="profile">
+			    	<div class="show_img_content">
+					</div>
+			    </div>
+			    <div role="tabpanel" class="tab-pane" id="messages">
+			    	<div class="show_img_content">
+					</div>
+			    </div>
+			  </div>
 		</div>
 		<div class="more_img">
 			<span class="more">发现更多</span>
@@ -155,38 +245,266 @@
 
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
-	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js?1"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js"></script>
+	<script src="__PUBLIC_PIPACKER__/pipacker/js/works.js"></script>
 
 	<script>
-		var page = 1; 
-		var $show_img_list = $(".show_img_list");
+		var page = 1;
+		var more_lock = true;
+		var url = "{:url('/qworks/Hot')}";
+        var $show_img_list = $(".show_img_list");
+        var search_data = {};
+
+
 		$show_img_list.on("click",function(el){
 			var this_elm = $(el.target);
-			if(this_elm.hasClass("m_img")){
-				var apic_id = this_elm.attr("data-id");
+			if(this_elm.hasClass("modal_tip")){
+				var apic_id = this_elm.siblings('.m_img').attr("data-id");
 				localStorage.setItem("apic_id",apic_id);
 				location.href = "{:url('photoshow/index')}";
 			}
 		});
-		$(".more").on('click',function(){
-			page++;
-			$.ajax({
-				url:"{:url('/works')}",
-				type:"get",
-				data:{"page":page},
-				success:function(data){
-					if(!$.isEmptyObject(data)){
-						redata = $.parseJSON(data);
-						var str = '';
-						for(var i=0;i<redata.rearray.length;i++){
-							str+='<div class="col-lg-4"><a href="javascript:;">'+
-								 '<img src="'+redata.rearray[i].works_src+'" class="m_img" data-id="'+redata.rearray[i].works_id+'">'+
-								 '<p>© '+redata.rearray[i].user_name+'</p></a></div>';
-						}
-						$show_img_list.find(".show_img_content").html($(str));
+		$show_img_list.on("mouseover mouseout",function(el){
+			var this_elm = $(el.target);
+
+			var $allmodal_tip = $(".modal_tip");
+			if(this_elm.hasClass("m_img")){
+				var $modal_tip = this_elm.siblings('.modal_tip');
+				if(el.type=="mouseover"){
+					if($modal_tip.is(":hidden")){
+						$allmodal_tip.stop().hide();
+						$modal_tip.stop().show(500);
+					}
+				}else if(el.type=="mouseout"){
+					if(!$modal_tip.is(":hidden")){
+						// console.log(this_elm);
+
+						// console.log(111);
+						// $modal_tip.stop().hide(500);
 					}
 				}
-			});
+			}else if(this_elm.hasClass("modal_tip")){				
+				if(el.type=="mouseover"){
+					this_elm.show(0);
+				}else if(el.type=="mouseout"){
+					this_elm.stop().hide(0);
+				}
+			}else if(this_elm.hasClass("modal_tip_aaa")){
+				var $modal_tip = this_elm.parent('.modal_tip');				
+				if(el.type=="mouseover"){
+					if($modal_tip.is(":hidden")){
+						$modal_tip.stop().show(0);
+					}
+				}else if(el.type=="mouseout"){
+					// $modal_tip.stop().hide(0);
+				}
+			}
+		});
+		var $nav_main_btn = $(".nav_main_btn");
+		// console.log($nav_main_btn);
+		$nav_main_btn.eq(2).on("click",function(){
+			page=1;
+			// console.log($show_img_list.find(".show_img_content").eq(1).html());
+			if($show_img_list.find(".show_img_content").eq(2).html()!=''){
+				$.get("{:url('/works')}",{page:page}).done(function(data){
+					if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							console.log(redata.rearray);
+							var str = '';
+							for(var i=0;i<redata.rearray.length;i++){
+                                str += '<div class="show_img_box">' +
+                                    '<div class="show_content_img">' +
+                                    '<div class="pic_div">' +
+                                    '<img src="' + redata.rearray[i].works_src + '" data-id="' + redata.rearray[i].works_id + '" class="m_img"/>' +
+                                    '<div class="modal_tip">' +
+                                    '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
+                                    '<span class="modal_tip_aaa">';
+                                    for(var j=0; j < redata.rearray[i].works_tags.length;j++){
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j]+' </a>';
+                                    }
+                                     str+= '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
+									 '</div>'+
+									 '</div>'+									 
+									 '<p>© '+redata.rearray[i].user_name+'</p>'+
+									 '</div>'+
+									 '</div>';	
+							}
+							$show_img_list.find(".show_img_content").eq(2).html($(str));
+                            url = "{:url('/works')}";
+                            search_data = { "page": page };
+							more_lock = true;
+							$(".more").text("发现更多");
+						}
+				});
+			}
+			
+		});
+		$nav_main_btn.eq(1).on("click",function(){
+			page=1;
+			// console.log($show_img_list.find(".show_img_content").eq(1).html());
+			if($show_img_list.find(".show_img_content").eq(1).html()!=''){
+				$.get("{:url('/qworks/News')}",{page:page}).done(function(data){
+					if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							for(var i=0;i<redata.rearray.length;i++){
+                                str += '<div class="show_img_box">' +
+                                    '<div class="show_content_img">' +
+                                    '<div class="pic_div">' +
+                                    '<img src="' + redata.rearray[i].works_src + '" data-id="' + redata.rearray[i].works_id + '" class="m_img"/>' +
+                                    '<div class="modal_tip">' +
+                                    '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
+                                    '<span class="modal_tip_aaa">';
+                                    for(var j=0; j < redata.rearray[i].works_tags.length;j++){
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j]+' </a>';
+                                    }
+                                     str+= '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
+									 '</div>'+
+									 '</div>'+									 
+									 '<p>© '+redata.rearray[i].user_name+'</p>'+
+									 '</div>'+
+									 '</div>';	
+							}
+							$show_img_list.find(".show_img_content").eq(1).html($(str));
+                            url = "{:url('/qworks/News')}";
+                            search_data = { "page": page };
+							more_lock = true;
+							$(".more").text("发现更多");
+						}
+				});
+			}
+			
+		});
+		$nav_main_btn.eq(0).on("click",function(){
+			page=1;
+			if($show_img_list.find(".show_img_content").eq(0).html()!=""){
+				$.get("{:url('/qworks/Hot')}",{page:page}).done(function(data){
+					if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							for(var i=0;i<redata.rearray.length;i++){
+								str+='<div class="show_img_box">'+
+									 '<div class="show_content_img">'+
+									 '<div class="pic_div">'+
+									 '<img src="'+redata.rearray[i].works_src+'" data-id="'+redata.rearray[i].works_id+'" class="m_img"/>'+
+									 '<div class="modal_tip">'+
+                                     '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title+'</h5>' +
+                                     '<span class="modal_tip_aaa">';
+                                     for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j] + ' </a>';
+                                     }
+                                     str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
+									 '</div>'+
+									 '</div>'+									 
+									 '<p>© '+redata.rearray[i].user_name+'</p>'+
+									 '</div>'+
+									 '</div>';	
+							}
+							$show_img_list.find(".show_img_content").eq(0).html($(str));
+                            url = "{:url('/qworks/Hot')}";
+                            search_data = { "page": page };
+							more_lock = true;
+							$(".more").text("发现更多");
+						}
+				});
+			}
+			
+		});
+		//点击加载更多
+		$(".more").on('click',function(){
+			page++;
+			search_data = { "page": page };
+			// console.log(page);
+			if(more_lock){
+				$.ajax({
+					url:url,
+					type:"get",
+                    data: search_data,
+					success:function(data){
+						if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							var str = '';
+							if(0==redata.status){
+								for(var i=0;i<redata.rearray.length;i++){
+									//创建模型
+								str+='<div class="show_img_box">'+
+									 '<div class="show_content_img">'+
+									 '<div class="pic_div">'+
+									 '<img src="'+redata.rearray[i].works_src+'" data-id="'+redata.rearray[i].works_id+'" class="m_img"/>'+
+									 '<div class="modal_tip">'+
+                                     '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
+                                     '<span class="modal_tip_aaa">';
+                                     for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
+                                        str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j] + ' </a>';
+                                     }
+                                     str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata.rearray[i].works_browse + '</span>' +
+									 '</div>'+
+									 '</div>'+									 
+									 '<p>© '+redata.rearray[i].user_name+'</p>'+
+									 '</div>'+
+									 '</div>';
+								}
+								$show_img_list.find(".show_img_content").append($(str));
+							}else{
+								more_lock = false;
+								$(".more").text("没有啦");
+							}
+						}
+					}
+				});
+			}else{
+				$(".more").text("没有啦");
+			}
+		});
+		var $shot_search = $('#shot_search');
+		var $search_content = $('.head_img');
+		var $show_img_title = $(".show_img_title");
+		var $show_img = $(".show_img");
+		//搜索
+		$shot_search.on('input propertychange',function(){
+			var key_words = $(this).val();
+			var search_key = {
+				"senddata":{
+					"key_word":key_words,
+				},
+				"url":"{:url('/qworks/Search')}",
+                "callback": function (redata) { 
+					var str = '';
+                    if (redata.length > 0) {
+                        for (var i = 0; i < redata.length; i++) {
+                            str += '<div class="show_img_box">' +
+                                '<div class="show_content_img">' +
+                                '<div class="pic_div">' +
+                                '<img src="' + redata[i].works_src + '" data-id="' + redata[i].works_id + '" class="m_img"/>' +
+                                '<div class="modal_tip">' +
+                                '<h5 class="modal_tip_aaa">标题：' + redata[i].works_title + '</h5>' +
+                                '<span class="modal_tip_aaa">';
+                                for (var j = 0; j < redata[i].works_tags.length; j++) {
+                                    str += '<a href="#" class="modal_tip_aaa">#' + redata[i].works_tags[j] + ' </a>';
+                                }
+                                str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata[i].works_browse + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<p>© ' + redata[i].user_name + '</p>' +
+                                '</div>' +
+                                '</div>';
+                        }
+                        $(".more").text("发现更多");
+                    }else{
+                        $(".more").text("对不起,没有搜索到相关的图片");
+                    }
+					$search_content.hide();
+					$show_img_title.hide();
+					$show_img.html();
+                    $show_img_list.find(".show_img_content").eq(0).html(str);
+                    page = 1;
+                    url = "{:url('/qworks/Search')}";
+                    search_data = { "page": page, "key_word": key_words};
+				}
+			};
+			var search = new search_works(search_key);
+			search.search();
+			// console.log(search_data);
 		});
 	</script>
 </body>

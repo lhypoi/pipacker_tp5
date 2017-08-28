@@ -48,6 +48,9 @@ ul{
 .imgwidth{
 	width: 100%;
 }
+.text_red {
+    color:orangered;
+}
 
 
 /*导航条样式*/
