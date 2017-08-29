@@ -76,17 +76,17 @@ class Follwer extends baseControll
 		 $param = Request::instance()->param();
         // print_r($_FILES['works_src']);
         if(!empty($param)){
-		$follwer_list = Db::table("pp_follwer")
-                            ->where($param)
-                            ->join("pp_user","pp_user.user_id = pp_follwer.follwer.user")
-                            ->field("pp_user.user_name,pp_user.user_phone,pp_user.user_photo,pp_user.user_id")
-							->order("pp_comment.update_time desc")
-                            ->find();
-		if(!empty($follwer_list)){
-			$this->reJson("1",array(),"读取成功...");
-		}else{
-			$this->reJson("2",array(),"服务器处理失败");
-		}
+            unset($param['id']);
+            $follwer_list = Db::table("pp_follwer")
+                                ->where('pp_follwer.user_id='.$param['user_id'])
+                                ->join("pp_user","pp_user.user_id = pp_follwer.follwer_user")
+                                ->field("pp_user.user_name,pp_user.user_phone,pp_user.user_photo,pp_user.user_id")
+                                ->select();
+            if(!empty($follwer_list)){
+                $this->reJson("1",$follwer_list,"读取成功...");
+            }else{
+                $this->reJson("2",array(),"服务器处理失败");
+            }
 		}else{
 			$this->reJson("3",array(),"数据丢失了...");
 		}
