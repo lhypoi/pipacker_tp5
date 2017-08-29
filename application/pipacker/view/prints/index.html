@@ -443,6 +443,7 @@
 	// console.log(datapp);
 	$(function(){
 		var page = 1;
+		// var pages = 1;
 		var more_lock = true;
         var works_id = localStorage.getItem("apic_id");     
     	var $thumbnails = $('.pic_title');
@@ -451,6 +452,8 @@
         var $user_name = $('#author');
         var $data_id = 0;
         var data_id_new = $(".show_content_small_img").length-1;
+        var url = "{:url('/qworks/News')}";
+		var $show_content = $(".show_content");
         $.ajax({
           url: "{:url('/qworks/Apic')}",
           type: 'get',
@@ -531,7 +534,7 @@
 			$("#pay_money").on("click", function() {
 				var $user_address = $(".user_address").val();
 				var $user_tel = $(".user_tel").val();
-				if (typeof($user_address)!='undefined' && typeof($user_address)!='undefined') {
+				if (typeof($user_address)!='undefined' && typeof($user_tel)!='undefined') {
 					if (""!=$user_address && ""!=$user_tel) {
 						if (/^1[34578]\d{9}$/.test($user_tel)) {
 							var $user_name = localStorage.getItem('user_name');
@@ -572,6 +575,42 @@
 				}
 			})
 		}
+		var pages = 1;
+		//点击加载更多
+		$(".more").on('click',function(){
+			pages++;
+			search_data = { "page": pages };
+			console.log(pages);
+			if(more_lock){
+				$.ajax({
+					url:url,
+					type:"get",
+                    data: search_data,
+					success:function(data){
+						if(!$.isEmptyObject(data)){
+							redata = $.parseJSON(data);
+							console.log(redata);
+							var str = '';
+							if(0==redata.status){
+								for(var i=0;i<redata.rearray.length;i++){
+									//创建模型
+									str+='<li class="show_content_img">'+
+										'<a href="#browse_modal" data-toggle="modal"><img src="'+redata.rearray[i].works_src+'" data-pid="'+redata.rearray[i].works_id+'" data-id="'+i+'" alt="" class="show_content_small_img"></a>'+
+									'</li>';
+								}
+								
+								$show_content.find(".show_img_ul").append($(str));
+							}else{
+								more_lock = false;
+								$(".more").text("没有啦");
+							}
+						}
+					}
+				});
+			}else{
+				$(".more").text("没有啦");
+			}
+		});
 		
     });
        

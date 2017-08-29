@@ -128,7 +128,7 @@
 	        column-count:4;
 	        -moz-column-gap: 1em;
 	        -webkit-column-gap: 1em;
-	        column-gap: 1em;+
+	        column-gap: 1em;
 		}
 		.show_img_box{
 			padding: 15px 0 0 15px;
@@ -177,13 +177,13 @@
 	<div class="container">
 		<div class="head_img">
 			<div class="header_img">
-				<a href="{:url('dialogue/index')}">
+				<a href="">
 					<img src="__PUBLIC_PIPACKER__/pipacker/images/cover5.jpg" class="imgwidth">
 				</a>
 				<p class="header_author">© Yucel Basoglu</p>
 			</div>
 			<div class="header_text">
-				<a href="{:url('dialogue/index')}">
+				<a href="">
 					<span class="header_text_left">杂志</span>
 					&nbsp;&nbsp;
 					<span class="header_text_right">Yucel Basoglu:鼓舞人心的BW海景摄影师</span>
@@ -253,7 +253,7 @@
 		var more_lock = true;
 		var url = "{:url('/qworks/Hot')}";
         var $show_img_list = $(".show_img_list");
-        var search_data = {};
+        var search_data = { "page": page};
 
 
 		$show_img_list.on("click",function(el){
@@ -318,7 +318,7 @@
                                     '<img src="' + redata.rearray[i].works_src + '" data-id="' + redata.rearray[i].works_id + '" class="m_img"/>' +
                                     '<div class="modal_tip">' +
                                     '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
-                                    '<span class="modal_tip_aaa">';
+                                    '<span class="modal_tip_aaa">标签：';
                                     for(var j=0; j < redata.rearray[i].works_tags.length;j++){
                                         str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j]+' </a>';
                                     }
@@ -354,7 +354,7 @@
                                     '<img src="' + redata.rearray[i].works_src + '" data-id="' + redata.rearray[i].works_id + '" class="m_img"/>' +
                                     '<div class="modal_tip">' +
                                     '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
-                                    '<span class="modal_tip_aaa">';
+                                    '<span class="modal_tip_aaa">标签：';
                                     for(var j=0; j < redata.rearray[i].works_tags.length;j++){
                                         str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j]+' </a>';
                                     }
@@ -389,7 +389,7 @@
 									 '<img src="'+redata.rearray[i].works_src+'" data-id="'+redata.rearray[i].works_id+'" class="m_img"/>'+
 									 '<div class="modal_tip">'+
                                      '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title+'</h5>' +
-                                     '<span class="modal_tip_aaa">';
+                                     '<span class="modal_tip_aaa">标签：';
                                      for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
                                         str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j] + ' </a>';
                                      }
@@ -412,8 +412,7 @@
 		});
 		//点击加载更多
 		$(".more").on('click',function(){
-			page++;
-			search_data = { "page": page };
+			search_data.page++;
 			// console.log(page);
 			if(more_lock){
 				$.ajax({
@@ -433,7 +432,7 @@
 									 '<img src="'+redata.rearray[i].works_src+'" data-id="'+redata.rearray[i].works_id+'" class="m_img"/>'+
 									 '<div class="modal_tip">'+
                                      '<h5 class="modal_tip_aaa">标题：' + redata.rearray[i].works_title + '</h5>' +
-                                     '<span class="modal_tip_aaa">';
+                                     '<span class="modal_tip_aaa">标签：';
                                      for (var j=0; j < redata.rearray[i].works_tags.length; j++) {
                                         str += '<a href="#" class="modal_tip_aaa">' + redata.rearray[i].works_tags[j] + ' </a>';
                                      }
@@ -478,9 +477,9 @@
                                 '<img src="' + redata[i].works_src + '" data-id="' + redata[i].works_id + '" class="m_img"/>' +
                                 '<div class="modal_tip">' +
                                 '<h5 class="modal_tip_aaa">标题：' + redata[i].works_title + '</h5>' +
-                                '<span class="modal_tip_aaa">';
+                                '<span class="modal_tip_aaa">标签：';
                                 for (var j = 0; j < redata[i].works_tags.length; j++) {
-                                    str += '<a href="#" class="modal_tip_aaa">#' + redata[i].works_tags[j] + ' </a>';
+                                    str += '<a href="#" class="modal_tip_aaa">' + redata[i].works_tags[j] + ' </a>';
                                 }
                                 str += '</span><br><br><span class="modal_tip_aaa">浏览量：' + redata[i].works_browse + '</span>' +
                                 '</div>' +

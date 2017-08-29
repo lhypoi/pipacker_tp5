@@ -5,13 +5,12 @@
   <title>Document</title>
     <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/css/swiper.min.css"> -->
-  <link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css?1">
+  <link rel="stylesheet" href="__PUBLIC_PIPACKER__/pipacker/css/mainpage.css">
 
 
   <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
   <script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
   <script src='__PUBLIC_PIPACKER__/pipacker/js/jquery.zoombie.js'></script>
-  <script src="__PUBLIC_PIPACKER__/pipacker/js/user.js"></script>
   <style>
         html, body {
             position: relative;
@@ -63,7 +62,7 @@
         }
         .browse_photo {
             width: 70%;
-            max-height: 600px;
+            height: 100%;
             float: left;
         }
         /*comment or detail*/
@@ -142,7 +141,7 @@
         }
         .detail_com .thumbnails {
             width: 100%;
-            height:40%;
+            height:auto;
             margin-bottom: 25px;
         }
         .detail_com .thumbnails img {
@@ -268,8 +267,9 @@
         }
         .floor .author_header_inner .user_headphoto {
             float: left;
-            width: 110px;
-            height: 110px;
+            width: 50px;
+            height: 50px;
+            border-radius:50%;
             box-shadow: #000 0px 0px 10px;
             margin: -5px 15px 0px -5px;
         }
@@ -299,6 +299,9 @@
             -moz-border-radius: 0;
             border-radius: 0;
             vertical-align: middle;
+        }
+        .floor .author_header_inner span.follow{
+            background: transparent;
         }
         .floor .dropdown .dropdown-menu .author_content .author_photo {
             clear: both;
@@ -362,15 +365,17 @@
         .browse_big_img{
           clear: both;
           width:100%;
-          height:400px;
+          height:70%;
           margin-top: 120px;
           position: relative;
           border-right: 1px solid #aaa;
         }
         .browse_big_img div.img_middle{
           /*vertical-align: middle;*/
-          text-align: center;
-          height:400px;
+            text-align: center;
+            height: 100%;
+            /* margin: auto; */
+            padding: 7% 0 0 0;
         }
         .browse_big_img div.img_middle img {
           position: relative;
@@ -378,7 +383,7 @@
         }
         .show_content_small_img{
           max-width:100%;
-          max-height:80%;
+          max-height:70%;
         }
         .hf_btn{
         position: absolute;        
@@ -398,7 +403,7 @@
           margin-top: 10px;
           overflow: hidden; 
           position: absolute;
-          bottom: -16%;
+          bottom:0;
         }
         ul.browse_nav_small_img{
           list-style: none;
@@ -437,6 +442,14 @@
           width:35px;
           background: rgba(98,98,98,.3);
           border-radius: 50%;
+        }
+        .del_comment{
+            font-size: 12px; 
+            color: #555;
+            vertical-align: text-top; 
+            display: inline-block;
+            float:right;
+            cursor: pointer;
         }
         .zoom {
           display:inline-block;
@@ -499,31 +512,32 @@
       </div>
     </div>
     <div class="detail_com">
-      <h3 style="font-family: '宋体';">照片信息</h3>
+      <h3 style="font-family: '宋体';">图片简介</h3>
       <div class="thumbnails">
         
       </div>
       <div class="info">
+        <p>图片信息</p>
           <!-- <p><span class="color888;">查看</span><br><span class="colorccc;">10086+</span></p>
           <p><span class="color888;">类型</span><br><span class="colorccc;">肖像</span></p> -->
           <ul class="info_list">
             <li>
-              <p><span class="color888">查看</span><br><span class="colorccc">10086+</span></p>
+              <p><span class="color888">查看</span><br><span class="colorccc"></span></p>
             </li>
             <li>
-              <p><span class="color888">类型</span><br><span class="colorccc">肖像</span></p>
+              <p><span class="color888">类型</span><br><span class="colorccc"></span></p>
             </li>
             <li>
-              <p><span class="color888">相机</span><br><span class="colorccc">Canon EOS 5D Mark IV</span></p>
+              <p><span class="color888">相机</span><br><span class="colorccc"></span></p>
             </li>
             <li>
-              <p><span class="color888">光圈</span><br><span class="colorccc">F/0</span></p>
+              <p><span class="color888">光圈</span><br><span class="colorccc"></span></p>
             </li>
             <li>
-              <p><span class="color888">快门</span><br><span class="colorccc">1/800</span></p>
+              <p><span class="color888">快门</span><br><span class="colorccc"></span></p>
             </li>
             <li>
-              <p><span class="color888">感光度</span><br><span class="colorccc">ISO-400</span></p>
+              <p><span class="color888">感光度</span><br><span class="colorccc"></span></p>
             </li>
           </ul>
       </div>
@@ -538,21 +552,13 @@
                    <div class="author_content">
                       <div class="author_header">
                         <div class="author_header_inner">
-                          <a href="homepage" class="user_name" style="color: #fff; font-size: 21px;">RUA<img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" class="user_headphoto"></a>
-                          <span class="follow">关注</span>
+                          <a href="homepage" class="user_name" style="color: #fff; font-size: 21px;">RUA<img src="" class="user_headphoto"></a>
+                          <span class="follow btn">我要关注</span>
                         </div>
                       </div>
                       <div class="author_photo">
                         <ul class="author_photo_list">
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
-                          <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li>
+                          <!-- <li><a href=""><img src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt=""></a></li> -->
                         </ul>
                       </div>
                    </div>
@@ -572,16 +578,22 @@
     </div>
 </body>
 </html>
+<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js"></script> 
 <script src="__PUBLIC_PIPACKER__/pipacker/js/works.js"></script>
 <script type="text/javascript">
-
-    $(document).on("keydown", function (event) {
-        if (event.keyCode == 116) {
-            event.keyCode = 0;
-            event.cancelBubble = true;
-            return false;
-        }
-    });
+    //禁止f5和f12
+    //$(document).on("keydown", function (event) {
+     //   if (event.keyCode == 116) {
+         //   event.keyCode = 0;
+      //      event.cancelBubble = true;
+           //return false;
+     //   }
+        //if (event.keyCode == 123) {
+          //  event.keyCode = 0;
+          //  event.cancelBubble = true;
+         //   return false;
+       // }
+   // });
     //禁止右键弹出菜单 
     $(document).on("contextmenu", function () {
         return false;
@@ -611,11 +623,46 @@ var $collection = $(".like_btn").find("i");
 var $comment_text = $(".comment_text");
 var $comment_text_btn = $(".comment_text_btn");
 var $comment_btn_i = $(".comment_btn_i");
-    var $comment_container = $(".comment_container");
-    var $browsenum = $('.browsenum');
-    var gnum = 0;
+var $comment_container = $(".comment_container");
+var $browsenum = $('.browsenum');
+var gnum = 0;
+var $show_div = $('.comORdet');
+var $detail_com = $('.detail_com');
+var $nav_a_author = $('.nav_a_author');
+var $follow = $("span.follow");
 var posnum = 200;
 var $like_btn = $(".like_list");
+var $author_photo_list = $(".author_photo_list");
+var $comment_container = $(".comment_container");
+
+
+$comment_container.on("click",function(el){
+      var this_elm = $(el.target);
+      if(this_elm.hasClass("del_comment")){
+        var comment_id = this_elm.attr("data-id");
+         $.ajax({
+                    url: "{:url('/comment/:1')}",
+                    type: 'delete',
+                    data: {comment_id:comment_id},
+                }).done(function (data) {
+                    if (!$.isEmptyObject(data)) {
+                        var redata = $.parseJSON(data);
+                        if (0 == redata.status) {
+                            this_elm.parents(".comment_connent").hide(500);
+                        }
+                    }
+          });
+      }
+    });
+$author_photo_list.on("click",function(el){
+      var this_elm = $(el.target);
+      if(this_elm.hasClass("c_img")){
+        var apic_id = this_elm.attr("data-id");
+        localStorage.setItem("apic_id",apic_id);
+        location.href = "{:url('photoshow/index')}";
+      }
+    });
+    //放大镜倍率
 $like_btn.on("click",function(e){
   var this_elm = $(e.target);
   if(this_elm.hasClass('glyphicon-zoom-in')){
@@ -627,58 +674,161 @@ $like_btn.on("click",function(e){
         posnum=posnum-100;
       }
   }
-});
+    });
+    //放大镜
 $browse_img.children(".img_middle").find("img").mouseenter(function () {
     // $(this).stop().animate({ "max-width": "180%", "max-height": "140%", marginTop: "-5%", marginLeft: "0%","z-index":1036 });
     $(this).zoombieLens({Size:posnum,imageSrc: $(this).attr("src")});
 }).mouseleave(function () {
     $(this).stop().animate({ "max-width": "100%", "max-height": "80%", marginTop:0, marginLeft: 0,"z-index":0 })
 });
-//发表评论
-  $comment_text_btn.on("click",function(){
-      var val = $comment_text.val();
-      var comdata = {
-        "user_id":localStorage.getItem("user_id"),
-        "comment":val,
-        "works_id":localStorage.getItem("apic_id")
-      };
-      //评论的回调函数
-      $.post("{:url('/comment')}",comdata,function(data){
-          if (!$.isEmptyObject(data)) {
-              redata = $.parseJSON(data);
-              str = '<div class="comment_connent">' +
-                  '<div class="media">' +
-                  '<div class="media-left">' +
-                  '<img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">' +
-                  '</div>' +
-                  '<div class="media-body">' +
-                  '<h4 class="media-heading">' + localStorage.getItem("user_name") + '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">' + getLocalTime(redata.rearray.update_time) + '</span></h4>' +
-                  '<p>' + comdata.comment + '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: relative;float:right;">删除</span></p>' +
-                  '</div>' +
-                  '</div>' +
-                  '</div> ';
-              $comment_container.prepend(str);
-          }
-      });
-  });
+
   //时间转换 
   function getLocalTime(nS) {     
-   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
-  } 
+   // return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
+        var text = '';
+        // $time = $time === NULL || $time > time() ? time() : intval($time);
+        var t = parseInt((new Date().getTime() - new Date(parseInt(nS)*1000))/1000); //时间差 （秒）
+        
+        // console.log(new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '));
+       if(t < 60){
+          text = '刚刚'; 
+          // 一分钟内
+       }else if(t < 3600){
+          text = Math.floor(t / 60) + '分钟前';
+          // 一分钟内
+       }else if(t < 86400){
+          text = Math.floor(t / (60 * 60)) +'小时前';
+          // 一小时内
+       }else if(t < 259200){
+          text = Math.floor(t/(60*60*24)) ==1?'昨天': '前天 ';  
+          // 昨天和前天
+       }else if(t < 31536000){
+          text =new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
+          // 一年内
+       }else{          
+          text = "1年以前"; //一年以前
+       }
+        
+        return text;
+  }
 
-  $collection.on('click',function(){
-    //收藏回调函数
-    $.post("{:url('/collect')}",{"user_id":localStorage.getItem("user_id"),"works_id":localStorage.getItem("apic_id")},function(data){
-        if (!$.isEmptyObject(data)) {
-            var redata = $.parseJSON(data);
-            if (0 == redata.status) {
-                $collection.addClass("text_red");
+    //发表评论
+    $comment_text_btn.on("click", function () {
+        if (user_option.haslogin()) {
+            var val = $comment_text.val();
+            var comdata = {
+                "user_id": localStorage.getItem("user_id"),
+                "comment": val,
+                "works_id": localStorage.getItem("apic_id")
+            };
+            //评论的回调函数
+            $.post("{:url('/comment')}", comdata, function (data) {
+                if (!$.isEmptyObject(data)) {
+                    redata = $.parseJSON(data);
+                    str = '<div class="comment_connent">' +
+                        '<div class="media">' +
+                        '<div class="media-left">' +
+                        '<img class="media-object" src="'+localStorage.getItem("user_photo")+'" alt="">' +
+                        '</div>' +
+                        '<div class="media-body">' +
+                        '<h5 class="media-heading">' + localStorage.getItem("user_name") + '<span style="font-size: 12px; vertical-align: text-top; display: inline-block;float:right;">' + getLocalTime(redata.rearray.update_time) + '</span></h5>' +
+                        '<p>' + comdata.comment + '<span class="del_comment" data-id="'+redata.rearray.comment_id+'" style="font-size: 12px; vertical-align: text-top; display: inline-block;position: relative;float:right;">删除</span></p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div> ';
+                    $comment_container.prepend(str);
+                }
+            });
+        } else {
+            $("#pp_login").modal("show");
+        }
+       
+    });
+    $follow.on('click', function () {
+        //关注回调函数
+        if (user_option.haslogin()) {
+            if ($follow.hasClass('btn-success')) {
+                $.ajax({
+                    url: "{:url('/follwer/:1')}",
+                    type: 'delete',
+                    data: { follwer_user: $follow.attr("data-id") , user_id: localStorage.getItem("user_id") },
+                }).done(function (data) {
+                    if (!$.isEmptyObject(data)) {
+                        var redata = $.parseJSON(data);
+                        if (0 == redata.status) {
+                            $follow.removeClass("btn-success");
+                            $follow.text("我要关注");
+                        }
+                    }
+                });
+
+            } else {
+                $.post("{:url('/follwer')}",
+                    { follwer_user: $follow.attr("data-id"), user_id: localStorage.getItem("user_id") },
+                    function (data) {
+                    if (!$.isEmptyObject(data)) {
+                        var redata = $.parseJSON(data);
+                        if (0 == redata.status) {
+                            $follow.addClass("btn-success");
+                            $follow.text("取消关注");
+                        }
+                    }
+                });
             }
+        } else {
+            $("#pp_login").modal("show");
+        }
+
+    });
+    $collection.on('click', function () {
+        //收藏回调函数
+        if (user_option.haslogin()) {
+            if ($collection.hasClass('text_red')) {
+                $.ajax({
+                    url: "{:url('/collect/:1')}",
+                    type: 'delete',
+                    data: { works_id: localStorage.getItem("apic_id"), user_id: localStorage.getItem("user_id") },
+                }).done(function (data) {
+                    if (!$.isEmptyObject(data)) {
+                        var redata = $.parseJSON(data);
+                        if (0 == redata.status) {
+                            var num = $(".show_content_small_img").attr('data-id');
+                            var trandata = $.parseJSON(sessionStorage.getItem("allpic"));
+                            trandata[num].collect_val = 0;
+                            sessionStorage.clear();
+                            sessionStorage.setItem("allpic",JSON.stringify(trandata));
+                            $collection.removeClass("text_red");
+                        }
+                    }
+                });
+
+            } else {
+                $.post("{:url('/collect')}", { "user_id": localStorage.getItem("user_id"), "works_id": localStorage.getItem("apic_id") }, function (data) {
+                    if (!$.isEmptyObject(data)) {
+                        var redata = $.parseJSON(data);
+                        if (0 == redata.status) {                          
+                            var num = $(".show_content_small_img").attr('data-id');
+                            var trandata = $.parseJSON(sessionStorage.getItem("allpic"));
+                            sessionStorage.clear();
+                            trandata[num].collect_val = 1;
+                            sessionStorage.setItem("allpic",JSON.stringify(trandata));
+                            $collection.addClass("text_red");
+                        }
+                    }
+                });
+            }
+        } else {
+            $("#pp_login").modal("show");
+        }
+        
+    });
+  //查看评论
+    $comment_btn_i.on("click", function () {
+        if ($show_div.is(":hidden")) {
+            comment_query();
         }
     });
-  });
-  //查看评论
-    $comment_btn_i.on("click", comment_query);
     function comment_query() {
         var str = '';
         $.get("{:url('/comment')}", { "works_id": localStorage.getItem("apic_id") }, function (data) {
@@ -687,23 +837,63 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
                 if (0 == redata.status) {
                     for (var i = 0; i < redata.rearray.length; i++) {
                         str += '<div class="comment_connent">' +
-                            '<div class="media">' +
-                            '<div class="media-left">' +
-                            '<img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">' +
-                            '</div>' +
-                            '<div class="media-body">' +
-                            '<h4 class="media-heading">' + redata.rearray[i].user_name +
-                            '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">' +
-                            getLocalTime(redata.rearray[i].update_time) + '</span></h4>' +
-                            '<p>' + redata.rearray[i].comment;
-                            if (0 == redata.rearray[i].del_val){
-                                str += '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">删除</span></p>';
-                            }
-                            str += '</div>' +
-                            '</div>' +
-                            '</div> ';
+                                '<div class="media">' +
+                                '<div class="media-left">' +
+                                '<img class="media-object" src="' + redata.rearray[i].user_photo +'" alt="">' +
+                                '</div>' +
+                                '<div class="media-body" style="color:#ddd;">' +
+                                '<h5 class="media-heading">' + redata.rearray[i].user_name +
+                                '<span style="font-size: 12px; vertical-align: text-top; display: inline-block;float:right;">' +
+                                getLocalTime(redata.rearray[i].update_time) + '</span></h5>' +
+                                '<p>' + redata.rearray[i].comment;
+                                if (0 == redata.rearray[i].del_val){
+                                    str += '<span class="del_comment" data-id="'+redata.rearray[i].comment_id+'">删除</span></p>';
+                                }
+                                str += '</div>' +
+                                '</div>' +
+                                '</div> ';
                     }
                     $comment_container.html(str);
+                }
+            }
+        });
+    }
+    //查看作者的收藏
+    var $author_content = $(".author_content");
+    var $author_name = $("a.user_name"); 
+    var $author_photo_list = $(".author_photo_list");
+    $nav_a_author.on("click", function () {
+        var id = $nav_a_author.attr("data-id");
+        if ($author_content.is(":hidden")) {
+            author_collect_query(id);
+        }
+    });
+    function author_collect_query(id) {
+        var str = '';
+        var user_curr = localStorage.getItem("user_id");
+        $.get("{:url('/qcollect/Author_collect')}", { "user_id": id }, function (data) {
+            if (!$.isEmptyObject(data)) {
+                redata = $.parseJSON(data);
+                if (0 == redata.status) {
+                    var str = '';
+                    for (var i = 0; i < redata.rearray.collect_list.length; i++) {
+                        str += '<li><a href=""><img src="' + redata.rearray.collect_list[i].works_src + '" class="c_img" data-id="' +
+                            redata.rearray.collect_list[i].works_id + '"></a></li>';
+                    }
+                    if(user_curr == redata.rearray.user_info.user_id){
+                          $follow.hide(500);
+                    }else{ 
+                      if (0 == redata.rearray.follwer_val) {
+                          $follow.show(500);
+                          $follow.addClass("btn-success");
+                          $follow.text("取消关注");
+                      }
+                    }
+                    $follow.attr("data-id", id);
+                    $author_photo_list.html(str);
+                    var user_str = redata.rearray.user_info.user_name +
+                        '<img src="' + redata.rearray.user_info.user_photo+'" class="user_headphoto">';
+                    $author_name.html(user_str);
                 }
             }
         });
@@ -720,7 +910,19 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
           // $('.browsenum').text(redata.rearray.count);
           $browse_img.find("img").eq(0).attr("src",pic.works_src);
           $browse_img.find("img").eq(0).zoombieLens({Size:200,imageSrc: $(this).attr("src")});
-          $browse_img.find("img").eq(0).attr("data-id",num);
+          $browse_img.find("img").eq(0).attr("data-id", num);
+          $collection.removeClass("text_red");
+          if (0 != pic.collect_val) {
+              $collection.addClass("text_red");
+          }
+          if (!$show_div.is(":hidden")) {
+              $show_div.fadeOut(500);
+          }
+          if ($detail_com.is(":hidden")) {
+              $detail_com.fadeIn(500);
+          } else {
+              // $detail_com.hide(500);
+          } 
           $thumbnails.text(pic.works_profile);
           $para.eq(0).text(pic.works_browse);
           $para.eq(1).text(pic.works_type);
@@ -728,17 +930,16 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
           $para.eq(3).text(pic.works_para[1]);
           $para.eq(4).text(pic.works_para[2]);
           $para.eq(5).text(pic.works_para[3]);
-          $navbar_text.text(pic.works_title);
+          $navbar_text.html(pic.works_title);
           localStorage.setItem("apic_id", pic.works_id); 
-          $author.html("&copy;"+pic.user_name);
+          $author.html("&copy;" + pic.user_name);
+          $nav_a_author.attr("data-id",pic.user_id);
       }
  });
 
   $(function (){
         $('.right_btn').on('click',function(e){
             var this_elm = $(e.target);
-            var $show_div = $('.comORdet');
-            var $detail_com = $('.detail_com');
             // console.log($show_div);
             if(this_elm.hasClass("comment_btn_i")){
                 if(!$detail_com.is(":hidden")){
@@ -751,14 +952,14 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
                         // $show_div.hide(500);
                     }                
                 }else if(this_elm.hasClass("detail_btn_i")){
-                    if(!$show_div.is(":hidden")){
-                        $show_div.fadeOut(500);
-                    }
                     if($detail_com.is (":hidden")){
                         $detail_com.fadeIn(500);
                     }else{
                         // $detail_com.hide(500);
-                    } 
+                     } 
+                    if (!$show_div.is(":hidden")) {
+                        $show_div.fadeOut(500);
+                    }
                 }
             });
     });
@@ -773,13 +974,25 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
         })
         .done(function(data) {
            if(!$.isEmptyObject(data)){
-              var redata = $.parseJSON(data);
+               var redata = $.parseJSON(data);
               $para.eq(0).text(redata.rearray.pic.works_browse);
               sessionStorage.setItem("allpic",JSON.stringify(redata.rearray.allpic));
               var str = '';
               for(var i=0;i<redata.rearray.allpic.length;i++){
                 str+='<li><img class="nav_small_img" src="'+redata.rearray.allpic[i].works_src+'" alt="" data-id="'+i+'"></li>';
               }
+              $collection.removeClass("text_red");
+              if (0 != redata.rearray.allpic[0].collect_val) {
+                  $collection.addClass("text_red");
+              }
+              if (!$show_div.is(":hidden")) {
+                  $show_div.fadeOut(500);
+              }
+              if ($detail_com.is(":hidden")) {
+                  $detail_com.fadeIn(500);
+              } else {
+                  // $detail_com.hide(500);
+              } 
               $browse_nav_small_img.html(str);
               $browsenum.find("span").eq(1).text(redata.rearray.allpic.length);
               $browse_img.find("img").eq(0).attr("src",redata.rearray.pic.works_src);
@@ -792,8 +1005,9 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
               $para.eq(3).text(redata.rearray.pic.works_para[1]);
               $para.eq(4).text(redata.rearray.pic.works_para[2]);
               $para.eq(5).text(redata.rearray.pic.works_para[3]);
-              $navbar_text.text(redata.rearray.pic.works_title);
-              $author.html("&copy;"+redata.rearray.pic.user_name);
+              $navbar_text.html(redata.rearray.pic.works_title);
+              $author.html("&copy;" + redata.rearray.pic.user_name);
+              $nav_a_author.attr("data-id", redata.rearray.pic.user_id);
            }
         });
 
@@ -806,9 +1020,15 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
           "browse_nav_small_img":$browse_nav_small_img,
           "num":gnum,
           "author": $author,
-          "browsenum": $browsenum
+          "browsenum": $browsenum,
+          "show_div": $show_div,
+          "detail_com": $detail_com,
+          "collection": $collection,
+          "nav_a_author": $nav_a_author,
+          "navbar_text": $navbar_text
         };
         var browse_img_btn = new browse_img_yf(data);//新建
         browse_img_btn.init();//初始化
       });
+      
 </script>

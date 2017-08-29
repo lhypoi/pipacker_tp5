@@ -6,7 +6,7 @@ use think\Request;
 use think\Db;
 use app\api\controller\baseControll;
 
-class Comment extends baseControll
+class Dialogue extends baseControll
 {
     /**
      * 显示资源列表
@@ -19,12 +19,11 @@ class Comment extends baseControll
         //
         $param = Request::instance()->param();
         if(!empty($param)){
-            $comment_list = Db::table("pp_comment")
-                            ->where($param)
-                            ->join("pp_user","pp_user.user_id = pp_comment.user_id")
-                            ->field("pp_user.user_name,pp_user.user_phone,pp_user.user_photo,pp_user.user_id,pp_comment.comment,pp_comment.update_time,pp_comment.works_id,pp_comment.comment_id")
-                            ->order("pp_comment.update_time desc")
-                            ->limit(10)
+            $comment_list = Db::table("pp_dialogue")
+                            ->where("")
+                            ->join("pp_user","pp_user.user_id = pp_dialogue.user_id")
+                            ->field("pp_user.user_name,pp_user.user_phone,pp_user.user_photo,pp_user.user_id,pp_dialogue.dialogue_comment,pp_dialogue.update_time,pp_dialogue.dialogue_id")
+                            ->order("pp_dialogue.update_time desc")
                             ->select();
             session_start();
             if(!empty($_SESSION["user_info"])){
@@ -72,8 +71,8 @@ class Comment extends baseControll
             // $param['works_para'] = json_encode($param['works_para']);
             // $param['works_src'] = saveFile('pic_src');
             $param['update_time'] = time();
-            Db::table("pp_comment")->insert($param);
-            $redata["comment_id"] =  Db::table("pp_comment")->getLastInsID();
+            Db::table("pp_dialogue")->insert($param);
+            $redata["dialogue_id"] =  Db::table("pp_dialogue")->getLastInsID();
             $redata["update_time"] = $param['update_time'];
             $this->reJson("0",$redata,"成功插入");
         }else{
@@ -127,7 +126,7 @@ class Comment extends baseControll
         $param = Request::instance()->param();
         if(!empty($param)){
         unset($param["id"]);
-        if(Db::table("pp_comment")->where($param)->delete()){
+        if(Db::table("pp_dialogue")->where($param)->delete()){
             $this->reJson("0",array(),"已删除评论");
         }else{
             $this->reJson("2",array(),"服务器处理失败");

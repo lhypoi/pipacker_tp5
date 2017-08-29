@@ -17,6 +17,20 @@
             }else{
                 $this->assign("user_info","");
             }
+            if(!empty($_SESSION["user_profile"])){
+                $this->assign("user_profile",$_SESSION["user_profile"]);
+            }else{
+                $this->assign("user_profile","");
+            }
+            $con = curl_init();
+
+			curl_setopt($con,CURLOPT_URL,'http://'.$_SERVER['HTTP_HOST'].url('/api/home'));
+			curl_setopt($con,CURLOPT_RETURNTRANSFER,1);
+			curl_setopt($con,CURLOPT_HEADER,0);
+
+			 $val =  json_decode(curl_exec($con),true);
+
+			 curl_close($con);
 	    	return $this->fetch();
 	    }
 	}
