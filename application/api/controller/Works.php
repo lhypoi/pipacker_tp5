@@ -1,5 +1,4 @@
 <?php
-
 namespace app\api\controller;
 
 use think\Controller;
@@ -57,11 +56,19 @@ class Works extends baseControll
 
         }
         // echo Db:: ;
-       if(!empty($pp_list)){                
+       if(!empty($pp_list)){  
+            foreach ($pp_list as $key => $val) {
+                # code...
+                $tags = explode(',',$val['works_tags']);
+                $pp_list[$key]['works_tags'] = $tags;
+                $para = explode(',',$val['works_para']);
+                $pp_list[$key]['works_para'] = $para;
+            }
             $this->reJson("0",$pp_list); 
         }else{
            $this->reJson("1");  
         }
+
     }
 
 
@@ -271,7 +278,7 @@ class Works extends baseControll
                         ->join("pp_user","pp_user.user_id = pp_works.user_id")
                         ->order("pp_works.update_time desc")
                         ->where("pp_works.works_type = '$type'")
-                        ->limit(15*$page_val)
+                        ->limit(15*$page_val,15)
                         ->select();
             if(!empty($pp_list)){ 
                 foreach ($pp_list as $key => $val) {
@@ -367,7 +374,7 @@ class Works extends baseControll
             $pp_list = Db::table("pp_works")
                         ->join("pp_user","pp_user.user_id = pp_works.user_id")
                         ->order("pp_works.update_time desc")
-                        ->limit(15*$page_val)
+                        ->limit(15*$page_val,15)
                         ->select();
             if(!empty($pp_list)){ 
                 foreach ($pp_list as $key => $val) {
@@ -388,6 +395,9 @@ class Works extends baseControll
         //
         $param = Request::instance()->param();
         // var_dump(Request::instance());
+
+		 session_start();
+
         if(!empty($_SESSION["user_info"])){
             $user_id = $_SESSION["user_info"]["user_id"];
         }else{
@@ -404,22 +414,22 @@ class Works extends baseControll
                     $pic = Db::table("pp_works")->order('works_id desc')->where("works_id<$id")
                     ->join("pp_user","pp_user.user_id = pp_works.user_id")->limit(1)->find();
                     $allpic = Db::table("pp_works")->order('pp_works.works_id asc')
-                    ->where("pp_works.works_id<$id")
-                    ->join("pp_user","pp_user.user_id = pp_works.user_id")
+					->where("pp_works.works_id<$id")
+					->join("pp_user","pp_user.user_id = pp_works.user_id")
                     // ->join("pp_collect","pp_collect.user_id = pp_works.user_id")
-                    ->limit(10)->select();
-                    // print_r($pic);               
+					->limit(10)->select();
+                    // print_r($pic);				
                 }else if(0==$ew){
                     $pic = Db::table("pp_works")->order('works_id asc')->where("works_id>$id")
                     ->join("pp_user","pp_user.user_id = pp_works.user_id")->limit(1)->find();
                     $allpic = Db::table("pp_works")->order('pp_works.works_id asc')
-                    ->where("pp_works.works_id>$id")                   
+					->where("pp_works.works_id>$id")                   
                     // ->join("pp_collect","pp_collect.user_id = pp_user.user_id pp_collect = pp_works.works_id")
-                    ->join("pp_user","pp_user.user_id = pp_works.user_id")
-                    ->limit(10)->select();
-                }           
-                Db::table("pp_works")->where("works_id=$id")->setInc('works_browse');
-                // Db::table("pp_works")->where("works_id=$id")->update(['id' => 1, 'name' => 'thinkphp']);
+
+					->join("pp_user","pp_user.user_id = pp_works.user_id")
+					->limit(10)->select();
+                }			
+				Db::table("pp_works")->where("works_id=$id")->setInc('works_browse');
                 if(!empty($pic)){   
                     $tags = explode(',',$pic['works_tags']);
                     $pic['works_tags'] = $tags;
@@ -456,11 +466,11 @@ class Works extends baseControll
                                 ->where($param)
                                 ->join("pp_user","pp_user.user_id = pp_works.user_id")
                                 ->find();
-                Db::table("pp_works")->where("works_id=$id")->setInc('works_browse');
+				Db::table("pp_works")->where("works_id=$id")->setInc('works_browse');
                 $allpic =  Db::table("pp_works")->order('pp_works.works_id asc')->where("pp_works.works_id>=$id")
-                ->join("pp_user","pp_user.user_id = pp_works.user_id")
+				->join("pp_user","pp_user.user_id = pp_works.user_id")
                  // ->join("pp_collect","pp_collect.works_id = pp_works.works_id")
-                ->limit(10)->select();
+				->limit(10)->select();
                 if(!empty($pp_list)){
                     $tags = explode(',',$pp_list['works_tags']);
                     $para = explode(',',$pp_list['works_para']);
@@ -469,7 +479,7 @@ class Works extends baseControll
                         if(null==$user_id){
                             $allpic[$key]["collect_val"] = 0;
                         }else{
-                            $collect_val = Db::table("pp_collect")->where(array("works_id"=>$val["works_id"],"user_id"=>$val["user_id"]))->find();
+                            $collect_val = Db::table("pp_collect")->where(array("works_id"=>$val["works_id"],"user_id"=>$user_id))->find();
                             if(!empty($collect_val)){
                                  $allpic[$key]["collect_val"] = 1;
                             }else{
@@ -495,13 +505,13 @@ class Works extends baseControll
             $this->reJson("2",$param,"没有值");
         }
     }
-    //搜索api
+	//搜索api
     public function getSearch(){
         $param = Request::instance()->param();
         if(!empty($param)){
             if(isset($param["page"])){
                 $page = $param["page"];
-                unset($param["page"]);
+				unset($param["page"]);
             }else{       
                 $page = 1;
             }
@@ -511,7 +521,7 @@ class Works extends baseControll
                            ->limit(15)
                            ->page($page)
                            ->select();
-            foreach ($pp_list as $key => $val) {
+			foreach ($pp_list as $key => $val) {
                         # code...
                         $tags = explode(',',$val['works_tags']);
                         $pp_list[$key]['works_tags'] = $tags;

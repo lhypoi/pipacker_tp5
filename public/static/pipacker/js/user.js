@@ -1,6 +1,6 @@
-$(function (){
+
 	function user_option(){
-		// this.user_id=logcalStorage.getItem("user_id");
+        this.user_id = localStorage.getItem("user_id");
 		// this.data={}
 	};
 	user_option.prototype={
@@ -80,7 +80,7 @@ $(function (){
 								var redata = $.parseJSON(Data);
 								console.log(redata);
 								if (0 == redata.status) {
-									localStorage.setItem("user_phone",redata.rearray.user_phone);
+									localStorage.setItem("user_photo",redata.rearray.user_photo);
 									// localStorage.setItem("user_pwd",redata[0].user_pwd);
 									localStorage.setItem("user_name",redata.rearray.user_name);
 									localStorage.setItem("user_id",redata.rearray.user_id);
@@ -246,4 +246,3 @@ $(function (){
 	}
 	var user_option = new user_option();
 	user_option.init();
-});

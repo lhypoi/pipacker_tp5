@@ -34,10 +34,11 @@
 	    	// $pp_json = $pp_list->all();
 	    	// print_r($pp_list);
 	    	$pp_list = $val["rearray"];
-	    	foreach ($pp_list as $key => $value) {
-	    		$tags = explode(',',$value['works_tags']);
-	    		$pp_list[$key]['works_tags'] =$tags;
-	    	}
+	    	// foreach ($pp_list as $key => $value) {
+	    	// 	$tags = explode(',',$value['works_tags']);
+	    	// 	$pp_list[$key]['works_tags'] =$tags;
+	    	// }
+	    	// print_r($pp_list);
 	    	// $pp_json[0]['works_src']= str_replace('/', '\/', $pp_json[0]['works_src']);
 	    	// unset($pp_json[0]['works_src']);
 	    	// unset($pp_json[0]['works_para']);
@@ -73,10 +74,10 @@
 	    	// $pp_json = $pp_list->all();
 	    	// print_r($pp_list);
 	    	$pp_list = $val["rearray"];
-	    	foreach ($pp_list as $key => $value) {
-	    		$tags = explode(',',$value['works_tags']);
-	    		$pp_list[$key]['works_tags'] =$tags;
-	    	}
+	    	// foreach ($pp_list as $key => $value) {
+	    	// 	$tags = explode(',',$value['works_tags']);
+	    	// 	$pp_list[$key]['works_tags'] =$tags;
+	    	// }
 	    	// $pp_json[0]['works_src']= str_replace('/', '\/', $pp_json[0]['works_src']);
 	    	// unset($pp_json[0]['works_src']);
 	    	// unset($pp_json[0]['works_para']);

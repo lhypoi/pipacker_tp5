@@ -262,22 +262,18 @@
 	<script>
 		$(function() {
 			var page = 1;
+			// fuyong();
 			$(".photo_list_nav").each(function(index,el) {
 					// console.log($(el));
 				$(el).on("click", function() {
 					// console.log(index);
 					$(".photo_list_nav").removeClass("photo_main_nav_item_selected").addClass("photo_main_nav_item");
 					$(el).removeClass("photo_main_nav_item").addClass("photo_main_nav_item_selected");
-					// if(index == 0){
-					// 	console.log(0);
-					// }
-					// else if(index == 1){
-					// 	console.log(1);
-					// }
 					switch(index)
 					{
 						case 0: 
-							$.get("{:url('/qworks/Tags')}",{page:page,type:"人像"}).done(function(data){
+							var type = "人像";
+							$.get("{:url('/qworks/Tags')}",{page:page,type:type}).done(function(data){
 								if(!$.isEmptyObject(data)){
 										redata = $.parseJSON(data);
 										// console.log(redata);
@@ -293,10 +289,11 @@
 										$(".more").text("发现更多");
 									}
 							});
-							fuyong();
+							fuyong(type);
 							break;
 						case 1:
-							$.get("{:url('/qworks/Tags')}",{page:page,type:"风景"}).done(function(data){
+							var type = "风景";
+							$.get("{:url('/qworks/Tags')}",{page:page,type:type}).done(function(data){
 								if(!$.isEmptyObject(data)){
 										redata = $.parseJSON(data);
 										// console.log(redata);
@@ -312,10 +309,11 @@
 										$(".more").text("发现更多");
 									}
 							});
-							fuyong();
+							fuyong(type);
 							break;
 						case 2:
-							$.get("{:url('/qworks/Tags')}",{page:page,type:"生态"}).done(function(data){
+							var type = "生态";
+							$.get("{:url('/qworks/Tags')}",{page:page,type:type}).done(function(data){
 								if(!$.isEmptyObject(data)){
 										redata = $.parseJSON(data);
 										// console.log(redata);
@@ -331,10 +329,11 @@
 										$(".more").text("发现更多");
 									}
 							});
-							fuyong();
+							fuyong(type);
 							break;
 						case 3:
-							$.get("{:url('/qworks/Tags')}",{page:page,type:"纪实"}).done(function(data){
+							var type = "纪实";
+							$.get("{:url('/qworks/Tags')}",{page:page,type:type}).done(function(data){
 								if(!$.isEmptyObject(data)){
 										redata = $.parseJSON(data);
 										// console.log(redata);
@@ -350,10 +349,11 @@
 										$(".more").text("发现更多");
 									}
 							});
-							fuyong();
+							fuyong(type);
 							break;
 						case 4:
-							$.get("{:url('/qworks/Tags')}",{page:page,type:"生活"}).done(function(data){
+							var type = "生活";
+							$.get("{:url('/qworks/Tags')}",{page:page,type:type}).done(function(data){
 								if(!$.isEmptyObject(data)){
 										redata = $.parseJSON(data);
 										// console.log(redata);
@@ -369,10 +369,11 @@
 										$(".more").text("发现更多");
 									}
 							});
-							fuyong();
+							fuyong(type);
 							break;
 						case 5:
-							$.get("{:url('/qworks/Tags')}",{page:page,type:"LOMO"}).done(function(data){
+							var type = "LOMO";
+							$.get("{:url('/qworks/Tags')}",{page:page,type:type}).done(function(data){
 								if(!$.isEmptyObject(data)){
 										redata = $.parseJSON(data);
 										// console.log(redata);
@@ -388,10 +389,11 @@
 										$(".more").text("发现更多");
 									}
 							});
-							fuyong();
+							fuyong(type);
 							break;
 						case 6:
-							$.get("{:url('/qworks/Tags')}",{page:page,type:"观念"}).done(function(data){
+							var type = "观念";
+							$.get("{:url('/qworks/Tags')}",{page:page,type:type}).done(function(data){
 								if(!$.isEmptyObject(data)){
 										redata = $.parseJSON(data);
 										// console.log(redata);
@@ -407,7 +409,7 @@
 										$(".more").text("发现更多");
 									}
 							});
-							fuyong();
+							fuyong(type);
 							break;
 					}
 				})
@@ -425,12 +427,19 @@
 				location.href = "{:url('photoshow/index')}";
 			}
 		});
-		function fuyong(){
+		function fuyong($type){
+			var type = '';
+			if(typeof($type)!='undefined' && ""!=$type){
+				type = $type;
+			}
+			else
+			{
+				type = "人像";
+			}
 			var $nav_main_btn = $(".nav_main_btn");
-			// console.log($nav_main_btn);
 			$nav_main_btn.eq(2).on("click",function(){
 				page=1;
-				$.get("{:url('/qworks/getTagsNews')}",{page:page}).done(function(data){
+				$.get("{:url('/qworks/TagsNews')}",{page:page,type:type}).done(function(data){
 					if(!$.isEmptyObject(data)){
 							redata = $.parseJSON(data);
 							var str = '';
@@ -467,7 +476,7 @@
 			});
 			$nav_main_btn.eq(0).on("click",function(){
 				page=1;
-				$.get("{:url('/qworks/getTagsHot')}",{page:page}).done(function(data){
+				$.get("{:url('/qworks/TagsHot')}",{page:page,type:type}).done(function(data){
 					if(!$.isEmptyObject(data)){
 							redata = $.parseJSON(data);
 							var str = '';
@@ -484,7 +493,7 @@
 				});
 			});
 		}
-		fuyong();
+		// fuyong();
 		//点击加载更多
 		$(".more").on('click',function(){
 			page++;

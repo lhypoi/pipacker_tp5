@@ -124,6 +124,14 @@
 		    display: inline-block;
 		    margin-bottom: 10px;
 		}
+		.del_comment{
+            font-size: 12px; 
+            color: #555;
+            vertical-align: text-top; 
+            display: inline-block;
+            float:right;
+            cursor: pointer;
+        }
 	</style>
 </head>
 <body>
@@ -132,16 +140,16 @@
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="head_title">
-					<h1>Yucel Basoglu:鼓舞人心的BW海景摄影师</h1>
-					<p>来源 <a href="">Carla DLM</a></p>
+					<h1>国王Moiceanu:授予罗马尼亚摄影师和登山家</h1>
+					<p>来源 <a href="">Sebastian Vasiu</a></p>
 				</div>
 				<div class="content margin_top">
 					<div class="margin_bottom">
-						<a href="" class="margin_bottom"><img src="__PUBLIC_PIPACKER__/pipacker/images/dialogue1.jpg" alt=""></a>
+						<a href="" class="margin_bottom"><img src="__PUBLIC_PIPACKER__/pipacker/images/dialogue.jpg" alt=""></a>
 						<p>Yucel Basoglu 是一个活跃的成员1 x社区。他是为他的黑白摄影海景广为人知。他的艺术一直是公认的与多个国际奖项。关于他的工作,他说:“唯一的记忆,情绪和感受的是根植于我的照片”。它对我来说是一个很大的乐趣去采访他,了解他更好,作为一个人,一个摄影师。谢谢你Yucel !</p>
 					</div>
 					<div class="margin_bottom">
-						<a href="" class="margin_bottom"><img src="__PUBLIC_PIPACKER__/pipacker/images/dialogue1.jpg" alt=""></a>
+						<a href="" class="margin_bottom"><img src="__PUBLIC_PIPACKER__/pipacker/images/dialogue.jpg" alt=""></a>
 						<p>Yucel Basoglu 是一个活跃的成员1 x社区。他是为他的黑白摄影海景广为人知。他的艺术一直是公认的与多个国际奖项。关于他的工作,他说:“唯一的记忆,情绪和感受的是根植于我的照片”。它对我来说是一个很大的乐趣去采访他,了解他更好,作为一个人,一个摄影师。谢谢你Yucel !</p>
 						<p>Yucel Basoglu 是一个活跃的成员1 x社区。他是为他的黑白摄影海景广为人知。他的艺术一直是公认的与多个国际奖项。关于他的工作,他说:“唯一的记忆,情绪和感受的是根植于我的照片”。它对我来说是一个很大的乐趣去采访他,了解他更好,作为一个人,一个摄影师。谢谢你Yucel !</p>
 						<p>Yucel Basoglu 是一个活跃的成员1 x社区。他是为他的黑白摄影海景广为人知。他的艺术一直是公认的与多个国际奖项。关于他的工作,他说:“唯一的记忆,情绪和感受的是根植于我的照片”。它对我来说是一个很大的乐趣去采访他,了解他更好,作为一个人,一个摄影师。谢谢你Yucel !</p>
@@ -157,37 +165,24 @@
 					</div>
 				</div>
 				<div class="comment margin_top">
-					<h3 class="margin_bottom">评论</h3>
-					<div class="margin_bottom">
-						<textarea name="" id="" cols="30" rows="10"></textarea>
-						<button>发布</button>
-					</div>
-					<div class="comment_connent">
-						<div class="media">
-						  <div class="media-left">
-						    <a href="#">
-						      <img class="media-object" src="" alt="">
-						    </a>
-						  </div>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    ...
-						  </div>
-						</div>
-					</div>
-					<div class="comment_connent">
-						<div class="media">
-						  <div class="media-left">
-						    <a href="#">
-						      <img class="media-object" src="" alt="">
-						    </a>
-						  </div>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    ...
-						  </div>
-						</div>
-					</div>
+					<h3 style="font-family: '宋体';">评论</h3>
+				      <div>
+				        <textarea class="comment_text margin_bottom" placeholder="在这里写出你的评论"></textarea>
+				        <button class="comment_text_btn margin_bottom">发表</button>
+				      </div>
+					 <div class="comment_container">
+			        <!-- <div class="comment_connent">
+			          <div class="media">
+			            <div class="media-left">
+			                <img class="media-object" src="__PUBLIC_PIPACKER__/pipacker/images/3.jpg" alt="">
+			            </div>
+			            <div class="media-body">
+			              <h4 class="media-heading">Media heading<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></h4>
+			              <p>....<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: absolute; right: 10px;">30分钟前</span></p>
+			            </div>
+			          </div>
+			        </div> -->
+      				</div>
 				</div>
 				<div class="more_article">
 					<h3 class="margin_top">更多热文</h3>
@@ -244,5 +239,117 @@
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/js/user.js"></script>
+	<script>
+		    //发表评论
+    var $comment_text = $(".comment_text");
+    var $comment_text_btn = $(".comment_text_btn");
+	var $comment_container = $(".comment_container");
+	function getLocalTime(nS) {     
+   // return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
+        var text = '';
+        // $time = $time === NULL || $time > time() ? time() : intval($time);
+        var t = parseInt((new Date().getTime() - new Date(parseInt(nS)*1000))/1000); //时间差 （秒）
+        
+        // console.log(new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '));
+       if(t < 60){
+          text = '刚刚'; 
+          // 一分钟内
+       }else if(t < 3600){
+          text = Math.floor(t / 60) + '分钟前';
+          // 一分钟内
+       }else if(t < 86400){
+          text = Math.floor(t / (60 * 60)) +'小时前';
+          // 一小时内
+       }else if(t < 259200){
+          text = Math.floor(t/(60*60*24)) ==1?'昨天': '前天 ';  
+          // 昨天和前天
+       }else if(t < 31536000){
+          text =new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
+          // 一年内
+       }else{          
+          text = "1年以前"; //一年以前
+       }
+        
+        return text;
+  }
+    $comment_text_btn.on("click", function () {
+        if (user_option.haslogin()) {
+            var val = $comment_text.val();
+            var comdata = {
+                "user_id": localStorage.getItem("user_id"),
+                "dialogue_comment": val
+            };
+            //评论的回调函数
+            $.post("{:url('/dialogue')}", comdata, function (data) {
+                if (!$.isEmptyObject(data)) {
+                    redata = $.parseJSON(data);
+                    str = '<div class="comment_connent">' +
+                        '<div class="media">' +
+                        '<div class="media-left">' +
+                        '<img class="media-object" src="'+localStorage.getItem("head_photo")+'" alt="">' +
+                        '</div>' +
+                        '<div class="media-body">' +
+                        '<h5 class="media-heading">' + localStorage.getItem("user_name") + '<span style="font-size: 12px; vertical-align: text-top; display: inline-block;float:right;">' + getLocalTime(redata.rearray.update_time) + '</span></h5>' +
+                        '<p>' + comdata.dialogue_comment + '<span class="del_comment" data-id="'+redata.rearray.dialogue_id+'" style="font-size: 12px; vertical-align: text-top; display: inline-block;position: relative;float:right;">删除</span></p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div> ';
+                    $comment_container.prepend(str);
+                }
+            });
+        } else {
+            $("#pp_login").modal("show");
+        }
+       
+    });
+    function comment_query() {
+        var str = '';
+        $.get("{:url('/dialogue')}", { data:"123"}, function (data) {
+            if (!$.isEmptyObject(data)) {
+                redata = $.parseJSON(data);
+                if (0 == redata.status) {
+                    for (var i = 0; i < redata.rearray.length; i++) {
+                        str += '<div class="comment_connent">' +
+                                '<div class="media">' +
+                                '<div class="media-left">' +
+                                '<img class="media-object" src="' + redata.rearray[i].user_photo +'" alt="">' +
+                                '</div>' +
+                                '<div class="media-body" style="color:#ddd;">' +
+                                '<h5 class="media-heading">' + redata.rearray[i].user_name +
+                                '<span style="font-size: 12px; vertical-align: text-top; display: inline-block;float:right;">' +
+                                getLocalTime(redata.rearray[i].update_time) + '</span></h5>' +
+                                '<p>' + redata.rearray[i].dialogue_comment;
+                                if (0 == redata.rearray[i].del_val){
+                                    str += '<span class="del_comment" data-id="'+redata.rearray[i].dialogue_id+'">删除</span></p>';
+                                }
+                                str += '</div>' +
+                                '</div>' +
+                                '</div> ';
+                    }
+                    $comment_container.html(str);
+                }
+            }
+        });
+    }
+    $comment_container.on("click",function(el){
+      var this_elm = $(el.target);
+      if(this_elm.hasClass("del_comment")){
+        var comment_id = this_elm.attr("data-id");
+         $.ajax({
+                    url: "{:url('/dialogue/:1')}",
+                    type: 'delete',
+                    data: {"dialogue_id":comment_id},
+                }).done(function (data) {
+                    if (!$.isEmptyObject(data)) {
+                        var redata = $.parseJSON(data);
+                        if (0 == redata.status) {
+                            this_elm.parents(".comment_connent").hide(500);
+                        }
+                    }
+          });
+      }
+    });
+    comment_query();
+	</script>
 </body>
 </html>

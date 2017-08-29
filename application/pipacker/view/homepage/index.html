@@ -15,13 +15,10 @@
 		    height: 250px;
 		    background: #151515;
 		    background-repeat: no-repeat;
-		    background-size: 100%;
-		    background-position: center;
 		    margin: auto;
 		    margin-top: 80px;
 		    overflow: hidden;
 		    background: #151515;
-		    /*background-image: url(C:\fakepath\02.jpg);*/
 	        position: relative;
 	        left: 50%;
     		margin-left: -600px;
@@ -40,11 +37,13 @@
 			margin-left: 10px;
 			position: relative;
 			z-index: 1;
+			overflow: hidden;
 		}
 		.head_info .head_photo img {
 			width: 100%;
 			height: 100%;
 			vertical-align: middle;
+			
 		}
 		.head_info .user_name {
 			color: #fff;
@@ -73,7 +72,7 @@
 			background: #fff;
     		color: #000;
 		}
-		.head_info .follow , .save_intro{
+		.head_info .follow , .save_intro, .cancel_intro{
 			display: inline-block;
             float: right;
             border: none;
@@ -102,7 +101,7 @@
             vertical-align: middle;
             /*margin-right: 40px;*/
 		}
-		.head_info .follow:hover, .save_intro:hover {
+		.head_info .follow:hover, .save_intro:hover, .cancel_intro:hover {
 			color: #fff;
 		}
 		.container .show_img_list{
@@ -222,10 +221,14 @@
             -webkit-border-radius: 0;
             -moz-border-radius: 0;
             border-radius: 0;
-            margin: 30px auto;
             margin-bottom: 0;
+            float: right;
 		}
 		.save_intro {
+			margin-bottom: 10px;
+		}
+		.cancel_intro {
+			margin-left: 10px;
 			margin-bottom: 10px;
 		}
 		.createInt:hover {
@@ -245,6 +248,16 @@
           color: #fff;
           border: 1px solid #252525;
           outline: none;
+        }
+        .show_yours {
+        	/*border: 1px solid #333;*/
+        	padding-bottom: 20px;
+        }
+        .show_intro_text {
+        	color: #eee;
+        	padding: 30px 10px;
+        	font-size: 17px;
+        	text-indent:2em;
         }
 		.comment {
 			padding-bottom: 50px;
@@ -388,6 +401,10 @@
 		    border-radius: 3px;
 		    box-shadow: 0px 1px 1px rgba(0,0,0,0.2);
 		}
+		.edit_show {
+			display: none;
+		    margin-top: -40px;
+		}
 	</style>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC_PIPACKER__/pipacker/libarary/Bootstrap3.3.7/js/bootstrap.min.js"></script>
@@ -396,7 +413,7 @@
 <body>
 	{include file="common/navigation"}
 	<div class="container">
-		<div class="head_bg">
+		<div class="head_bg" style="background-size: 100%; background-position: center;">
 			<a class=" button grey square edit_bg" href="#editbg_model" data-toggle="modal">编辑</a>
 		</div>
 	</div>
@@ -404,7 +421,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="head_photo">
-					<img src="__PUBLIC_PIPACKER__/pipacker/images/none-square.jpg">
+					<img id="h_photo" src="__PUBLIC_PIPACKER__/pipacker/images/none-square.jpg">
 					<a class=" button grey square edit_hp" href="#edithp_model" data-toggle="modal">编辑</a>
 				</div>
 				<span class="user_name"></span>
@@ -418,10 +435,9 @@
 	</div>
 	<div class="container" style="text-align: center; margin-top: -115px;">
 		<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a style="border-left: 2px solid #222222;" href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">发布(233)</a></li>
-		    <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">图集</a></li>
+		    <li role="presentation" class="active"><a style="border-left: 2px solid #222222;" href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">发布</a></li>
 		    <li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">粉丝</a></li>
-		    <li role="presentation"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">留言</a></li>
+		    <li role="presentation"><a href="#tab4" class="comment_btn_i" aria-controls="tab4" role="tab" data-toggle="tab">留言</a></li>
 	  	</ul>
 		{include file="common/show_img_list"}
 	</div>
@@ -454,7 +470,7 @@
 						<span style="font-size: 13px; font-weight: bold; color: #aaa;">从您的计算机中选择一个文件</span>
 						<input type="file" id="hp_img" name="" style="color: #aaa;">
 					</p>
-        			<button type="button" class="button grey square" style="margin-right: 10px;">上传</button>
+        			<button type="button" class="button grey square edit_hp_btn" style="margin-right: 10px;">上传</button>
 					<button type="button" class="button grey square" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -485,7 +501,7 @@
 		$.get("{:url('/works')}",{user_id:user_id}).done(function(data){
 			if(!$.isEmptyObject(data)){
 				redata = $.parseJSON(data);
-				console.log(redata);
+				// console.log(redata);
 				var str = '';
 				for(var i=0;i<redata.rearray.length;i++){
 					str+='<li class="show_content_img"><a href="javascript:;">'+
@@ -494,15 +510,187 @@
 				}
 				$user_name.text(user_name);
 				$show_img_content.find(".show_img_ul").eq(0).html($(str));
-				// url = "{:url('/works')}";
-				// more_lock = true;
 				
-				// $(".more").text("发现更多");
 			}
-		})
+		});
+		$.get("{:url('/api/home/index')}",{user_id:user_id}).done(function(data){
+			if (!$.isEmptyObject(data)) {
+				redata = $.parseJSON(data);
+				// console.log(localStorage)
+				if (0 == redata.status) {
+					var head_bg=redata.rearray[0].user_bg;
+	        		head_bg=head_bg.replace("\\",'/');
+					$(".head_bg").css("background-image","url("+head_bg+")");
+					var head_photo=redata.rearray[0].user_photo;
+	        		head_photo=head_photo.replace("\\",'/');
+	        		$("#h_photo").attr("src",head_photo);
+					$(".show_intro_text").html(redata.rearray[0].user_profile);
+				} else if (1 == redata.status) {
+					alert("保存失败");
+				}
+			}
+		});
 		$(".edit_bg_btn").on("click",function() {
-			// $edit_bg.css('background-image','$("#bg_img")[0].value');
-			// console.log($("#bg_img")[0].value)
-		})
+			var fd = new FormData();
+			var $user_id = localStorage.getItem("user_id");
+			var $bg_files = $("#bg_img").get(0).files[0];
+			fd.append("user_id",$user_id);
+			fd.append("user_bg",$bg_files);
+			if ("" != $("#bg_img").val()) {
+				$.ajax({
+					url:"{:url('/api/home/save')}",
+					data:fd,
+					type:"post",
+					contentType:false,
+		        	processData:false,
+		        	success:function(data) {
+		        		redata = $.parseJSON(data);
+		        		var str=redata.rearray;
+		        		str=str.replace("\\",'/');
+		        		// console.log(str);
+						$("#editbg_model").modal('hide');
+						$(".modal-backdrop").hide();
+						$(".head_bg").css("background-image","url("+str+")");
+		        	}
+				})
+			} else {
+				alert("请选择你想上传的封面照片");
+			}
+		});
+		$(".edit_hp_btn").on("click",function() {
+			var fd = new FormData();
+			var $user_id = localStorage.getItem("user_id");
+			var $hp_files = $("#hp_img").get(0).files[0];
+			fd.append("user_id",$user_id);
+			fd.append("user_photo",$hp_files);
+			if ("" != $("#hp_img").val()) {
+				$.ajax({
+					url:"{:url('/api/home/savehead')}",
+					data:fd,
+					type:"post",
+					contentType:false,
+		        	processData:false,
+		        	success:function(data) {
+		        		redata = $.parseJSON(data);
+		        		var str=redata.rearray;
+		        		str=str.replace("\\",'/');
+		        		// console.log(str);
+						$("#edithp_model").modal('hide');
+						$(".modal-backdrop").hide();
+						$("#h_photo").attr("src",str);
+		        		localStorage.setItem("head_photo", str);
+		        	}
+				})
+			} else {
+				alert("请选择你想上传的封面照片");
+			}
+		});
+		$(".createInt").on("click",function() {
+			$(".show_yours").hide();
+			$(".edit_show").show();
+			$(".comment_container").hide();
+			$(".comment").hide();
+			$(".show_intro_text").hide();
+		});
+		$(".save_intro").on("click",function() {
+			var $introduction_text = $(".introduction_text").val();
+			var $user_id = localStorage.getItem("user_id");
+			if ("" != $introduction_text) {
+				$.post("{:url('/api/home/update')}",{"user_profile":$introduction_text,"user_id":$user_id},function(data) {
+					if (!$.isEmptyObject(data)) {
+						var redata = $.parseJSON(data);
+						console.log(redata)
+						if (1 == redata.status) {
+							$(".show_yours").show();
+							$(".edit_show").hide();
+							$(".comment_container").show();
+							$(".comment").show();
+							$(".show_intro_text").show();
+							$(".show_intro_text").html(redata.rearray.user_profile);
+						} else if (0 == redata.status) {
+							alert("保存失败");
+						}
+					}
+				})
+			} else {
+				alert("描述一下您自己吧")
+			}
+		});
+		$(".cancel_intro").on("click",function() {
+			$(".show_yours").show();
+			$(".edit_show").hide();
+			$(".comment_container").show();
+			$(".comment").show();
+			$(".show_intro_text").show();
+		});
+
+		//发表评论
+		var $comment_container = $(".comment_container");
+		var $comment_text = $(".comment_text");
+		var $comment_text_btn = $(".comment_text_btn");
+		var $comment_btn_i = $(".comment_btn_i");
+		$comment_text_btn.on("click",function(){
+	      var val = $comment_text.val();
+	      var comdata = {
+	        "user_id":localStorage.getItem("user_id"),
+	        "comment":val,
+	        "works_id":localStorage.getItem("apic_id")
+	      };
+	      //评论的回调函数
+	      $.post("{:url('/comment')}",comdata,function(data){
+	          if (!$.isEmptyObject(data)) {
+	              redata = $.parseJSON(data);
+	              var head_photo = localStorage.getItem("head_photo");
+	              str = '<div class="comment_connent">' +
+	                  '<div class="media">' +
+	                  '<div class="media-left">' +
+	                  '<img class="media-object" src="'+head_photo+'" alt="">' +
+	                  '</div>' +
+	                  '<div class="media-body">' +
+	                  '<h4 class="media-heading">' + localStorage.getItem("user_name") + '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">' + getLocalTime(redata.rearray.update_time) + '</span></h4>' +
+	                  '<p>' + comdata.comment + '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;position: relative;float:right;">删除</span></p>' +
+	                  '</div>' +
+	                  '</div>' +
+	                  '</div> ';
+	              $comment_container.prepend(str);
+	          }
+	      });
+	  	});
+	  	//时间转换 
+		function getLocalTime(nS) {     
+		   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+		}
+		//查看评论
+	    $comment_btn_i.on("click", comment_query);
+	    function comment_query() {
+	        var str = '';
+	        $.get("{:url('/comment')}", { "works_id": localStorage.getItem("apic_id") }, function (data) {
+	            if (!$.isEmptyObject(data)) {
+	                redata = $.parseJSON(data);
+	              	var head_photo = localStorage.getItem("head_photo");
+	                if (0 == redata.status) {
+	                    for (var i = 0; i < redata.rearray.length; i++) {
+	                        str += '<div class="comment_connent">' +
+	                            '<div class="media">' +
+	                            '<div class="media-left">' +
+	                            '<img class="media-object" src="'+head_photo+'" alt="">' +
+	                            '</div>' +
+	                            '<div class="media-body">' +
+	                            '<h4 class="media-heading">' + redata.rearray[i].user_name +
+	                            '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">' +
+	                            getLocalTime(redata.rearray[i].update_time) + '</span></h4>' +
+	                            '<p>' + redata.rearray[i].comment;
+	                            if (0 == redata.rearray[i].del_val){
+	                                str += '<span style="font-size: 12px; color: #555; vertical-align: text-top; display: inline-block;float:right;">删除</span></p>';
+	                            }
+	                            str += '</div>' +
+	                            '</div>' +
+	                            '</div> ';
+	                    }
+	                    $comment_container.html(str);
+	                }
+	            }
+	        });
+	    }
 	})
 </script>
