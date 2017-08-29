@@ -61,13 +61,13 @@ class Goods extends baseControll
         session_start();
         $param=Request::instance()->param();
         $cartInfo=$param['cartdata'];
-        print_r($_SESSION);
+        //print_r($_SESSION);
         $cart_data=[
             'goods_id'=>$cartInfo['goods_info'][0]['goods_id'],
             'goods_name'=>$cartInfo['goods_info'][0]['goods_name'],
-            'goods_num'=>$cartInfo['num'],
+            'goods_num'=>$cartInfo['nums'],
             'goods_price'=>$cartInfo['totPrice'],
-            'user_id'=>2
+            'user_id'=>$cartInfo['user_id']
         ];
         db("cart")->insert($cart_data);
         return jsonp([

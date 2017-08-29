@@ -25,7 +25,6 @@ class User extends baseControll
         }else{
             $param = Request::instance()->param();
             if(!empty($param)){
-
                if(isset($param["user_pwd"])){
                  $param["user_pwd"]=MD5($param["user_pwd"]);
                }
@@ -126,5 +125,92 @@ class User extends baseControll
     public function delete($id)
     {
         //
+    }
+
+//    vue端注册接口
+    public function postReg ()
+    {
+        $param = Request::instance()->param();
+        if (!empty($param)) {
+            if (!empty(Db::table("pp_user")->where('user_phone=' . $param['user_phone'])->find())) {
+                $this->reJson("1", array(), "该手机号已注册！");
+                exit();
+            }
+            $param["update_time"] = time();
+            $param["user_pwd"] = MD5($param["user_pwd"]);
+            if (empty($param["user_name"])) {
+                $param["user_name"] = "user" . time();
+            }
+            unset($param['action']);
+            Db::table("pp_user")->insert($param);
+            $user_id = Db::table("pp_user")->getLastInsID();
+            $param['user_id'] = $user_id;
+            if ($user_id > 0) {
+                $this->reJson("0", $param, "注册成功！");
+            } else {
+                $this->reJson("1", array(), "服务器处理失败！");
+            }
+        } else {
+            $this->reJson("2", array(), "数据丢失了...");
+        }
+    }
+
+    //    vue端获取用户数据接口
+    public function getUserInfo()
+    {
+        $param = Request::instance()->param();
+        unset($param['action']);
+        if (!empty($param)) {
+            $user = Db::table("pp_user")->where($param)->find();
+            unset($user["user_pwd"]);
+            $this->reJson("0", $user);
+        }
+    }
+    public function getUserWorks()
+    {
+        $param = Request::instance()->param();
+        unset($param['action']);
+        if (!empty($param)) {
+            $user = Db::table("pp_works")->where($param)->select();
+            $this->reJson("0", $user);
+        }
+    }
+
+//    vue端登录接口
+    public function postLog()
+    {
+        $param = Request::instance()->param();
+        unset($param['action']);
+        if(!empty($param)){
+            if(isset($param["user_pwd"])){
+                $param["user_pwd"]=MD5($param["user_pwd"]);
+            }
+            $user = Db::table("pp_user")->where($param)->find();
+
+            if(!empty($user)){
+                $this->reJson("0", $user, "登陆成功！");
+            }else{
+                $this->reJson("1",'',"登陆失败！");
+            }
+        }
+    }
+//    vue端编辑接口
+    public function getUserEdit()
+    {
+        $param = Request::instance()->param();
+        unset($param['action']);
+        if(!empty($param)){
+            if(isset($param["user_pwd"])){
+                $param["user_pwd"]=MD5($param["user_pwd"]);
+            }
+            $user = Db::table("pp_user")->where('user_id='.$param['user_id'])->update($param);
+
+            if(!empty($user)){
+                $user = Db::table("pp_user")->where('user_id='.$param['user_id'])->find();
+                $this->reJson("0", $user, "修改成功！");
+            }else{
+                $this->reJson("1");
+            }
+        }
     }
 }

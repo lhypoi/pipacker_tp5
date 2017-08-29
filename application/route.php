@@ -27,6 +27,7 @@
 // ];
 //
 use think\Route;
+header("Access-Control-Allow-Origin: http://localhost:8080");
 Route::resource("works","api/Works");
 Route::resource("atlas","api/Atlas");
 Route::resource("comment","api/comment");
@@ -37,3 +38,4 @@ Route::resource("follwer","api/Follwer");
 Route::controller("qworks","api/Works");
 Route::resource("carts","api/Carts");
 Route::controller("qcollect","api/Collect");
+Route::controller("quser","api/User");
