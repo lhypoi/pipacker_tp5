@@ -190,6 +190,25 @@ class User extends baseControll
             if(!empty($user)){
                 $this->reJson("0", $user, "登陆成功！");
             }else{
+                $this->reJson("1",'',"登陆失败！");
+            }
+        }
+    }
+//    vue端编辑接口
+    public function getUserEdit()
+    {
+        $param = Request::instance()->param();
+        unset($param['action']);
+        if(!empty($param)){
+            if(isset($param["user_pwd"])){
+                $param["user_pwd"]=MD5($param["user_pwd"]);
+            }
+            $user = Db::table("pp_user")->where('user_id='.$param['user_id'])->update($param);
+
+            if(!empty($user)){
+                $user = Db::table("pp_user")->where('user_id='.$param['user_id'])->find();
+                $this->reJson("0", $user, "修改成功！");
+            }else{
                 $this->reJson("1");
             }
         }

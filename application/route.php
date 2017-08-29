@@ -27,6 +27,7 @@
 // ];
 //
 use think\Route;
+header("Access-Control-Allow-Origin: http://localhost:8080");
 Route::resource("works","api/Works");
 Route::resource("atlas","api/Atlas");
 Route::resource("comment","api/comment");
