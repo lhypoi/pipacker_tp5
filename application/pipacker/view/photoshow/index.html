@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -689,7 +689,7 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
         var text = '';
         // $time = $time === NULL || $time > time() ? time() : intval($time);
         var t = parseInt((new Date().getTime() - new Date(parseInt(nS)*1000))/1000); //时间差 （秒）
-        
+        // console.log(t/(2592000));
         // console.log(new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '));
        if(t < 60){
           text = '刚刚'; 
@@ -709,7 +709,8 @@ $browse_img.children(".img_middle").find("img").mouseenter(function () {
        }else{          
           text = "1年以前"; //一年以前
        }
-        
+
+        // console.log(text);
         return text;
   }
 

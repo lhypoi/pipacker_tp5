@@ -34,8 +34,6 @@
 			 $val =  json_decode(curl_exec($con),true);
 
 			 curl_close($con);
-			 // var_dump($val);
-			 // var_dump($val['rearray']);	
 			 
 			 $this->assign("works_list",$val["rearray"]);
 	    	 return $this->fetch();

@@ -23,24 +23,24 @@ class Comment extends baseControll
                             ->where($param)
                             ->join("pp_user","pp_user.user_id = pp_comment.user_id")
                             ->field("pp_user.user_name,pp_user.user_phone,pp_user.user_photo,pp_user.user_id,pp_comment.comment,pp_comment.update_time,pp_comment.works_id,pp_comment.comment_id")
-                            ->order("pp_comment.update_time desc")
+							->order("pp_comment.update_time desc")
                             ->limit(10)
                             ->select();
-            session_start();
-            if(!empty($_SESSION["user_info"])){
-                $user_id = $_SESSION["user_info"]["user_id"];
-                foreach($comment_list as $key => $val){
-                    if($user_id == $val["user_id"]){
-                        $comment_list[$key]["del_val"]=0;
-                    }else{
-                        $comment_list[$key]["del_val"]=1;
-                    }
-                }
-            }else{
-                foreach($comment_list as $key => $val){
-                    $comment_list[$key]["del_val"]=1;
-                }
-            }
+			session_start();
+			if(!empty($_SESSION["user_info"])){
+				$user_id = $_SESSION["user_info"]["user_id"];
+				foreach($comment_list as $key => $val){
+					if($user_id == $val["user_id"]){
+						$comment_list[$key]["del_val"]=0;
+					}else{
+						$comment_list[$key]["del_val"]=1;
+					}
+				}
+			}else{
+				foreach($comment_list as $key => $val){
+					$comment_list[$key]["del_val"]=1;
+				}
+			}
             $this->reJson("0",$comment_list);
         }else{
             $this->reJson("1",array(),"数据丢失了...");
