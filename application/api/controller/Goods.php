@@ -61,7 +61,7 @@ class Goods extends baseControll
         session_start();
         $param=Request::instance()->param();
         $cartInfo=$param['cartdata'];
-        print_r($_SESSION);
+        //print_r($_SESSION);
         $cart_data=[
             'goods_id'=>$cartInfo['goods_info'][0]['goods_id'],
             'goods_name'=>$cartInfo['goods_info'][0]['goods_name'],
