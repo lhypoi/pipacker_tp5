@@ -62,14 +62,24 @@ class Goods extends baseControll
         $param=Request::instance()->param();
         $cartInfo=$param['cartdata'];
         //print_r($_SESSION);
-        $cart_data=[
-            'goods_id'=>$cartInfo['goods_info'][0]['goods_id'],
-            'goods_name'=>$cartInfo['goods_info'][0]['goods_name'],
-            'goods_num'=>$cartInfo['nums'],
-            'goods_price'=>$cartInfo['totPrice'],
-            'user_id'=>$cartInfo['user_id']
-        ];
-        db("cart")->insert($cart_data);
+        $check = db("cart")->where("goods_id='{$cartInfo['goods_info'][0]['goods_id']}' AND user_id='{$cartInfo['user_id']}'")->find();
+        if(!empty($check)) {
+            db("cart")
+                ->where("goods_id='{$cartInfo['goods_info'][0]['goods_id']}' AND user_id='{$cartInfo['user_id']}'")
+                ->update([
+                    'goods_num' => $cartInfo['nums'] + $check['goods_num'],
+                    'goods_price' => $cartInfo['totPrice'] + $check['goods_price']
+                ]);
+        }else{
+            $cart_data=[
+                'goods_id'=>$cartInfo['goods_info'][0]['goods_id'],
+                'goods_name'=>$cartInfo['goods_info'][0]['goods_name'],
+                'goods_num'=>$cartInfo['nums'],
+                'goods_price'=>$cartInfo['totPrice'],
+                'user_id'=>$cartInfo['user_id']
+            ];
+            db("cart")->insert($cart_data);
+        }
         return jsonp([
                 "status" => 1,
                 "msg" => "加入购物成功"

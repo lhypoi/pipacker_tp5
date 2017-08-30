@@ -19,7 +19,7 @@ class Follwer extends baseControll
         //
         $param = Request::instance()->param();
         if(!empty($param)){
-            $follwer_list = Db::table("pp_follower")
+            $follwer_list = Db::table("pp_follwer")
                             ->where($param)
                             ->join("pp_user","pp_user.user_id = pp_follower.follower.user")
                             ->field("pp_user.user_name,pp_user.user_phone,pp_user.user_photo,pp_user.user_id")

@@ -49,7 +49,7 @@ class message extends baseControll{
         $id = $param['u_id'];
         $from_id = $param['from_id'];
         $name = array();
-        $result = db("notice")->where("from_user=$from_id AND to_user=$id")->order("id DESC")->select();
+        $result = db("notice")->where("from_user=$from_id AND to_user=$id")->order("id DESC")->paginate(10);
         for($i = 0; $i < count($result); $i ++) {
             $name[$i] = db("admin")->where("id={$result[$i]['from_user']}")->column("name");
         }
@@ -64,7 +64,7 @@ class message extends baseControll{
         $id = $param['u_id'];
         $from_id = $param['from_id'];
         $name = array();
-        $result = db("private_msg")->where("from_user=$from_id AND to_user=$id")->order("id DESC")->select();
+        $result = db("private_msg")->where("from_user=$from_id AND to_user=$id")->order("id DESC")->paginate(10);
         for($i = 0; $i < count($result); $i ++) {
             $name[$i] = db("user")->where("user_id={$result[$i]['from_user']}")->column("user_name");
         }
