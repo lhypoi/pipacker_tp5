@@ -593,4 +593,19 @@ class Works extends baseControll
             ->paginate(10);
         $this->reJson("0",$pp_list);
     }
+
+    public function getDetail(){
+        $param=Request::instance()->param();
+        $works_id=$param['works_id'];
+
+        $works_de=db("works")
+            ->field('pp_works.*,
+                user.user_name,
+                user.user_profile
+            ')
+            ->join("user","user.user_id=pp_works.user_id AND pp_works.works_id=$works_id")
+//            ->where('works_id='.$works_id)
+            ->select();
+        $this->reJson($works_de);
+    }
 }
